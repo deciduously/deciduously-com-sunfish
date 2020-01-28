@@ -1,0 +1,57 @@
+{% extends "skel.html" %}
+{% block title %}CV{% endblock %}
+{% block content %}
+    <main class="cv">
+        <div class="cv-section">
+            <section class="cv-heading-section" itemscope itemtype="https://schema.org/Person">
+                <span class="name">
+                  <span itemprop="givenName">{{ cv.first_name }}</span> <span itemprop="familyName">{{ cv.last_name }}</span>
+                </span>
+                <br />
+                <span itemprop="jobTitle" class="subtitle">
+                  {{ cv.subtitle }}
+                </span>
+                <br />
+                {# <a href={{ mail_to }} itemprop="email"> #}
+                  {{ cv.email }}
+                </a>
+                <div class="cv-links">
+                    {% for link in cv.links %}
+                    <figure>
+                        <a target="_blank noreferrer" href={{ link.link.target }}>
+                          <img
+                            src={{ link.icon }}
+                            alt={{ link.link.name }}
+                            height={{ img_dim }}
+                            width={{ img_dim }}
+                          />
+                        </a>
+                        <figcaption>{{ link.link.name }}</figcaption>
+                      </figure>
+                    {% endfor %}
+                </div>
+            </section>
+            <section class="homeaddress address cv-heading-section" itemscope itemtype="https://schema.org/PostalAddress">
+                <div itemprop="streetAddress">
+                  {{ cv.address.street }}
+                </div>
+                <span itemprop="addressLocality">
+                  {{ cv.address.locality.name }}
+                </span>, <abbr title={{ cv.address.locality.state.full_name }} itemprop="addressRegion">
+                  {{ cv.address.locality.state.abbreviation }}
+                </abbr>{' '}
+                <span itemprop="postalCode">{{ cv.address.locality.postal_code }}</span>
+                <br />
+                <span itemprop="addressCountry">
+                  {{ cv.address.locality.state.country }}
+                </span>
+              </section>
+        </div>
+        <div class="cv-section">
+            <section class="cv-body-section">
+            </section>
+            <section class="cv-body-section">
+            </section>
+        </div>
+    </main>
+{% endblock %}

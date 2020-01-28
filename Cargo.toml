@@ -2,14 +2,22 @@
 authors = ["Ben Lovy <ben@deciduously.com>"]
 edition = "2018"
 name = "deciduously-com"
-version = "0.1.0"
+version = "1.0.0"
+
 [dependencies]
-futures = "*"
+askama = "0.9"
 hyper = "0.13"
 lazy_static = "1.4"
 log = "0.4"
 pretty_env_logger = "0.3"
+serde = "1.0"
+serde_derive = "1.0"
 structopt = "0.3"
+toml = "0.5"
+
 [dependencies.tokio]
-version = "0.2"
 features = ["full"]
+version = "0.2"
+
+[dev-dependencies]
+pretty_assertions = "0.6"

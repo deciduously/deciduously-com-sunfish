@@ -1,0 +1,22 @@
+first_name = "Ben"
+last_name = "Lovy"
+email = "ben@deciduously.com"
+subtitle = "Entry-level software developer with a life-long passion for creative problem solving through code."
+links = [
+    { link = { name = "GitHub", target = "https://github.com/deciduously" }, icon = "github.png" },
+    { link = { name = "DEV.to", target = "https://dev.to/deciduously" }, icon = "dev-badge.svg" },
+    { link = { name = "LinkedIn", target = "https://www.linkedin.com/in/benlovy/" }, icon = "32px-Linkedin_icon.svg.png" }
+]
+
+[address]
+street = "37 Capitol St"
+line2 = "Unit 1"
+
+[address.locality]
+name = "Watertown"
+postal_code = "02472"
+
+[address.locality.state]
+abbreviation = "MA"
+full_name = "Massachussets"
+country = "United States"
