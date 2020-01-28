@@ -13,4 +13,4 @@ deploy:
 	docker push $(REMOTE)
 
 run:
-	docker run -dit -p $(PORT):9080 $(EXEC)
+	docker run -dit -p $(PORT):8080 $(EXEC)
