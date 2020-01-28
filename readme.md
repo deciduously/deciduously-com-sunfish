@@ -31,6 +31,12 @@ OPTIONS:
 
 Options set in `src/config.toml` override these defaults, but options passed at the command line override `config.toml`.
 
+Makefile commands:
+
+- docker: build local docker image
+- deploy: deploy given tag as latest to remote
+- run: run local image
+
 ## Dependencies
 
 ### Crates
