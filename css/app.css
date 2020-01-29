@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.address {
+    @apply text-sm;
+}
+
+.cv {
+    width: 216mm;
+    margin: 20mm 35mm 20mm 35mm;
+  }
+
+.cv-section {
+    @apply flex mb-4;
+}
+
+.cv-heading-section {
+    @apply w-1/2 px-2;
+}
+
+.cv-body-section {
+  @apply w-1/2 px-2;
+}
+
+.section-header {
+    @apply font-bold text-lg;
+}
+
+ .subtitle {
+     @apply italic;
+}

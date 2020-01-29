@@ -4,7 +4,7 @@
     <div class="cv">
         <div class="cv-section">
             <section class="cv-heading-section" itemscope itemtype="https://schema.org/Person">
-                <span class="name">
+                <span class="text-2xl font-extrabold">
                   <span itemprop="givenName">{{ cv.first_name }}</span> <span itemprop="familyName">{{ cv.last_name }}</span>
                 </span>
                 <br />
@@ -12,13 +12,13 @@
                   {{ cv.subtitle }}
                 </span>
                 <br />
-                {# <a href={{ mail_to }} itemprop="email"> #}
+                {# <a href={{ mail_to }} itemprop="email">
                   {{ cv.email }}
-                </a>
-                <div class="cv-links">
+                </a> #}
+                <div class="flex mx-auto">
                     {% for link in cv.links %}
-                    <figure>
-                        <a target="_blank noreferrer" href={{ link.link.target }}>
+                    <figure class="px-3 w-px1">
+                        <a target="_blank" rel="noreferrer" href={{ link.link.target }}>
                           <img
                             src={{ link.icon }}
                             alt={{ link.link.name }}
@@ -26,12 +26,12 @@
                             width={{ img_dim }}
                           />
                         </a>
-                        <figcaption>{{ link.link.name }}</figcaption>
+                        <figcaption class="text-xs subtitle">{{ link.link.name }}</figcaption>
                       </figure>
                     {% endfor %}
                 </div>
             </section>
-            <section class="homeaddress address cv-heading-section" itemscope itemtype="https://schema.org/PostalAddress">
+            <section class="float-right address cv-heading-section" itemscope itemtype="https://schema.org/PostalAddress">
                 <div itemprop="streetAddress">
                   {{ cv.address.street }}
                 </div>
@@ -39,7 +39,7 @@
                   {{ cv.address.locality.name }}
                 </span>, <abbr title={{ cv.address.locality.state.full_name }} itemprop="addressRegion">
                   {{ cv.address.locality.state.abbreviation }}
-                </abbr>{' '}
+                </abbr>
                 <span itemprop="postalCode">{{ cv.address.locality.postal_code }}</span>
                 <br />
                 <span itemprop="addressCountry">

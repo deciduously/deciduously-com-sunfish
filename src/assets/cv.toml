@@ -1,7 +1,7 @@
 first_name = "Ben"
 last_name = "Lovy"
 email = "ben@deciduously.com"
-subtitle = "Entry-level software developer with a life-long passion for creative problem solving through code."
+subtitle = "Software Developer"
 links = [
     { link = { name = "GitHub", target = "https://github.com/deciduously" }, icon = "github.svg" },
     { link = { name = "DEV.to", target = "https://dev.to/deciduously" }, icon = "dev-badge.svg" },
