@@ -8,24 +8,25 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
     />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
+    {# this must be a 192px square PNG #}
+    {# <link rel="apple-touch-icon" href="/favicon.svg" /> #}
     <link rel="icon" type="image/x-icon" href="/favicon.svg" />
     <link rel="stylesheet" href="/main.css" />
     <link rel="manifest" href="/manifest.json" />
   </head>
   <body>
-    <header class="flex mx-auto">
+    <header class="flex mx-auto px-5">
       <nav>
         {% for link in links %}
-          <a class="px-10 no-underline" href={{ link.target }}>{{ link.name }}</a>
+          <a class="{% if link.target == "/" %}font-extrabold text-lg{% else %}italic{% endif %} px-10" href={{ link.target }}>{{ link.name }}</a>
         {% endfor %}
       </nav>
     </header>
     <main>
       {% block content %}{% endblock %}
     </main>
-    <footer>
-        Copyright 2020 Ben Lovy
+    <footer class="text-xs italic">
+      © 2020 Ben Lovy - <a href="https://github.com/deciduously/deciduously-com" target="_blank" rel="noreferrer">source</a>
     </footer>
   </body>
 </html>

@@ -12,9 +12,10 @@ type HandlerResult = Result<Response<Body>, Infallible>;
 async fn cv() -> HandlerResult {
     let markup =
         CvTemplate::from_str(include_str!("assets/cv.toml")).expect("Should parse cv.toml");
-    Ok(Response::new(Body::from(
-        markup.render().expect("Should render markup"),
-    )))
+    Ok(Response::builder()
+        .header(header::CONTENT_TYPE, "text/html")
+        .body(Body::from(markup.render().expect("Should render markup")))
+        .unwrap())
 }
 
 async fn four_oh_four() -> HandlerResult {
@@ -62,8 +63,22 @@ async fn image(path_str: &str) -> HandlerResult {
     }
 }
 
-pub async fn string_handler(s: &str) -> HandlerResult {
+async fn string_handler(s: &str) -> HandlerResult {
     Ok(Response::new(Body::from(s.to_string())))
+}
+
+async fn manifest() -> HandlerResult {
+    Ok(Response::builder()
+        .header(header::CONTENT_TYPE, "text/json")
+        .body(Body::from(include_str!("assets/manifest.json")))
+        .unwrap())
+}
+
+async fn stylesheet() -> HandlerResult {
+    Ok(Response::builder()
+        .header(header::CONTENT_TYPE, "text/css")
+        .body(Body::from(include_str!("assets/main.css")))
+        .unwrap())
 }
 
 pub async fn router(req: Request<Body>) -> HandlerResult {
@@ -72,8 +87,10 @@ pub async fn router(req: Request<Body>) -> HandlerResult {
     match (method, path) {
         (&Method::GET, "/") | (&Method::GET, "/index.html") => index().await,
         (&Method::GET, "/cv") => cv().await,
-        (&Method::GET, "/main.css") => string_handler(include_str!("assets/main.css")).await,
-        (&Method::GET, "/manifest.json") => string_handler(include_str!("assets/manifest.json")).await,
+        (&Method::GET, "/main.css") => stylesheet().await,
+        (&Method::GET, "/manifest.json") => {
+            manifest().await
+        }
         (&Method::GET, "/robots.txt") => string_handler(include_str!("assets/robots.txt")).await,
         (&Method::GET, path_str) => image(path_str).await,
         _ => {

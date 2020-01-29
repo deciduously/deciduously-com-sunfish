@@ -14,7 +14,8 @@
     "style": "postcss css/*.css > src/assets/main.css",
     "test": "cargo test",
     "test:watch": "cargo watch -x test",
-    "prod": "run-s style docker:build docker:run"
+    "prod": "run-s style docker:build docker:run",
+    "prod:rs": "cargo run --release"
   },
   "repository": {
     "type": "git",
