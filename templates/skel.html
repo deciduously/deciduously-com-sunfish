@@ -8,16 +8,19 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
     />
+    <link rel="stylesheet" src="/main.css" />
   </head>
   <body>
-    <header>
+    <header class="flex mx-auto">
       <nav>
         {% for link in links %}
           <a href={{ link.target }}>{{ link.name }}</a>
         {% endfor %}
       </nav>
     </header>
-    {% block content %}{% endblock %}
+    <main>
+      {% block content %}{% endblock %}
+    </main>
     <footer>
         Copyright 2020 Ben Lovy
     </footer>

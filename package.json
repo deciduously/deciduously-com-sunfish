@@ -1,0 +1,41 @@
+{
+  "name": "deciduously-com",
+  "version": "1.0.0",
+  "description": "Personal website.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "run-s style serve:dev",
+    "docker:build": "docker build -t deciduously-com .",
+    "docker:run": "docker run -dit -p 8080:8080 deciduously-com",
+    "lint": "run-s lint:rs lint:css",
+    "lint:css": "stylelint css/*",
+    "lint:rs": "cargo clippy",
+    "serve:dev": "cargo watch -x run",
+    "style": "postcss --use autoprefixer -c options.json -o src/assets/main.css css/*.css",
+    "test": "cargo test",
+    "test:watch": "cargo watch -x test",
+    "prod": "run-s style docker:build docker:run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deciduously/deciduously-com.git"
+  },
+  "author": "Ben Lovy <ben@deciduously.com>",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/deciduously/deciduously-com/issues"
+  },
+  "homepage": "https://github.com/deciduously/deciduously-com#readme",
+  "devDependencies": {
+    "autoprefixer": "^9.7.4",
+    "cssnano": "^4.1.10",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^7.0.26",
+    "postcss-cli": "^7.1.0",
+    "stylelint": "^13.0.0",
+    "stylelint-config-standard": "^19.0.0"
+  },
+  "dependencies": {
+    "tailwindcss": "^1.1.4"
+  }
+}

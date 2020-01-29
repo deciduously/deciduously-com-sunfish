@@ -5,8 +5,21 @@ From the ashes, it rises... a deciduously-com for 2020 and beyond.
 ## Requirements
 
 - [Rust 2018](https://www.rust-lang.org/) - stable toolchain
+- [Node/NPM](https://nodejs.org/en/)
+- [Docker](https://www.docker.com/)
 
 ## Usage
+
+### NPM Scripts
+
+- `dev`: start dev server on port 3000, watching for source changes
+- `prod`: build and start production Docker container on port 8080 - must stop container via docker
+- `run`: run local image
+- `lint`: run linters
+- `test`: run tests
+- `test:watch`: run tests, watching for changes
+
+### Executable Options
 
 ```shell
 ❯ cargo run -- -h
@@ -30,12 +43,6 @@ OPTIONS:
 ```
 
 Options set in `src/config.toml` override these defaults, but options passed at the command line override `config.toml`.
-
-Makefile commands:
-
-- docker: build local docker image
-- deploy: deploy given tag as latest to remote
-- run: run local image
 
 ## Dependencies
 

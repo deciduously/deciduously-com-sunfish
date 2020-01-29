@@ -22,7 +22,7 @@ pub struct Opt {
 lazy_static! {
     pub static ref OPT: Opt = {
         let toml_opt = include_str!("assets/config.toml");
-        if let Some(_) = std::env::args().nth(2) {
+        if std::env::args().nth(2).is_some() {
             // If anything was passed, override config.toml
             Opt::from_args()
         } else {
