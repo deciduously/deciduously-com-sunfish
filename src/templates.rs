@@ -3,37 +3,76 @@
 
 use crate::types::*;
 use askama::Template;
+use lazy_static::lazy_static;
 use std::str::FromStr;
 
-#[derive(Default, Template)]
+type HeaderLinks = Vec<Hyperlink>;
+
+lazy_static! {
+    static ref NAV: Vec<Hyperlink> = vec![
+        Hyperlink::new("deciduously.com", "/"),
+        Hyperlink::new("Resume/CV", "/cv"),
+        Hyperlink::new("Projects", "/projects"),
+    ];
+}
+
+#[derive(Template)]
 #[template(path = "skel.html")]
 pub struct SkelTemplate {
-    links: Vec<Hyperlink>,
+    links: HeaderLinks,
 }
 
-#[derive(Default, Template)]
+impl Default for SkelTemplate {
+    fn default() -> Self {
+        Self {
+            links: NAV.to_vec(),
+        }
+    }
+}
+
+#[derive(Template)]
 #[template(path = "404.html")]
 pub struct FourOhFourTemplate {
-    links: Vec<Hyperlink>,
+    links: HeaderLinks,
 }
 
-#[derive(Default, Template)]
+impl Default for FourOhFourTemplate {
+    fn default() -> Self {
+        Self {
+            links: NAV.to_vec(),
+        }
+    }
+}
+
+#[derive(Template)]
 #[template(path = "index.html")]
 pub struct IndexTemplate {
-    links: Vec<Hyperlink>,
+    links: HeaderLinks,
 }
 
-#[derive(Default, Template)]
+impl Default for IndexTemplate {
+    fn default() -> Self {
+        Self {
+            links: NAV.to_vec(),
+        }
+    }
+}
+
+#[derive(Template)]
 #[template(path = "cv.html")]
 pub struct CvTemplate {
     cv: CV,
     img_dim: usize,
-    links: Vec<Hyperlink>,
+    links: HeaderLinks,
 }
 
 impl CvTemplate {
     fn new(s: &str) -> Result<Self, toml::de::Error> {
-        Ok(Self{ cv: toml::from_str(&s)?, img_dim: 32, links: Vec::default() })
+        Ok(Self {
+            cv: toml::from_str(&s)?,
+            img_dim: 32,
+            links: NAV.to_vec(),
+        })
     }
 }
 

@@ -1,10 +1,19 @@
 use serde_derive::Deserialize;
 
 /// Link icon do display in header
-#[derive(Default, Deserialize, Debug)]
+#[derive(Default, Deserialize, Debug, Clone)]
 pub struct Hyperlink {
     pub name: String,
     pub target: String,
+}
+
+impl Hyperlink {
+    pub fn new(name: &str, target: &str) -> Self {
+        Self {
+            name: name.into(),
+            target: target.into(),
+        }
+    }
 }
 
 /// Link icon do display in header

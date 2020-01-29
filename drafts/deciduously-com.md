@@ -7,6 +7,8 @@ published: false
 date: 2020-01-31T11:00:00.000Z
 ---
 
+TODO MAKE A TEMPLATE APP ON GITHUB
+
 ## Simplicity wins
 
 // XKCD gluing together stuff
