@@ -11,7 +11,7 @@
     "lint:css": "stylelint css/*",
     "lint:rs": "cargo clippy",
     "serve:dev": "cargo watch -x run",
-    "style": "postcss --use autoprefixer -c options.json -o src/assets/main.css css/*.css",
+    "style": "postcss css/*.css > src/assets/main.css",
     "test": "cargo test",
     "test:watch": "cargo watch -x test",
     "prod": "run-s style docker:build docker:run"
@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/deciduously/deciduously-com#readme",
   "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^2.0.5",
     "autoprefixer": "^9.7.4",
     "cssnano": "^4.1.10",
     "npm-run-all": "^4.1.5",

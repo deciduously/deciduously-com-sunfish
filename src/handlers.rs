@@ -32,10 +32,6 @@ async fn index() -> HandlerResult {
     )))
 }
 
-async fn robots() -> HandlerResult {
-    Ok(Response::new(Body::from(include_str!("assets/robots.txt"))))
-}
-
 async fn image(path_str: &str) -> HandlerResult {
     let path_buf = PathBuf::from(path_str);
     let file_name = path_buf.file_name().unwrap().to_str().unwrap();
@@ -46,6 +42,7 @@ async fn image(path_str: &str) -> HandlerResult {
                 let body = {
                     let xml = match file_name {
                         "dev-badge.svg" => include_str!("assets/images/dev-badge.svg"),
+                        "favicon.svg" => include_str!("assets/images/favicon.svg"),
                         "linkedin-icon.svg" => include_str!("assets/images/linkedin-icon.svg"),
                         "github.svg" => include_str!("assets/images/github.svg"),
                         _ => "",
@@ -65,8 +62,8 @@ async fn image(path_str: &str) -> HandlerResult {
     }
 }
 
-pub async fn stylesheet() -> HandlerResult {
-    Ok(Response::new(Body::from(include_str!("assets/main.css"))))
+pub async fn string_handler(s: &str) -> HandlerResult {
+    Ok(Response::new(Body::from(s.to_string())))
 }
 
 pub async fn router(req: Request<Body>) -> HandlerResult {
@@ -75,8 +72,9 @@ pub async fn router(req: Request<Body>) -> HandlerResult {
     match (method, path) {
         (&Method::GET, "/") | (&Method::GET, "/index.html") => index().await,
         (&Method::GET, "/cv") => cv().await,
-        (&Method::GET, "/main.css") => stylesheet().await,
-        (&Method::GET, "/robots.txt") => robots().await,
+        (&Method::GET, "/main.css") => string_handler(include_str!("assets/main.css")).await,
+        (&Method::GET, "/manifest.json") => string_handler(include_str!("assets/manifest.json")).await,
+        (&Method::GET, "/robots.txt") => string_handler(include_str!("assets/robots.txt")).await,
         (&Method::GET, path_str) => image(path_str).await,
         _ => {
             warn!("{}: 404!", path);

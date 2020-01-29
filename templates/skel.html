@@ -8,13 +8,16 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
     />
-    <link rel="stylesheet" src="/main.css" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.svg" />
+    <link rel="stylesheet" href="/main.css" />
+    <link rel="manifest" href="/manifest.json" />
   </head>
   <body>
     <header class="flex mx-auto">
       <nav>
         {% for link in links %}
-          <a href={{ link.target }}>{{ link.name }}</a>
+          <a class="px-10 no-underline" href={{ link.target }}>{{ link.name }}</a>
         {% endfor %}
       </nav>
     </header>

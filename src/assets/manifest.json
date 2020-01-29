@@ -1,0 +1,15 @@
+{
+    "name": "deciduously-com",
+    "short_name": "Deciduously",
+    "start_url": "/",
+    "display": "standalone",
+    "icons": [
+      {
+        "src": "assets/images/favicon.cvg",
+        "sizes": "16x16",
+        "type": "image/svg+xml"
+      }
+    ],
+    "background_color": "#16161d",
+    "theme_color": "#16161d"
+  }
