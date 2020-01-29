@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Generate Style
-      run: npm run style
+      run: npm install && npm run style
     - name: Build
       run: cargo build --verbose
     - name: Run tests
