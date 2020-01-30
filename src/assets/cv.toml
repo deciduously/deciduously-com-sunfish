@@ -1,22 +1,199 @@
+[header]
 first_name = "Ben"
 last_name = "Lovy"
-email = "ben@deciduously.com"
+email = "bendlovy@gmail.com"
 subtitle = "Software Developer"
-links = [
-    { link = { name = "GitHub", target = "https://github.com/deciduously" }, icon = "github.svg" },
-    { link = { name = "DEV.to", target = "https://dev.to/deciduously" }, icon = "dev-badge.svg" },
-    { link = { name = "LinkedIn", target = "https://www.linkedin.com/in/benlovy/" }, icon = "linkedin-icon.svg" }
-]
+
+  [[header.links]]
+  name = "GitHub"
+  image_url = "github.png"
+  target = "https://github.com/deciduously"
+
+  [[header.links]]
+  name = "DEV.to"
+  image_url = "dev-badge.svg"
+  target = "https://dev.to/deciduously"
+
+  [[header.links]]
+  name = "LinkedIn"
+  image_url = "32px-Linkedin_icon.svg.png"
+  target = "https://www.linkedin.com/in/benlovy/"
+
+[intro]
+one_liner = "Entry-level software developer with a life-long passion for creative problem solving through code."
+about = "Eager to apply my self-learned programming knowledge towards a more serious course of study and switch careers, utilizing my background in high-intensity, fast paced work environments to bring strong positive energy mixed with technical expertise to the team and product."
+skills = "Quick and eager to internalize new concepts, highly motivated and resourceful self-learner. Creative problem-solver, fully leveraging available tools and resources where applicable. Thrives in fast-paced, high-intensity environments without sacrificing attention to detail. Effective, diplomatic communicator in difficult or delicate situations."
+techs = "Familiar and comfortable working with a range of languages including C++, JavaScript, TypeScript, Python, Clojure, and Rust, as well as Familiar with modern ecosystem tools such as Git/GitHub, TravisCI, GraphQL vs RESTful API design, test-driven development."
 
 [address]
 street = "37 Capitol St"
 line2 = "Unit 1"
 
-[address.locality]
-name = "Watertown"
-postal_code = "02472"
+  [address.locality]
+  name = "Watertown"
+  postal_code = "02472"
 
-[address.locality.state]
-abbreviation = "MA"
-full_name = "Massachussets"
-country = "United States"
+    [address.locality.state]
+    abbreviation = "MA"
+    full_name = "Massachussetts"
+    country = "United States"
+
+[[education]]
+name = "Champlain College"
+
+  [education.address]
+  street = " 163 South Willard St"
+
+    [education.address.locality]
+    name = "Burlington"
+    postal_code = "05401"
+
+      [education.address.locality.state]
+      abbreviation = "VT"
+      full_name = "Vermont"
+      country = "United States"
+
+  [[education.degrees]]
+  gpa = 4.0
+  expected = true
+  degree_type = "Cert"
+    subject = "C++ Programming"
+
+    [education.degrees.graduation_date]
+    year = 2020
+    month = "May"
+
+  [[education.degrees]]
+  gpa = 4.0
+  expected = true
+  degree_type = "BS"
+  subject = "Software Development"
+
+    [education.degrees.graduation_date]
+    year = 2021
+    month = "May"
+
+
+[[projects]]
+name = "Mifkad"
+synopsis = "Designed and implemented a full-stack web app backend to facilitate a previously handwritten attendance collection process at an administrative position, which they have adopted permanently. Built with a ReasonReact interface and asynchronous Rust/actix_web backend for persisting state to disk."
+
+[[projects]]
+name = "Ratscript"
+synopsis = "Embedded scripting language for the Anari project."
+
+[[employment]]
+title = "Accounts Receivable/Billing"
+employer = "JCC Greater Boston"
+current = true
+bullets = [
+  "Accurately completed daily billing/receiving tasks, interfacing with our accounting and membership database software.",
+  "Created and maintained extensive documentation of job tasks as they pertain to the software.",
+  "Leveraged creative solutions to automation problems to reclaim administrative time, using a mix of Rust, Windows batch scripts, and Excel macros."
+]
+
+  [employment.beginDate]
+  year = 2018
+  month = "Apr"
+
+  [employment.address]
+  street = "333 Nahanton St"
+
+    [employment.address.locality]
+    name = "Newton"
+    postal_code = "02459"
+
+      [employment.address.locality.state]
+      abbreviation = "MA"
+      full_name = "Massachussetts"
+      country = "United States"
+
+[[employment]]
+title = "Administrative Assistant"
+employer = "JCC Greater Boston"
+current = false
+bullets = [
+  "Organized and staffed educators, maintaining state-mandated child/staff ratios across all age groups.",
+  "Assessed and rewrote standard operating procedures to accommodate a rapidly growing student body.",
+  "Liaison between our educators, clients, directorial staff, larger JCC community, and 3rd party vendors."
+]
+
+  [employment.begin_date]
+  year = 2017
+  month = "Aug"
+
+  [employment.end_date]
+  year = 2018
+  month = "Apr"
+
+  [employment.address]
+  street = "333 Nahanton St"
+
+    [employment.address.locality]
+    name = "Newton"
+    postal_code = "02459"
+
+      [employment.address.locality.state]
+      abbreviation = "MA"
+      full_name = "Massachussetts"
+      country = "United States"
+
+[[employment]]
+title = "Shift Leader"
+employer = "Peet's Coffee"
+current = false
+bullets = [
+  "Monitored day to day product movement and ensured weekly restock minimize waste without running out of supply.",
+  "Oversaw staff behavior and customer affect while on shift.",
+  "Created and enforced standard operating procedures to maximize profits and customer engagement."
+]
+
+  [employment.begin_date]
+  year = 2015
+  month = "Aug"
+
+  [employment.end_date]
+  year = 2017
+  month = "Apr"
+
+  [employment.address]
+  street = "853 Broadway"
+
+    [employment.address.locality]
+    name = "New York"
+    postal_code = "10003"
+
+      [employment.address.locality.state]
+      abbreviation = "NY"
+      full_name = "New York"
+      country = "United States"
+
+[[employment]]
+title = "Operations Manager - Washington, DC"
+employer = "ZIRX"
+current = false
+bullets = [
+  "Recruited, trained, and managed a team of 35-40 independent contractors, ensuring proper day-to-day coverage needs were met, company standards were upheld, and any contractor concerns were addressed quickly and appropriately.",
+  "Facilitated feedback loop for active app development between QA and production environments, including retraining of staff on ground, allowing for rapid iteration of product.",
+  "Acted as sole liaison between remote company HQ and my local market, leveraging data visualization techniques to track growth and adjust business plan to ensure consistent expansion."
+]
+
+  [employment.begin_date]
+  year = 2014
+  month = "Aug"
+
+  [employment.end_date]
+  year = 2015
+  month = "Jul"
+
+  [employment.address]
+  street = "350 Townsend St"
+
+    [employment.address.locality]
+    name = "San Francisco"
+    postal_code = "94107"
+
+      [employment.address.locality.state]
+      abbreviation = "CA"
+      full_name = "California"
+      country = "United States"

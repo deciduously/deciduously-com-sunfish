@@ -5,18 +5,18 @@
         <div class="cv-section">
             <section class="cv-heading-section" itemscope itemtype="https://schema.org/Person">
                 <span class="text-2xl font-extrabold">
-                  <span itemprop="givenName">{{ cv.first_name }}</span> <span itemprop="familyName">{{ cv.last_name }}</span>
+                  <span itemprop="givenName">{{ cv.header.first_name }}</span> <span itemprop="familyName">{{ cv.header.last_name }}</span>
                 </span>
                 <br />
                 <span itemprop="jobTitle" class="subtitle">
-                  {{ cv.subtitle }}
+                  {{ cv.header.subtitle }}
                 </span>
                 <br />
                 {# <a href={{ mail_to }} itemprop="email">
-                  {{ cv.email }}
+                  {{ cv.header.email }}
                 </a> #}
                 <div class="flex mx-auto">
-                    {% for link in cv.links %}
+                    {% for link in cv.header.links %}
                     <figure class="px-3 w-px1">
                         <a target="_blank" rel="noreferrer" href={{ link.link.target }}>
                           <img
@@ -33,23 +33,72 @@
             </section>
             <section class="float-right address cv-heading-section" itemscope itemtype="https://schema.org/PostalAddress">
                 <div itemprop="streetAddress">
-                  {{ cv.address.street }}
+                  {{ cv.header.address.street }}
                 </div>
                 <span itemprop="addressLocality">
-                  {{ cv.address.locality.name }}
+                  {{ cv.header.address.locality.name }}
                 </span>, <abbr title={{ cv.address.locality.state.full_name }} itemprop="addressRegion">
-                  {{ cv.address.locality.state.abbreviation }}
+                  {{ cv.header.address.locality.state.abbreviation }}
                 </abbr>
-                <span itemprop="postalCode">{{ cv.address.locality.postal_code }}</span>
+                <span itemprop="postalCode">{{ cv.header.address.locality.postal_code }}</span>
                 <br />
                 <span itemprop="addressCountry">
-                  {{ cv.address.locality.state.country }}
+                  {{ cv.header.address.locality.state.country }}
                 </span>
               </section>
         </div>
         <div class="cv-section">
-            <section class="cv-body-section">
-            </section>
+          <section id="cv-intro cv-body-section">
+            <span class="font-semibold italic">{{ cv.intro.one_liner }}</span>
+            <p>
+              <span class="intro-heading">About</span>
+              <p class="intro-section">{{ cv.intro.about }}</p>
+              <span class="intro-heading">Skills</span>
+              <p class="intro-section">{{ cv.intro.skills }}</p>
+              <span class="intro-heading">Techs</span>
+              <p class="intro-section">{{ cv.intro.techs }}</p>
+            </p>
+          </section>
+          <section>
+            <ul>
+            {% for ed in cv.education %}
+              <li>
+                <span class="school-name">{{ ed.name }}</span>
+                <section class="address" itemscope itemtype="https://schema.org/PostalAddress">
+                  <div itemprop="streetAddress">
+                    {{ ed.address.street }}
+                  </div>
+                  <span itemprop="addressLocality">
+                    {{ ed.address.locality.name }}
+                  </span>, <abbr title={{ cv.address.locality.state.full_name }} itemprop="addressRegion">
+                    {{ ed.address.locality.state.abbreviation }}
+                  </abbr>
+                  <span itemprop="postalCode">{{ ed.address.locality.postal_code }}</span>
+                  <br />
+                  <span itemprop="addressCountry">
+                    {{ ed.address.locality.state.country }}
+                  </span>
+                </section>
+                <p class="subtitle">Unofficial transcript available on request</p>
+                <ul class="schools">
+                  {% for degree in ed.degrees %}
+                    <li>
+                      <p>
+                        <abbr title={{ degree.degree_type.full_name() }} class="degree-type">
+                          {{ degree.degree_type.abbreviation() }}
+                        </abbr> {{ degree.subject }}
+                        <br />
+                        <span class="grad-date">
+                          MONTHYEAR
+                        </span> {% if degree.expected %}<span class="expected">- expected</span>{% endif %}
+                        {{ degree.gpa }}
+                      </p>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+            {% endfor %}</ul>
+          </section>
             <section class="cv-body-section">
             </section>
         </div>

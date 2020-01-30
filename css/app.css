@@ -30,3 +30,7 @@
  .subtitle {
      @apply italic;
 }
+
+.intro-heading {
+    @apply font-bold;
+  }

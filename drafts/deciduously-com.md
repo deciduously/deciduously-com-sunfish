@@ -11,6 +11,63 @@ TODO MAKE A TEMPLATE APP ON GITHUB
 
 ## Simplicity wins
 
+In a previous post, I dramatically announced that I had *figured out my tool* for frontend:
+
+POST HERE
+
+I then promptly hopped ship and built a second static site generator in Rust from scratch, just like I said the whole problem was the first time.  Oops.
+
+Now, in my defense, I still stand by the previous post.  That was an ankle-deep survey of the landscape, and things were rosy.  It's not accurate to say that I hopped ship immediately - I did get, like, ankle deep.  I had a 3k line codebase on my hands before hopping ship.
+
+But, like, I had a 3k line codebase on my hands.
+
+So, my Stencil conclusion is that it's still by a lot mny favorite tool for that kind of thing.  However, it is imperative that you fit the tool to the job.  This job just ain't it.
+
+Also, `async` stabilized:
+
+```rust
+pub async fn router(req: Request<Body>) -> Result<Response<Body>, std::convert::Infallible> {
+    let (method, path) = (req.method(), req.uri().path());
+    info!("{} {}", method, path);
+    match (method, path) {
+        (&Method::GET, "/") | (&Method::GET, "/index.html") => index().await,
+        (&Method::GET, "/cv") => cv().await,
+        (&Method::GET, "/main.css") => stylesheet().await,
+        (&Method::GET, "/manifest.json") => {
+            manifest().await
+        }
+        (&Method::GET, "/robots.txt") => string_handler(include_str!("assets/robots.txt")).await,
+        (&Method::GET, path_str) => image(path_str).await,
+        _ => {
+            warn!("{}: 404!", path);
+            four_oh_four().await
+        }
+    }
+}
+```
+
+I mean, come on.  Look at it.  Before the drop, you're working with these crazy types, that even required external crates to work at all:
+
+```rust
+fn router(req: Request<Body>, _client: &Client<HttpConnector>) -> Box<Future<Item = Response<Body>, Error = Box<dyn std::error::Error + Send + Sync>> + Send> {
+    match (req.method(), req.uri().path()) {
+
+        (&Method::GET, "/") | (&Method::GET, "/index.html") => index(),
+        (&Method::GET, "/static/todo.css") => stylesheet(),
+        (&Method::GET, path_str) => image(path_str),
+        (&Method::POST, "/done") => toggle_todo_handler(req),
+        (&Method::POST, "/not-done") => toggle_todo_handler(req),
+        (&Method::POST, "/delete") => remove_todo_handler(req),
+        (&Method::POST, "/") => add_todo_handler(req),
+        _ => four_oh_four(),
+    }
+}
+```
+
+No more `futures` - just use the standard language feature `await`.  This kinda changes everything for me about writing this sort of code in Rust, even thous it's really just some super convenient syntax sugar.
+
+As I got deeper into my over-engineered Stencil mess and looked at what sorts of stuff was being shipped to my browser and run just to render the very simple markup and style I needed, Rust just kept looking sweeter and sweeter.
+
 // XKCD gluing together stuff
 
 This gives me the developer experience I wanted and nearly got with Stencil while also delivering a very simple, reliable, and fast set o' bits down the wire.
@@ -20,88 +77,6 @@ Who knew?
 ### Askama > Components
 
 Askama is the secret sauce, here.  For a static site, most of what I want components for is dicing up markup.  I also liked the ability to use TypeScript to help make the structure of data flow between them well defined and rigid, to avoid runtime issues.
-
-### async
-
-This isn't a game changer, but it is nice:
-
-```rust
-// TODO use your eventual router() instead
-pub async fn index(_req: Request<Body>) -> Result<Response<Body>, Infallible> {
-    let markup = CvTemplate::default();
-    Ok(Response::new(Body::from(markup.render().unwrap())))
-}
-
-#[tokio::main]
-async fn main() {
-    init_logging(2); // For now just INFO
-    let addr = format!("{}:{}", OPT.address, OPT.port).parse().expect("Should parse net::SocketAddr");
-    let make_svc = make_service_fn(|_conn| async { Ok::<_, Infallible>(service_fn(index)) });
-
-    let server = Server::bind(&addr).serve(make_svc);
-
-    info!("Serving deciduously-com on {}", addr);
-
-    if let Err(e) = server.await {
-        eprintln!("Server error: {}", e);
-    }
-}
-```
-
-**Oooh, aah**.  Compare to my version from before the new stuff:
-
-```rust
-fn router(req: Request<Body>, _client: &Client<HttpConnector>) -> Box<Future<Item = Response<Body>, Error = Box<dyn std::error::Error + Send + Sync>> + Send> {
-    // pattern match for both the method and the path of the request
-    match (req.method(), req.uri().path()) {
-        // GET handlers
-        // Index page handler
-        (&Method::GET, "/") | (&Method::GET, "/index.html") => index(),
-        // Style handler
-        (&Method::GET, "/static/todo.css") => stylesheet(),
-        // Image handler
-        (&Method::GET, path_str) => image(path_str),
-        // POST handlers
-        (&Method::POST, "/done") => toggle_todo_handler(req),
-        (&Method::POST, "/not-done") => toggle_todo_handler(req),
-        (&Method::POST, "/delete") => remove_todo_handler(req),
-        (&Method::POST, "/") => add_todo_handler(req),
-        // Anything else handler
-        _ => four_oh_four(),
-    }
-}
-
-fn main() {
-    pretty_env_logger::init();
-
-    // .parse() parses to a std::net::SocketAddr
-    let addr = "127.0.0.1:3000".parse().unwrap();
-
-    rt::run(future::lazy(move || {
-        // create a Client for all Services
-        let client = Client::new();
-
-        // define a service containing the router function
-        let new_service = move || {
-            // Move a clone of Client into the service_fn
-            let client = client.clone();
-            service_fn(move |req| router(req, &client))
-        };
-
-        // Define the server - this is what the future_lazy() we're building will resolve to
-        let server = Server::bind(&addr)
-            .serve(new_service)
-            .map_err(|e| eprintln!("Server error: {}", e));
-
-        println!("Listening on http://{}", addr);
-        server
-    }));
-}
-```
-
-So much cleaner now!  I mean, look at those types.  We don't even need to bring in a separate crate, I'm finally using the standard library!  It doesn't seem like a huge deal, but I think `async` makes tools like `hyper` much more approachable for beginners.
-
-Stabilized in LOOK IT UP on WHAT DATE
 
 ### Deployment
 
