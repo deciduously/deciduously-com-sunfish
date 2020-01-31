@@ -4,7 +4,7 @@
 use crate::templates::*;
 use askama::Template;
 use hyper::{header, Body, Method, Request, Response, StatusCode};
-use log::{info, warn};
+use log::{debug, info, warn};
 use std::{convert::Infallible, path::PathBuf, str::FromStr};
 
 type HandlerResult = Result<Response<Body>, Infallible>;
@@ -75,9 +75,12 @@ async fn manifest() -> HandlerResult {
 }
 
 async fn stylesheet() -> HandlerResult {
+    let sheet = include_str!("assets/main.css");
+    //NOTE: Weirdly, this breaks if you don't print it out first and just returns ""
+    debug!("{}", sheet);
     Ok(Response::builder()
         .header(header::CONTENT_TYPE, "text/css")
-        .body(Body::from(include_str!("assets/main.css")))
+        .body(Body::from(sheet))
         .unwrap())
 }
 
@@ -88,9 +91,7 @@ pub async fn router(req: Request<Body>) -> HandlerResult {
         (&Method::GET, "/") | (&Method::GET, "/index.html") => index().await,
         (&Method::GET, "/cv") => cv().await,
         (&Method::GET, "/main.css") => stylesheet().await,
-        (&Method::GET, "/manifest.json") => {
-            manifest().await
-        }
+        (&Method::GET, "/manifest.json") => manifest().await,
         (&Method::GET, "/robots.txt") => string_handler(include_str!("assets/robots.txt")).await,
         (&Method::GET, path_str) => image(path_str).await,
         _ => {

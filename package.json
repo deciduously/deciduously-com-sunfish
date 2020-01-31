@@ -4,7 +4,7 @@
   "description": "Personal website.",
   "main": "index.js",
   "scripts": {
-    "dev": "run-p style:watch serve:dev",
+    "dev": "run-s style serve:dev",
     "docker:build": "docker build -t deciduously-com .",
     "docker:run": "docker run -dit -p 8080:8080 deciduously-com",
     "lint": "run-s lint:rs lint:css",
@@ -12,6 +12,7 @@
     "lint:rs": "cargo clippy",
     "serve:dev": "cargo watch -x run",
     "style": "postcss css/*.css > src/assets/main.css",
+    "style:fix": "stylelint --fix css/*.css",
     "style:watch": "postcss -w css/*.css > src/assets/main.css",
     "test": "cargo test",
     "test:watch": "cargo watch -x test",

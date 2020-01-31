@@ -19,7 +19,7 @@ impl Hyperlink {
 /// Link icon do display in header
 #[derive(Default, Deserialize, Debug)]
 pub struct CvLink {
-    pub link: Hyperlink,
+    pub hyperlink: Hyperlink,
     pub icon: String,
 }
 
@@ -61,7 +61,7 @@ pub enum Month {
     Sep,
     Oct,
     Nov,
-    Dec
+    Dec,
 }
 
 impl Default for Month {
@@ -81,7 +81,7 @@ pub struct MonthYear {
 #[derive(Deserialize, Debug, Clone, Copy, PartialEq)]
 pub enum DegreeType {
     Cert,
-    BS
+    BS,
 }
 
 impl DegreeType {
@@ -89,7 +89,7 @@ impl DegreeType {
         use DegreeType::*;
         match self {
             Cert => "Certificate",
-            BS => "Bachelor of Science"
+            BS => "Bachelor of Science",
         }
     }
     pub fn abbreviation(&self) -> &str {
@@ -131,7 +131,7 @@ pub struct Intro {
     pub one_liner: String,
     pub about: String,
     pub skills: String,
-    pub techs: String
+    pub techs: String,
 }
 
 /// CV Header
@@ -142,7 +142,26 @@ pub struct CvHeader {
     pub email: String,
     pub subtitle: String,
     pub links: Vec<CvLink>,
-    pub address: Vec<Address>
+    pub address: Address,
+}
+
+/// Projects
+#[derive(Default, Deserialize, Debug)]
+pub struct CvProject {
+    pub name: String,
+    pub synopsis: String,
+}
+
+/// Employment Entry
+#[derive(Default, Deserialize, Debug)]
+pub struct CvEmployment {
+    pub title: String,
+    pub employer: String,
+    pub begin_date: MonthYear,
+    pub end_date: Option<MonthYear>,
+    pub current: bool,
+    pub address: Address,
+    pub bullets: Vec<String>,
 }
 
 /// CV/Resume
@@ -151,4 +170,6 @@ pub struct CV {
     pub header: CvHeader,
     pub education: Vec<School>,
     pub intro: Intro,
+    pub projects: Vec<CvProject>,
+    pub employment: Vec<CvEmployment>,
 }

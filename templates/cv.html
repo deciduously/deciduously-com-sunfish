@@ -18,15 +18,15 @@
                 <div class="flex mx-auto">
                     {% for link in cv.header.links %}
                     <figure class="px-3 w-px1">
-                        <a target="_blank" rel="noreferrer" href={{ link.link.target }}>
+                        <a target="_blank" rel="noreferrer" href={{ link.hyperlink.target }}>
                           <img
                             src={{ link.icon }}
-                            alt={{ link.link.name }}
+                            alt={{ link.hyperlink.name }}
                             height={{ img_dim }}
                             width={{ img_dim }}
                           />
                         </a>
-                        <figcaption class="text-xs subtitle">{{ link.link.name }}</figcaption>
+                        <figcaption class="text-xs subtitle">{{ link.hyperlink.name }}</figcaption>
                       </figure>
                     {% endfor %}
                 </div>
@@ -37,7 +37,7 @@
                 </div>
                 <span itemprop="addressLocality">
                   {{ cv.header.address.locality.name }}
-                </span>, <abbr title={{ cv.address.locality.state.full_name }} itemprop="addressRegion">
+                </span>, <abbr title={{ cv.header.address.locality.state.full_name }} itemprop="addressRegion">
                   {{ cv.header.address.locality.state.abbreviation }}
                 </abbr>
                 <span itemprop="postalCode">{{ cv.header.address.locality.postal_code }}</span>
@@ -48,7 +48,8 @@
               </section>
         </div>
         <div class="cv-section">
-          <section id="cv-intro cv-body-section">
+          <div class="cv-body-section">
+          <section id="cv-intro">
             <span class="font-semibold italic">{{ cv.intro.one_liner }}</span>
             <p>
               <span class="intro-heading">About</span>
@@ -60,6 +61,7 @@
             </p>
           </section>
           <section>
+            <span class="cv-section-title">Education</span>
             <ul>
             {% for ed in cv.education %}
               <li>
@@ -70,7 +72,7 @@
                   </div>
                   <span itemprop="addressLocality">
                     {{ ed.address.locality.name }}
-                  </span>, <abbr title={{ cv.address.locality.state.full_name }} itemprop="addressRegion">
+                  </span>, <abbr title={{ ed.address.locality.state.full_name }} itemprop="addressRegion">
                     {{ ed.address.locality.state.abbreviation }}
                   </abbr>
                   <span itemprop="postalCode">{{ ed.address.locality.postal_code }}</span>
@@ -99,7 +101,50 @@
               </li>
             {% endfor %}</ul>
           </section>
+          <section>
+            <span class="cv-section-title">Projects</span>
+          {% for project in cv.projects %}
+            <section class="project">
+              <p>
+                <span class="font-bold">{{ project.name }}</span>
+                <div>{{ project.synopsis }}</div>
+              </p>
+            </section>
+          {% endfor %}
+        </section>
+      </div>
             <section class="cv-body-section">
+              <span class="cv-section-title">Employment</span>
+              {% for e in cv.employment %}
+              <section>
+                <span class="font-semibold">{{ e.title }}</span>
+                <br />
+                <span class="italic text-sm">{{ e.employer }}</span>
+                  <section class="float-right" itemscope itemtype="https://schema.org/PostalAddress">
+                    <div itemprop="streetAddress">
+                      {{ e.address.street }}
+                    </div>
+                    <span itemprop="addressLocality">
+                      {{ e.address.locality.name }}
+                    </span>, <abbr title={{ e.address.locality.state.full_name }} itemprop="addressRegion">
+                      {{ e.address.locality.state.abbreviation }}
+                    </abbr>
+                    <span itemprop="postalCode">{{ e.address.locality.postal_code }}</span>
+                    <br />
+                    <span itemprop="addressCountry">
+                      {{ e.address.locality.state.country }}
+                    </span>
+                  </section>
+                <br />
+                MONTHYEAR - MONTHYEAR
+                <br />
+                <ul>
+                  {% for point in e.bullets %}
+                  <li class="emp-bullet">{{ point }}</li>
+                  {% endfor %}
+                </ul>
+              </section>
+              {% endfor %}
             </section>
         </div>
     </div>
