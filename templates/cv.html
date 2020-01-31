@@ -1,151 +1,154 @@
 {% extends "skel.html" %}
 {% block title %}CV{% endblock %}
 {% block content %}
-    <div class="cv">
-        <div class="cv-section">
-            <section class="cv-heading-section" itemscope itemtype="https://schema.org/Person">
-                <span class="text-2xl font-extrabold">
-                  <span itemprop="givenName">{{ cv.header.first_name }}</span> <span itemprop="familyName">{{ cv.header.last_name }}</span>
-                </span>
-                <br />
-                <span itemprop="jobTitle" class="subtitle">
-                  {{ cv.header.subtitle }}
-                </span>
-                <br />
-                {# <a href={{ mail_to }} itemprop="email">
+<button onClick="printCv()">Download PDF</button>
+<div class="cv">
+  <div class="cv-section">
+    <section class="cv-heading-section" itemscope itemtype="https://schema.org/Person">
+      <span class="text-2xl font-extrabold">
+        <span itemprop="givenName">{{ cv.header.first_name }}</span> <span
+          itemprop="familyName">{{ cv.header.last_name }}</span>
+      </span>
+      <br />
+      <span itemprop="jobTitle" class="subtitle">
+        {{ cv.header.subtitle }}
+      </span>
+      <br />
+      {# <a href={{ mail_to }} itemprop="email">
                   {{ cv.header.email }}
                 </a> #}
-                <div class="flex mx-auto">
-                    {% for link in cv.header.links %}
-                    <figure class="px-3 w-px1">
-                        <a target="_blank" rel="noreferrer" href={{ link.hyperlink.target }}>
-                          <img
-                            src={{ link.icon }}
-                            alt={{ link.hyperlink.name }}
-                            height={{ img_dim }}
-                            width={{ img_dim }}
-                          />
-                        </a>
-                        <figcaption class="text-xs subtitle">{{ link.hyperlink.name }}</figcaption>
-                      </figure>
-                    {% endfor %}
-                </div>
-            </section>
-            <section class="float-right address cv-heading-section" itemscope itemtype="https://schema.org/PostalAddress">
-                <div itemprop="streetAddress">
-                  {{ cv.header.address.street }}
-                </div>
-                <span itemprop="addressLocality">
-                  {{ cv.header.address.locality.name }}
-                </span>, <abbr title={{ cv.header.address.locality.state.full_name }} itemprop="addressRegion">
-                  {{ cv.header.address.locality.state.abbreviation }}
-                </abbr>
-                <span itemprop="postalCode">{{ cv.header.address.locality.postal_code }}</span>
-                <br />
-                <span itemprop="addressCountry">
-                  {{ cv.header.address.locality.state.country }}
-                </span>
-              </section>
-        </div>
-        <div class="cv-section">
-          <div class="cv-body-section">
-          <section id="cv-intro">
-            <span class="font-semibold italic">{{ cv.intro.one_liner }}</span>
-            <p>
-              <span class="intro-heading">About</span>
-              <p class="intro-section">{{ cv.intro.about }}</p>
-              <span class="intro-heading">Skills</span>
-              <p class="intro-section">{{ cv.intro.skills }}</p>
-              <span class="intro-heading">Techs</span>
-              <p class="intro-section">{{ cv.intro.techs }}</p>
-            </p>
-          </section>
-          <section>
-            <span class="cv-section-title">Education</span>
-            <ul>
-            {% for ed in cv.education %}
-              <li>
-                <span class="school-name">{{ ed.name }}</span>
-                <section class="address" itemscope itemtype="https://schema.org/PostalAddress">
-                  <div itemprop="streetAddress">
-                    {{ ed.address.street }}
-                  </div>
-                  <span itemprop="addressLocality">
-                    {{ ed.address.locality.name }}
-                  </span>, <abbr title={{ ed.address.locality.state.full_name }} itemprop="addressRegion">
-                    {{ ed.address.locality.state.abbreviation }}
-                  </abbr>
-                  <span itemprop="postalCode">{{ ed.address.locality.postal_code }}</span>
-                  <br />
-                  <span itemprop="addressCountry">
-                    {{ ed.address.locality.state.country }}
-                  </span>
-                </section>
-                <p class="subtitle">Unofficial transcript available on request</p>
-                <ul class="schools">
-                  {% for degree in ed.degrees %}
-                    <li>
-                      <p>
-                        <abbr title={{ degree.degree_type.full_name() }} class="degree-type">
-                          {{ degree.degree_type.abbreviation() }}
-                        </abbr> {{ degree.subject }}
-                        <br />
-                        <span class="grad-date">
-                          MONTHYEAR
-                        </span> {% if degree.expected %}<span class="expected">- expected</span>{% endif %}
-                        {{ degree.gpa }}
-                      </p>
-                    </li>
-                  {% endfor %}
-                </ul>
-              </li>
-            {% endfor %}</ul>
-          </section>
-          <section>
-            <span class="cv-section-title">Projects</span>
-          {% for project in cv.projects %}
-            <section class="project">
-              <p>
-                <span class="font-bold">{{ project.name }}</span>
-                <div>{{ project.synopsis }}</div>
-              </p>
-            </section>
-          {% endfor %}
-        </section>
+      <div class="flex mx-auto">
+        {% for link in cv.header.links %}
+        <figure class="px-3 w-px1">
+          <a target="_blank" rel="noreferrer" href={{ link.hyperlink.target }}>
+            <img src={{ link.icon }} alt={{ link.hyperlink.name }} height={{ img_dim }} width={{ img_dim }} />
+          </a>
+          <figcaption class="text-xs subtitle">{{ link.hyperlink.name }}</figcaption>
+        </figure>
+        {% endfor %}
       </div>
-            <section class="cv-body-section">
-              <span class="cv-section-title">Employment</span>
-              {% for e in cv.employment %}
-              <section>
-                <span class="font-semibold">{{ e.title }}</span>
-                <br />
-                <span class="italic text-sm">{{ e.employer }}</span>
-                  <section class="float-right" itemscope itemtype="https://schema.org/PostalAddress">
-                    <div itemprop="streetAddress">
-                      {{ e.address.street }}
-                    </div>
-                    <span itemprop="addressLocality">
-                      {{ e.address.locality.name }}
-                    </span>, <abbr title={{ e.address.locality.state.full_name }} itemprop="addressRegion">
-                      {{ e.address.locality.state.abbreviation }}
-                    </abbr>
-                    <span itemprop="postalCode">{{ e.address.locality.postal_code }}</span>
-                    <br />
-                    <span itemprop="addressCountry">
-                      {{ e.address.locality.state.country }}
-                    </span>
-                  </section>
-                <br />
-                MONTHYEAR - MONTHYEAR
-                <br />
-                <ul>
-                  {% for point in e.bullets %}
-                  <li class="emp-bullet">{{ point }}</li>
-                  {% endfor %}
-                </ul>
-              </section>
-              {% endfor %}
+    </section>
+    <section class="float-right address cv-heading-section" itemscope itemtype="https://schema.org/PostalAddress">
+      <div itemprop="streetAddress">
+        {{ cv.header.address.street }}
+      </div>
+      <span itemprop="addressLocality">
+        {{ cv.header.address.locality.name }}
+      </span>, <abbr title={{ cv.header.address.locality.state.full_name }} itemprop="addressRegion">
+        {{ cv.header.address.locality.state.abbreviation }}
+      </abbr>
+      <span itemprop="postalCode">{{ cv.header.address.locality.postal_code }}</span>
+      <br />
+      <span itemprop="addressCountry">
+        {{ cv.header.address.locality.state.country }}
+      </span>
+    </section>
+  </div>
+  <div class="cv-section">
+    <div class="cv-body-section">
+      <section id="cv-intro">
+        <span class="font-semibold italic">{{ cv.intro.one_liner }}</span>
+        <p>
+          <span class="intro-heading">About</span>
+          <p class="intro-section">{{ cv.intro.about }}</p>
+          <span class="intro-heading">Skills</span>
+          <p class="intro-section">{{ cv.intro.skills }}</p>
+          <span class="intro-heading">Techs</span>
+          <p class="intro-section">{{ cv.intro.techs }}</p>
+        </p>
+      </section>
+      <section>
+        <span class="cv-section-title">Education</span>
+        <ul>
+          {% for ed in cv.education %}
+          <li>
+            <span class="school-name">{{ ed.name }}</span>
+            <section class="address" itemscope itemtype="https://schema.org/PostalAddress">
+              <div itemprop="streetAddress">
+                {{ ed.address.street }}
+              </div>
+              <span itemprop="addressLocality">
+                {{ ed.address.locality.name }}
+              </span>, <abbr title={{ ed.address.locality.state.full_name }} itemprop="addressRegion">
+                {{ ed.address.locality.state.abbreviation }}
+              </abbr>
+              <span itemprop="postalCode">{{ ed.address.locality.postal_code }}</span>
+              <br />
+              <span itemprop="addressCountry">
+                {{ ed.address.locality.state.country }}
+              </span>
             </section>
-        </div>
+            <p class="subtitle">Unofficial transcript available on request</p>
+            <ul class="schools">
+              {% for degree in ed.degrees %}
+              <li>
+                <p>
+                  <abbr title={{ degree.degree_type.full_name() }} class="degree-type">
+                    {{ degree.degree_type.abbreviation() }}
+                  </abbr> {{ degree.subject }}
+                  <br />
+                  <span class="date grad-date">
+                    <span class="month">{{ degree.graduation_date.month }}</span> <span
+                      class="year">{{ degree.graduation_date.year }}</span>
+                  </span> {% if degree.expected %}<span class="expected">- expected</span>{% endif %}
+                  {{ degree.gpa }}
+                </p>
+              </li>
+              {% endfor %}
+            </ul>
+          </li>
+          {% endfor %}</ul>
+      </section>
+      <section>
+        <span class="cv-section-title">Projects</span>
+        {% for project in cv.projects %}
+        <section class="project">
+          <p>
+            <span class="font-bold">{{ project.name }}</span>
+            <div>{{ project.synopsis }}</div>
+          </p>
+        </section>
+        {% endfor %}
+      </section>
     </div>
+    <section class="cv-body-section">
+      <span class="cv-section-title">Employment</span>
+      {% for e in cv.employment %}
+      <section>
+        <span class="font-semibold">{{ e.title }}</span>
+        <br />
+        <span class="italic text-sm">{{ e.employer }}</span>
+        <section class="float-right" itemscope itemtype="https://schema.org/PostalAddress">
+          <div itemprop="streetAddress">
+            {{ e.address.street }}
+          </div>
+          <span itemprop="addressLocality">
+            {{ e.address.locality.name }}
+          </span>, <abbr title={{ e.address.locality.state.full_name }} itemprop="addressRegion">
+            {{ e.address.locality.state.abbreviation }}
+          </abbr>
+          <span itemprop="postalCode">{{ e.address.locality.postal_code }}</span>
+          <br />
+          <span itemprop="addressCountry">
+            {{ e.address.locality.state.country }}
+          </span>
+        </section>
+        <br />
+        <span class="date grad-date">
+          <span class="month">{{ e.begin_date.month }}</span> <span class="year">{{ e.begin_date.year }}</span>
+        </span> - {% if e.end_date.is_some() %}<span class="date grad-date">
+          <span class="month">{{ e.end_date.unwrap().month }}</span> <span
+            class="year">{{ e.end_date.unwrap().year }}</span>
+        </span>{% else %}<span class="italic">expected</span>{% endif %}
+        <br />
+        <ul>
+          {% for point in e.bullets %}
+          <li class="emp-bullet">{{ point }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endfor %}
+    </section>
+  </div>
+</div>
 {% endblock %}

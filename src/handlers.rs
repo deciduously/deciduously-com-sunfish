@@ -74,6 +74,13 @@ async fn manifest() -> HandlerResult {
         .unwrap())
 }
 
+async fn javascript(script: &'static str) -> HandlerResult {
+    Ok(Response::builder()
+        .header(header::CONTENT_TYPE, "application/javascript")
+        .body(Body::from(script))
+        .unwrap())
+}
+
 async fn stylesheet() -> HandlerResult {
     let sheet = include_str!("assets/main.css");
     //NOTE: Weirdly, this breaks if you don't print it out first and just returns ""
@@ -90,6 +97,10 @@ pub async fn router(req: Request<Body>) -> HandlerResult {
     match (method, path) {
         (&Method::GET, "/") | (&Method::GET, "/index.html") => index().await,
         (&Method::GET, "/cv") => cv().await,
+        (&Method::GET, "/app.js") => javascript(include_str!("assets/app.js")).await,
+        (&Method::GET, "/html2canvas.min.js") => {
+            javascript(include_str!("assets/html2canvas.min.js")).await
+        }
         (&Method::GET, "/main.css") => stylesheet().await,
         (&Method::GET, "/manifest.json") => manifest().await,
         (&Method::GET, "/robots.txt") => string_handler(include_str!("assets/robots.txt")).await,

@@ -1,4 +1,5 @@
 use serde_derive::Deserialize;
+use std::fmt;
 
 /// Link icon do display in header
 #[derive(Default, Deserialize, Debug, Clone)]
@@ -67,6 +68,12 @@ pub enum Month {
 impl Default for Month {
     fn default() -> Self {
         Self::Jan
+    }
+}
+
+impl fmt::Display for Month {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{:?}", self)
     }
 }
 
