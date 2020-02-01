@@ -1,7 +1,8 @@
 {% extends "skel.html" %}
 {% block title %}CV{% endblock %}
 {% block content %}
-<div class="cv max-w-4xl">
+<div class="cv m-5 flex max-w-4xl">
+  <div class="cv-body-section">
   <div class="cv-section font-sans">
     <section class="cv-heading-section" itemscope itemtype="https://schema.org/Person">
       <span class="text-2xl font-extrabold">
@@ -27,10 +28,12 @@
         {% endfor %}
       </div>
     </section>
-    <section class="float-right address cv-heading-section" itemscope itemtype="https://schema.org/PostalAddress">
+    <div class="float-right address cv-heading-section" itemscope itemtype="https://schema.org/PostalAddress">
+      {% if !cv.header.address.street.is_empty() %}
       <div itemprop="streetAddress">
         {{ cv.header.address.street }}
       </div>
+    {% endif %}
       <span itemprop="addressLocality">
         {{ cv.header.address.locality.name }}
       </span>, <abbr title={{ cv.header.address.locality.state.full_name }} itemprop="addressRegion">
@@ -41,10 +44,8 @@
       <span itemprop="addressCountry">
         {{ cv.header.address.locality.state.country }}
       </span>
-    </section>
+    </div>
   </div>
-  <div class="cv-section">
-    <div class="cv-body-section">
       <section id="cv-intro">
         <span class="font-semibold italic">{{ cv.intro.one_liner }}</span>
         <p>
@@ -58,15 +59,18 @@
       </section>
       <section>
         <span class="cv-section-title">Education</span>
-        <ul>
+        <ul class="schools">
           {% for ed in cv.education %}
           <li>
             <span class="school-name font-semibold">{{ ed.name }}</span>
-            <div>
+            <span class="float-right text-sm subtitle">Unofficial transcript available on request</span>
+            <div class="flex">
               <div class="address" itemscope itemtype="https://schema.org/PostalAddress">
-                <div itemprop="streetAddress">
-                  {{ ed.address.street }}
-                </div>
+                {% if !ed.address.street.is_empty() %}
+                  <div itemprop="streetAddress">
+                    {{ ed.address.street }}
+                  </div>
+                {% endif %}
                 <span itemprop="addressLocality">
                   {{ ed.address.locality.name }}
                 </span>, <abbr title={{ ed.address.locality.state.full_name }} itemprop="addressRegion">
@@ -78,25 +82,24 @@
                   {{ ed.address.locality.state.country }}
                 </span>
               </div>
-              <span class="float-right text-sm subtitle">Unofficial transcript available on request</span>
+              <ul class="float-right px-10">
+                {% for degree in ed.degrees %}
+                <li>
+                  <p>
+                    <abbr title={{ degree.degree_type.full_name() }} class="font-semibold">
+                      {{ degree.degree_type.abbreviation() }}
+                    </abbr> {{ degree.subject }}
+                    <br />
+                    <span class="date grad-date">
+                      <span class="month">{{ degree.graduation_date.month }}</span> <span
+                        class="year">{{ degree.graduation_date.year }}</span>
+                    </span> {% if degree.expected %}<span class="text-xs italic">- expected</span>{% endif %}
+                    | GPA: {{ degree.gpa }}
+                  </p>
+                </li>
+                {% endfor %}
+              </ul>
             </div>
-            <ul class="schools">
-              {% for degree in ed.degrees %}
-              <li>
-                <p>
-                  <abbr title={{ degree.degree_type.full_name() }} class="font-semibold">
-                    {{ degree.degree_type.abbreviation() }}
-                  </abbr> {{ degree.subject }}
-                  <br />
-                  <span class="date grad-date">
-                    <span class="month">{{ degree.graduation_date.month }}</span> <span
-                      class="year">{{ degree.graduation_date.year }}</span>
-                  </span> {% if degree.expected %}<span class="text-xs italic">- expected</span>{% endif %}
-                  | GPA: {{ degree.gpa }}
-                </p>
-              </li>
-              {% endfor %}
-            </ul>
           </li>
           {% endfor %}</ul>
       </section>
@@ -120,9 +123,11 @@
         <br />
         <span class="italic text-sm">{{ e.employer }}</span>
         <section class="float-right address" itemscope itemtype="https://schema.org/PostalAddress">
+          {% if !e.address.street.is_empty() %}
           <div itemprop="streetAddress">
             {{ e.address.street }}
           </div>
+        {% endif %}
           <span itemprop="addressLocality">
             {{ e.address.locality.name }}
           </span>, <abbr title={{ e.address.locality.state.full_name }} itemprop="addressRegion">
