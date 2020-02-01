@@ -3,34 +3,50 @@
 
 use crate::templates::*;
 use askama::Template;
+use flate2::{write::ZlibEncoder, Compression};
 use hyper::{header, Body, Method, Request, Response, StatusCode};
-use log::{debug, info, warn};
-use std::{convert::Infallible, path::PathBuf, str::FromStr};
+use log::{info, warn};
+use std::{convert::Infallible, io::prelude::*, path::PathBuf, str::FromStr};
 
 type HandlerResult = Result<Response<Body>, Infallible>;
 
-async fn cv() -> HandlerResult {
-    let markup =
-        CvTemplate::from_str(include_str!("assets/cv.toml")).expect("Should parse cv.toml");
+/// Top-level handler that DEFLATE compresses and responds with from a &str body
+/// If None passed to status, 200 OK will be returned
+async fn string_handler(
+    body: &str,
+    content_type: &str,
+    status: Option<StatusCode>,
+) -> HandlerResult {
+    // Compress
+    let mut e = ZlibEncoder::new(Vec::new(), Compression::default());
+    e.write_all(body.as_bytes()).unwrap();
+    let compressed = e.finish().unwrap();
+    // Return response
     Ok(Response::builder()
-        .header(header::CONTENT_TYPE, "text/html")
-        .body(Body::from(markup.render().expect("Should render markup")))
+        .status(status.unwrap_or(StatusCode::default()))
+        .header(header::CONTENT_TYPE, content_type)
+        .header(header::CONTENT_ENCODING, "deflate")
+        .body(Body::from(compressed))
         .unwrap())
+}
+
+async fn cv() -> HandlerResult {
+    let template =
+        CvTemplate::from_str(include_str!("assets/cv.toml")).expect("Should parse cv.toml");
+    let html = template.render().expect("Should render markup");
+    string_handler(&html, "text/html", None).await
 }
 
 async fn four_oh_four() -> HandlerResult {
-    let markup = FourOhFourTemplate::default();
-    Ok(Response::builder()
-        .status(StatusCode::NOT_FOUND)
-        .body(Body::from(markup.render().expect("Should render markup")))
-        .unwrap())
+    let template = FourOhFourTemplate::default();
+    let html = template.render().expect("Should render markup");
+    string_handler(&html, "text/html", Some(StatusCode::NOT_FOUND)).await
 }
 
 async fn index() -> HandlerResult {
-    let markup = IndexTemplate::default();
-    Ok(Response::new(Body::from(
-        markup.render().expect("Should render markup"),
-    )))
+    let template = IndexTemplate::default();
+    let html = template.render().expect("Should render markup");
+    string_handler(&html, "text/html", None).await
 }
 
 async fn image(path_str: &str) -> HandlerResult {
@@ -40,21 +56,14 @@ async fn image(path_str: &str) -> HandlerResult {
         match ext.to_str().unwrap() {
             "svg" => {
                 // build the response
-                let body = {
-                    let xml = match file_name {
-                        "dev-badge.svg" => include_str!("assets/images/dev-badge.svg"),
-                        "favicon.svg" => include_str!("assets/images/favicon.svg"),
-                        "linkedin-icon.svg" => include_str!("assets/images/linkedin-icon.svg"),
-                        "github.svg" => include_str!("assets/images/github.svg"),
-                        _ => "",
-                    };
-                    Body::from(xml)
+                let xml = match file_name {
+                    "dev-badge.svg" => include_str!("assets/images/dev-badge.svg"),
+                    "favicon.svg" => include_str!("assets/images/favicon.svg"),
+                    "linkedin-icon.svg" => include_str!("assets/images/linkedin-icon.svg"),
+                    "github.svg" => include_str!("assets/images/github.svg"),
+                    _ => "",
                 };
-                Ok(Response::builder()
-                    .status(StatusCode::OK)
-                    .header(header::CONTENT_TYPE, "image/svg+xml")
-                    .body(body)
-                    .unwrap())
+                string_handler(xml, "image/svg+xml", None).await
             }
             _ => four_oh_four().await,
         }
@@ -63,45 +72,21 @@ async fn image(path_str: &str) -> HandlerResult {
     }
 }
 
-async fn string_handler(s: &str) -> HandlerResult {
-    Ok(Response::new(Body::from(s.to_string())))
-}
-
-async fn manifest() -> HandlerResult {
-    Ok(Response::builder()
-        .header(header::CONTENT_TYPE, "text/json")
-        .body(Body::from(include_str!("assets/manifest.json")))
-        .unwrap())
-}
-
-/*
-async fn javascript(script: &'static str) -> HandlerResult {
-    Ok(Response::builder()
-        .header(header::CONTENT_TYPE, "application/javascript")
-        .body(Body::from(script))
-        .unwrap())
-}
-*/
-
-async fn stylesheet() -> HandlerResult {
-    let sheet = include_str!("assets/main.css");
-    //NOTE: Weirdly, this breaks if you don't print it out first and just returns ""
-    debug!("{}", sheet);
-    Ok(Response::builder()
-        .header(header::CONTENT_TYPE, "text/css")
-        .body(Body::from(sheet))
-        .unwrap())
-}
-
 pub async fn router(req: Request<Body>) -> HandlerResult {
     let (method, path) = (req.method(), req.uri().path());
     info!("{} {}", method, path);
     match (method, path) {
         (&Method::GET, "/") | (&Method::GET, "/index.html") => index().await,
         (&Method::GET, "/cv") => cv().await,
-        (&Method::GET, "/main.css") => stylesheet().await,
-        (&Method::GET, "/manifest.json") => manifest().await,
-        (&Method::GET, "/robots.txt") => string_handler(include_str!("assets/robots.txt")).await,
+        (&Method::GET, "/main.css") => {
+            string_handler(include_str!("assets/main.css"), "text.css", None).await
+        }
+        (&Method::GET, "/manifest.json") => {
+            string_handler(include_str!("assets/manifest.json"), "text/json", None).await
+        }
+        (&Method::GET, "/robots.txt") => {
+            string_handler(include_str!("assets/robots.txt"), "text", None).await
+        }
         (&Method::GET, path_str) => image(path_str).await,
         _ => {
             warn!("{}: 404!", path);
