@@ -152,6 +152,12 @@ pub struct CvHeader {
     pub address: Address,
 }
 
+impl CvHeader {
+    pub fn mail_to(&self) -> String {
+        format!("mailto:{}", self.email)
+    }
+}
+
 /// Projects
 #[derive(Default, Deserialize, Debug)]
 pub struct CvProject {

@@ -6,11 +6,6 @@
   @apply text-sm;
 }
 
-.cv {
-  width: 216mm;
-  margin: 20mm 35mm 20mm 35mm;
-}
-
 .cv-section {
   @apply flex mb-4;
 }
@@ -24,7 +19,7 @@
 }
 
 .cv-section-title {
-  @apply font-bold;
+  @apply font-bold text-lg mx-auto;
 }
 
 .section-header {
