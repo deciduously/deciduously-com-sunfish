@@ -29,6 +29,9 @@
     "url": "https://github.com/deciduously/deciduously-com/issues"
   },
   "homepage": "https://github.com/deciduously/deciduously-com#readme",
+  "dependencies": {
+    "tailwindcss": "^1.1.4"
+  },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^2.0.5",
     "autoprefixer": "^9.7.4",
@@ -38,8 +41,5 @@
     "postcss-cli": "^7.1.0",
     "stylelint": "^13.0.0",
     "stylelint-config-standard": "^19.0.0"
-  },
-  "dependencies": {
-    "tailwindcss": "^1.1.4"
   }
 }
