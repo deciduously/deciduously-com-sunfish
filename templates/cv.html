@@ -5,12 +5,12 @@
   <div class="cv-body-section">
   <div class="cv-section font-sans">
     <section class="cv-heading-section" itemscope itemtype="https://schema.org/Person">
-      <span class="text-2xl font-extrabold">
+      <h2 class="text-2xl font-extrabold">
         <span itemprop="givenName">{{ cv.header.first_name }}</span> <span
           itemprop="familyName">{{ cv.header.last_name }}</span>
-      </span>
+      </h2>
       <br />
-      <span itemprop="jobTitle" class="subtitle">
+      <span itemprop="jobTitle" class="font-semibold subtitle">
         {{ cv.header.subtitle }}
       </span>
       <br />
@@ -47,18 +47,18 @@
     </div>
   </div>
       <section id="cv-intro">
-        <span class="font-semibold italic">{{ cv.intro.one_liner }}</span>
-        <p>
-          <span class="intro-heading">About</span>
+        <span class="font-medium italic">{{ cv.intro.one_liner }}</span>
+        <div>
+          <h3 class="intro-heading">About</h3>
           <p class="intro-section">{{ cv.intro.about }}</p>
-          <span class="intro-heading">Skills</span>
+          <h3 class="intro-heading">Skills</h3>
           <p class="intro-section">{{ cv.intro.skills }}</p>
-          <span class="intro-heading">Techs</span>
+          <h3 class="intro-heading">Techs</h3>
           <p class="intro-section">{{ cv.intro.techs }}</p>
-        </p>
+        </div>
       </section>
       <section>
-        <span class="cv-section-title">Education</span>
+        <h3 class="cv-section-title">Education</h3>
         <ul class="schools">
           {% for ed in cv.education %}
           <li>
@@ -86,7 +86,7 @@
                 {% for degree in ed.degrees %}
                 <li>
                   <p>
-                    <abbr title={{ degree.degree_type.full_name() }} class="font-semibold">
+                    <abbr title="{{ degree.degree_type.full_name() }}" class="font-semibold">
                       {{ degree.degree_type.abbreviation() }}
                     </abbr> {{ degree.subject }}
                     <br />
@@ -104,25 +104,23 @@
           {% endfor %}</ul>
       </section>
       <section>
-        <span class="cv-section-title">Projects</span>
+        <h3 class="cv-section-title">Projects</h3>
         {% for project in cv.projects %}
-        <section class="project">
-          <p>
+        <div class="project">
             <span class="font-bold">{{ project.name }}</span>
             <div>{{ project.synopsis }}</div>
-          </p>
-        </section>
+        </div>
         {% endfor %}
       </section>
     </div>
     <section class="cv-body-section">
-      <span class="cv-section-title">Employment</span>
+      <h3 class="cv-section-title">Employment</h3>
       {% for e in cv.employment %}
-      <section>
+      <div>
         <span class="font-semibold">{{ e.title }}</span>
         <br />
         <span class="italic text-sm">{{ e.employer }}</span>
-        <section class="float-right address" itemscope itemtype="https://schema.org/PostalAddress">
+        <div class="float-right address" itemscope itemtype="https://schema.org/PostalAddress">
           {% if !e.address.street.is_empty() %}
           <div itemprop="streetAddress">
             {{ e.address.street }}
@@ -130,7 +128,7 @@
         {% endif %}
           <span itemprop="addressLocality">
             {{ e.address.locality.name }}
-          </span>, <abbr title={{ e.address.locality.state.full_name }} itemprop="addressRegion">
+          </span>, <abbr title="{{ e.address.locality.state.full_name }}" itemprop="addressRegion">
             {{ e.address.locality.state.abbreviation }}
           </abbr>
           <span itemprop="postalCode">{{ e.address.locality.postal_code }}</span>
@@ -138,7 +136,7 @@
           <span itemprop="addressCountry">
             {{ e.address.locality.state.country }}
           </span>
-        </section>
+        </div>
         <br />
         <span class="date grad-date">
           <span class="month">{{ e.begin_date.month }}</span> <span class="year">{{ e.begin_date.year }}</span>
@@ -152,9 +150,8 @@
           <li class="emp-bullet max-w-md text-sm italic">- {{ point }}</li>
           {% endfor %}
         </ul>
-      </section>
+      </div>
       {% endfor %}
     </section>
   </div>
-</div>
 {% endblock %}

@@ -81,7 +81,7 @@ month = "May"
 
 [[projects]]
 name = "Mifkad"
-synopsis = "Full-stack web app to replace handwritten attendance collection, currently in production at Godine ELC.  ReasonReact UI, Rust/actix_web backend."
+synopsis = "Full-stack web app for attendance collection, currently in production.  ReasonReact UI, Rust/actix_web backend."
 
 [[projects]]
 name = "Blispr"

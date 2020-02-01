@@ -23,7 +23,7 @@ async fn string_handler(
     let compressed = e.finish().unwrap();
     // Return response
     Ok(Response::builder()
-        .status(status.unwrap_or(StatusCode::default()))
+        .status(status.unwrap_or_default())
         .header(header::CONTENT_TYPE, content_type)
         .header(header::CONTENT_ENCODING, "deflate")
         .body(Body::from(compressed))
