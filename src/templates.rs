@@ -48,12 +48,14 @@ impl Default for FourOhFourTemplate {
 #[template(path = "index.html")]
 pub struct IndexTemplate {
     links: HeaderLinks,
+    posts: Vec<Hyperlink>,
 }
 
 impl Default for IndexTemplate {
     fn default() -> Self {
         Self {
             links: NAV.to_vec(),
+            posts: vec![Hyperlink::new("test", "#")],
         }
     }
 }

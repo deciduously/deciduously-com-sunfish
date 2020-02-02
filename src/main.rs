@@ -8,6 +8,7 @@ use hyper::{
 use log::info;
 use std::convert::Infallible;
 
+mod blog;
 mod config;
 mod handlers;
 mod templates;
