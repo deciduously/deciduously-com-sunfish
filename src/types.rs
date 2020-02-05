@@ -41,7 +41,7 @@ pub struct BlogPost {
     pub published: bool,
     pub markdown: String,
     pub url_name: String,
-    pub tags: String,     // TODO Vec<String>
+    pub tags: String, // TODO Vec<String>
     pub title: String,
 }
 
@@ -50,7 +50,10 @@ impl BlogPost {
         // Init empty post
         let mut ret = Self::default();
         ret.id = id;
-        ret.url_name = path.file_stem().unwrap().to_str().unwrap().to_string();
+        ret.url_name = format!(
+            "/{}",
+            path.file_stem().unwrap().to_str().unwrap().to_string()
+        );
 
         // fill in struct from draft
         let md_file = fs::read_to_string(path.to_str().unwrap()).expect("Could not read draft");
@@ -95,7 +98,7 @@ impl BlogPost {
         let body = parse_tree_inner.next().unwrap();
         ret.markdown = body.as_str().to_string();
 
-        println!("{:?}", ret);
+        // done
         ret
     }
     fn get_template(&self) -> String {
@@ -120,7 +123,6 @@ impl Blog {
         let paths = fs::read_dir("blog").expect("Should locate blog directory");
         for path in paths {
             let path = path.expect("Could not open draft").path();
-            debug!("Adding path {:?}", path);
             let post = BlogPost::new(ret.total(), path);
             if post.published {
                 ret.published.push(post);

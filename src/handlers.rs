@@ -1,7 +1,7 @@
 // handlers.rs
 // Web route handlers and router
 
-use crate::templates::*;
+use crate::{types::BLOG, templates::*};
 use askama::Template;
 use flate2::{write::ZlibEncoder, Compression};
 use hyper::{header, Body, Method, Request, Response, StatusCode};
@@ -28,6 +28,11 @@ async fn string_handler(
         .header(header::CONTENT_ENCODING, "deflate")
         .body(Body::from(compressed))
         .unwrap())
+}
+
+async fn blog_handler(blog_url: &str) -> HandlerResult {
+    let html = "COMING SOON";
+    string_handler(&html, "text/html", None).await
 }
 
 async fn cv() -> HandlerResult {
@@ -89,15 +94,20 @@ pub async fn router(req: Request<Body>) -> HandlerResult {
         }
         (&Method::GET, path_str) => {
             // Otherwise...
-            // is it an svg?
+            // is it an image?
             if let Some(ext) = path_str.split('.').nth(1) {
                 match ext {
-                    "svg" => image(path).await,
+                    "png" | "svg" => image(path).await,
                     _ => four_oh_four().await,
                 }
             } else {
-                // No extension... is is a blog post?
-                // TODO
+                // No extension... is is a published blog post?
+                for post in &BLOG.published {
+                    if post.url_name == path_str {
+                        return blog_handler(path_str).await;
+                    }
+                }
+                // Otherwise...
                 four_oh_four().await
             }
         }
