@@ -1,7 +1,7 @@
 // templates.rs
 // Typed structs for each template in /templates/
 
-use crate::types::*;
+use crate::{blog::{LINKINFO, LinkInfo}, types::*};
 use askama::Template;
 use lazy_static::lazy_static;
 use std::str::FromStr;
@@ -42,14 +42,14 @@ impl Default for FourOhFourTemplate {
 #[template(path = "index.html")]
 pub struct IndexTemplate {
     links: &'static [Hyperlink],
-    posts: &'static [BlogPost],
+    posts: &'static [LinkInfo],
 }
 
 impl Default for IndexTemplate {
     fn default() -> Self {
         Self {
             links: &NAV,
-            posts: &BLOG.published,
+            posts: &LINKINFO.published,
         }
     }
 }

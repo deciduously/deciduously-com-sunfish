@@ -1,5 +1,5 @@
 ---
-title: I Scrapped My Stencil Project And Wrote A Static Site
+title: I Scrapped My Stencil Project And WrA
 tags: hooray, works
 published: false
 ---

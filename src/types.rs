@@ -1,8 +1,5 @@
-use lazy_static::lazy_static;
-use log::*;
-use pest::Parser;
 use serde_derive::Deserialize;
-use std::{fmt, fs, path::PathBuf};
+use std::fmt;
 
 //
 // General
@@ -21,119 +18,6 @@ impl Hyperlink {
             name: name.into(),
             target: target.into(),
         }
-    }
-}
-
-//
-// Blog
-//
-
-#[derive(Parser)]
-#[grammar = "draft.pest"]
-struct Draft;
-
-#[derive(Debug, Default, Clone)]
-pub struct BlogPost {
-    pub cover_image: Option<String>,
-    pub description: Option<String>,
-    pub edited: Option<String>, // only if published
-    pub id: usize,
-    pub published: bool,
-    pub markdown: String,
-    pub url_name: String,
-    pub tags: String, // TODO Vec<String>
-    pub title: String,
-}
-
-impl BlogPost {
-    fn new(id: usize, path: PathBuf) -> Self {
-        // Init empty post
-        let mut ret = Self::default();
-        ret.id = id;
-        ret.url_name = format!(
-            "/{}",
-            path.file_stem().unwrap().to_str().unwrap().to_string()
-        );
-
-        // fill in struct from draft
-        let md_file = fs::read_to_string(path.to_str().unwrap()).expect("Could not read draft");
-        let parse_tree = Draft::parse(Rule::draft, &md_file)
-            .expect("Could not parse draft")
-            .next()
-            .unwrap();
-        // cycle through each attribute
-        // unwrap is safe - if it parsed, there are between 3 and 6
-        let mut parse_tree_inner = parse_tree.into_inner();
-
-        // set header
-        let header = parse_tree_inner.next().unwrap();
-        let attributes = header.into_inner();
-        for attr in attributes {
-            let mut name: &str = "";
-            let mut value: &str = "";
-            for attr_part in attr.into_inner() {
-                match attr_part.as_rule() {
-                    Rule::key => name = attr_part.as_str(),
-                    Rule::value => value = attr_part.as_str(),
-                    _ => unreachable!(),
-                }
-            }
-            match name {
-                "cover_image" => ret.cover_image = Some(value.to_string()),
-                "description" => ret.description = Some(value.to_string()),
-                "edited" => ret.edited = Some(value.to_string()),
-                "published" => {
-                    ret.published = match value {
-                        "true" => true,
-                        _ => false,
-                    }
-                }
-                "tags" => ret.tags = value.to_string(),
-                "title" => ret.title = value.to_string(),
-                _ => error!("Unknown attribute {}!", name),
-            }
-        }
-
-        // set body
-        let body = parse_tree_inner.next().unwrap();
-        ret.markdown = body.as_str().to_string();
-
-        // done
-        ret
-    }
-    fn get_template(&self) -> String {
-        unimplemented!()
-    }
-}
-
-lazy_static! {
-    pub static ref BLOG: Blog = Blog::new();
-}
-
-#[derive(Debug, Default)]
-pub struct Blog {
-    pub drafts: Vec<BlogPost>,
-    pub published: Vec<BlogPost>,
-}
-
-impl Blog {
-    fn new() -> Self {
-        let mut ret = Blog::default();
-        // scrape posts
-        let paths = fs::read_dir("blog").expect("Should locate blog directory");
-        for path in paths {
-            let path = path.expect("Could not open draft").path();
-            let post = BlogPost::new(ret.total(), path);
-            if post.published {
-                ret.published.push(post);
-            } else {
-                ret.drafts.push(post);
-            }
-        }
-        ret
-    }
-    fn total(&self) -> usize {
-        self.drafts.len() + self.published.len()
     }
 }
 

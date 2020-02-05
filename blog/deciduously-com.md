@@ -1,5 +1,5 @@
 ---
-title: I Scrapped My Stencil Project And Wrote A Static Site In Rust Instead And I'm Not Even Sorry
+title: I Scrapped My Stencil Project And Wrote A Static Site Instead
 description: Despite everything, I wrote another DIY static site in Rust.
 cover_image: crab_medium.jpg
 tags: hooray, works

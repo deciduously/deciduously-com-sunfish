@@ -1,7 +1,7 @@
 // handlers.rs
 // Web route handlers and router
 
-use crate::{types::BLOG, templates::*};
+use crate::templates::*;
 use askama::Template;
 use flate2::{write::ZlibEncoder, Compression};
 use hyper::{header, Body, Method, Request, Response, StatusCode};
@@ -102,11 +102,14 @@ pub async fn router(req: Request<Body>) -> HandlerResult {
                 }
             } else {
                 // No extension... is is a published blog post?
+                /*
+                TODO
                 for post in &BLOG.published {
                     if post.url_name == path_str {
                         return blog_handler(path_str).await;
                     }
                 }
+                */
                 // Otherwise...
                 four_oh_four().await
             }
