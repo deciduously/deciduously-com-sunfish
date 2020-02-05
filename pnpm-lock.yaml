@@ -1,7 +1,7 @@
 dependencies:
   tailwindcss: 1.1.4
 devDependencies:
-  '@fullhuman/postcss-purgecss': 2.0.5
+  '@fullhuman/postcss-purgecss': 2.0.6
   autoprefixer: 9.7.4
   cssnano: 4.1.10
   npm-run-all: 4.1.5
@@ -127,13 +127,13 @@ packages:
     dev: true
     resolution:
       integrity: sha512-jBD+G8+LWpMBBWvVcdr4QysjUE4mU/syrhN17o1u3gx0/WzJB1kwiVZAXRtWbsIPOwW8pF/YJV5+nmetPzepXg==
-  /@fullhuman/postcss-purgecss/2.0.5:
+  /@fullhuman/postcss-purgecss/2.0.6:
     dependencies:
       postcss: 7.0.26
-      purgecss: 2.0.5
+      purgecss: 2.0.6
     dev: true
     resolution:
-      integrity: sha512-lWSnRiLfI3dGowZkPBfFOVkWlBP+Wk12u91mtjCTmA3hJ+d5+MyizVsTAOB1e52QJww6BRSD4g6XpknF+dEPnA==
+      integrity: sha512-RgD05Yd1VFudo1H1b2inb+10AS1mexp1edHfdoJvoeKaoMVoi/9DWrbWOpIrDmKq1CO82oQrb5wf4V64oaNkKQ==
   /@nodelib/fs.scandir/2.1.3:
     dependencies:
       '@nodelib/fs.stat': 2.0.3
@@ -294,7 +294,7 @@ packages:
   /autoprefixer/9.7.4:
     dependencies:
       browserslist: 4.8.6
-      caniuse-lite: 1.0.30001023
+      caniuse-lite: 1.0.30001025
       chalk: 2.4.2
       normalize-range: 0.1.2
       num2fraction: 1.2.2
@@ -338,8 +338,8 @@ packages:
       integrity: sha512-b8um+L1RzM3WDSzvhm6gIz1yfTbBt6YTlcEKAvsmqCZZFw46z626lVj9j1yEPW33H5H+lBQpZMP1k8l+78Ha0A==
   /browserslist/4.8.6:
     dependencies:
-      caniuse-lite: 1.0.30001023
-      electron-to-chromium: 1.3.344
+      caniuse-lite: 1.0.30001025
+      electron-to-chromium: 1.3.345
       node-releases: 1.1.47
     hasBin: true
     resolution:
@@ -403,15 +403,15 @@ packages:
   /caniuse-api/3.0.0:
     dependencies:
       browserslist: 4.8.6
-      caniuse-lite: 1.0.30001023
+      caniuse-lite: 1.0.30001025
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: true
     resolution:
       integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==
-  /caniuse-lite/1.0.30001023:
+  /caniuse-lite/1.0.30001025:
     resolution:
-      integrity: sha512-C5TDMiYG11EOhVOA62W1p3UsJ2z4DsHtMBQtjzp3ZsUglcQn62WOUgW0y795c7A5uZ+GCEIvzkMatLIlAsbNTA==
+      integrity: sha512-SKyFdHYfXUZf5V85+PJgLYyit27q4wgvZuf8QTOk1osbypcROihMBlx9GRar2/pIcKH2r4OehdlBr9x6PXetAQ==
   /ccount/1.0.5:
     dev: true
     resolution:
@@ -530,12 +530,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-vXTJhHebByxZn3lDvDJYw4lR5+uB3vuoHsuYA5AKuxRVn5wzzIfQKGLBmgdVRHKTJYeK5rvJcHnrd0Li49CFpg==
-  /commander/4.1.0:
+  /commander/4.1.1:
     dev: true
     engines:
       node: '>= 6'
     resolution:
-      integrity: sha512-NIQrwvv9V39FHgGFm36+U9SMQzbiHvU79k+iADraJTpmrFFfx7Ds0IvDoAdZsDrknlkRk14OYoWXb57uTh7/sw==
+      integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==
   /concat-map/0.0.1:
     resolution:
       integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=
@@ -798,9 +798,9 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-tUMXrxlExSW6U2EXiiKGSBVdYgtV8qlHL+C10TsW4PURY/ic+eaysnSkwB4kA/mBlCyy/IKDJ+Lc3wbWeaXtuQ==
-  /electron-to-chromium/1.3.344:
+  /electron-to-chromium/1.3.345:
     resolution:
-      integrity: sha512-tvbx2Wl8WBR+ym3u492D0L6/jH+8NoQXqe46+QhbWH3voVPauGuZYeb1QAXYoOAWuiP2dbSvlBx0kQ1F3hu/Mw==
+      integrity: sha512-f8nx53+Z9Y+SPWGg3YdHrbYYfIJAtbUjpFfW4X1RwTZ94iUG7geg9tV8HqzAXX7XTNgyWgAFvce4yce8ZKxKmg==
   /emoji-regex/7.0.3:
     dev: true
     resolution:
@@ -2352,16 +2352,16 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
-  /purgecss/2.0.5:
+  /purgecss/2.0.6:
     dependencies:
-      commander: 4.1.0
+      commander: 4.1.1
       glob: 7.1.6
       postcss: 7.0.26
       postcss-selector-parser: 6.0.2
     dev: true
     hasBin: true
     resolution:
-      integrity: sha512-VwQoDXImH0pabZ6ivLPCsWuRGd979NEzACaT/P3pWzDVCwHXSgXUM4QDbnMklMawU0r4MrCvdaORM84KJvsCIA==
+      integrity: sha512-Xab72ykpWtg+j/dTphz9HCrychRNbMebNBrI+pOU0mC7mG5OlwRksEEpNAdOLb1jg9oRHDDu6Exe+nlM9ZLp5Q==
   /q/1.5.1:
     dev: true
     engines:
@@ -3228,7 +3228,7 @@ packages:
     resolution:
       integrity: sha512-T39FNN1b6hCW4SOIk1XyTOWxtXdcen0t+XYrysQmChzSipvhBO8Bj0nK1ozAasdk24dNWuMZvr4k24nz+8HHLg==
 specifiers:
-  '@fullhuman/postcss-purgecss': ^2.0.5
+  '@fullhuman/postcss-purgecss': ^2.0.6
   autoprefixer: ^9.7.4
   cssnano: ^4.1.10
   npm-run-all: ^4.1.5
