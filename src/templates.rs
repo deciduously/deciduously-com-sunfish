@@ -1,17 +1,13 @@
 // templates.rs
 // Typed structs for each template in /templates/
 
-use crate::{blog::{LINKINFO, LinkInfo}, types::*};
+use crate::{blog::{LINKINFO, LinkInfo}, config::NAV, types::*};
 use askama::Template;
 use lazy_static::lazy_static;
 use std::str::FromStr;
 
 lazy_static! {
-    static ref NAV: Vec<Hyperlink> = vec![
-        Hyperlink::new("deciduously.com", "/"),
-        Hyperlink::new("Resume/CV", "/cv"),
-        Hyperlink::new("Projects", "/projects"),
-    ];
+
 }
 
 #[derive(Template)]

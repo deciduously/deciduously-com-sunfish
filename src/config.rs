@@ -1,6 +1,6 @@
 // config.rs
 // CLI options and logging setup
-
+use crate::types::Hyperlink;
 use lazy_static::lazy_static;
 use log::{info, trace, warn};
 use serde_derive::Deserialize;
@@ -20,6 +20,12 @@ pub struct Opt {
 }
 
 lazy_static! {
+    pub static ref NAV: Vec<Hyperlink> = vec![
+        Hyperlink::new("deciduously.com", "/"),
+        Hyperlink::new("Resume/CV", "/cv"),
+        Hyperlink::new("Projects", "/projects"),
+    ];
+
     pub static ref OPT: Opt = {
         let toml_opt = include_str!("assets/config.toml");
         if std::env::args().nth(2).is_some() {

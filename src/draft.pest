@@ -2,7 +2,7 @@ header = { header_guard ~ attribute{3,6} ~ header_guard }
     header_guard = _{ "-"{3} ~ NEWLINE }
     attribute = { key ~ ": " ~ value ~ NEWLINE }
         key = { (ASCII_ALPHANUMERIC | "_")+ }
-        value = { (ASCII_ALPHANUMERIC | PUNCTUATION | " ")* }
+        value = { (ASCII_ALPHANUMERIC | PUNCTUATION | " " | ":" | "/" | "+")* }
 
 body = { ANY* }
 

@@ -3,8 +3,7 @@ title: I Scrapped My Stencil Project And Wrote A Static Site Instead
 description: Despite everything, I wrote another DIY static site in Rust.
 cover_image: crab_medium.jpg
 tags: hooray, works
-published: true
-edited: 2020-02-01T12:05:00.000Z
+published: false
 ---
 
 TODO MAKE A TEMPLATE APP ON GITHUB
