@@ -2,7 +2,9 @@
 {% block title %}Home{% endblock %}
 {% block content %}
     <h1>Blag</h1>
+    <ul>
     {% for post in posts %}
-        <li><a href={{ post.target }}>{{ post.name }}</a></li>
+        <li>{{post.id}} - <a href="/{{ post.url_name }}">{{ post.title }}</a> - {{ post.edited.as_ref().unwrap() }}</li>
     {% endfor %}
+    </ul>
 {% endblock %}

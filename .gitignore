@@ -1,4 +1,4 @@
 /target
 **/*.rs.bk
 /node_modules
-/src/**/*.css
+/src/assets/main.css

@@ -87,7 +87,20 @@ pub async fn router(req: Request<Body>) -> HandlerResult {
         (&Method::GET, "/robots.txt") => {
             string_handler(include_str!("assets/robots.txt"), "text", None).await
         }
-        (&Method::GET, path_str) => image(path_str).await,
+        (&Method::GET, path_str) => {
+            // Otherwise...
+            // is it an svg?
+            if let Some(ext) = path_str.split('.').nth(1) {
+                match ext {
+                    "svg" => image(path).await,
+                    _ => four_oh_four().await,
+                }
+            } else {
+                // No extension... is is a blog post?
+                // TODO
+                four_oh_four().await
+            }
+        }
         _ => {
             warn!("{}: 404!", path);
             four_oh_four().await

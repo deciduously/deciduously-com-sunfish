@@ -11,7 +11,7 @@ use structopt::StructOpt;
 #[derive(Debug, Deserialize, StructOpt)]
 #[structopt(name = "deciduously-com")]
 pub struct Opt {
-    /// Server address - default
+    /// Server address
     #[structopt(short, long, default_value = "127.0.0.1")]
     pub address: String,
     /// Server port 0-65535

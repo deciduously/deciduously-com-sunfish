@@ -1,6 +1,9 @@
 // main.rs
 // Entry point - tokio
 
+#[macro_use]
+extern crate pest_derive;
+
 use hyper::{
     service::{make_service_fn, service_fn},
     Server,
@@ -8,7 +11,6 @@ use hyper::{
 use log::info;
 use std::convert::Infallible;
 
-mod blog;
 mod config;
 mod handlers;
 mod templates;
