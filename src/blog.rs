@@ -211,6 +211,6 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-    _ => four_oh_four().await,
+        _ => four_oh_four().await,
     }
 }

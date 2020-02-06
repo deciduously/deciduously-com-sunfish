@@ -250,7 +250,7 @@ fn generate_handler(blog: &Blog, file: &mut fs::File) -> Result<(), io::Error> {
     for p in &blog.drafts {
         p.write_handler_match_arm(file)?;
     }
-    writeln!(file, "    _ => four_oh_four().await,")?;
+    writeln!(file, "        _ => four_oh_four().await,")?;
     writeln!(file, "    }}")?;
     writeln!(file, "}}")?;
     Ok(())
