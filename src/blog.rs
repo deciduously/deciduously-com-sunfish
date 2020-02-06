@@ -141,76 +141,76 @@ impl Default for Blog6Template {
 
 pub async fn blog_handler(path_str: &str) -> HandlerResult {
     match path_str {
-        "green-squares" => {
+        "/green-squares" => {
             string_handler(
                 &Blog0Template::default()
                     .render()
                     .expect("Should render markup"),
-            "text/html",
-            None,
-        )
-        .await
-    }
-        "actix-wrap" => {
+                "text/html",
+                None,
+            )
+            .await
+        }
+        "/actix-wrap" => {
             string_handler(
                 &Blog1Template::default()
                     .render()
                     .expect("Should render markup"),
-            "text/html",
-            None,
-        )
-        .await
-    }
-        "cpp-template-specialization" => {
+                "text/html",
+                None,
+            )
+            .await
+        }
+        "/cpp-template-specialization" => {
             string_handler(
                 &Blog2Template::default()
                     .render()
                     .expect("Should render markup"),
-            "text/html",
-            None,
-        )
-        .await
-    }
-        "deciduously" => {
+                "text/html",
+                None,
+            )
+            .await
+        }
+        "/deciduously" => {
             string_handler(
                 &Blog4Template::default()
                     .render()
                     .expect("Should render markup"),
-            "text/html",
-            None,
-        )
-        .await
-    }
-        "rust-arena-trees" => {
+                "text/html",
+                None,
+            )
+            .await
+        }
+        "/rust-arena-trees" => {
             string_handler(
                 &Blog5Template::default()
                     .render()
                     .expect("Should render markup"),
-            "text/html",
-            None,
-        )
-        .await
-    }
-        "multi-stage-docker" => {
+                "text/html",
+                None,
+            )
+            .await
+        }
+        "/multi-stage-docker" => {
             string_handler(
                 &Blog6Template::default()
                     .render()
                     .expect("Should render markup"),
-            "text/html",
-            None,
-        )
-        .await
-    }
-        "deciduously-com" => {
+                "text/html",
+                None,
+            )
+            .await
+        }
+        "/deciduously-com" => {
             string_handler(
                 &Blog3Template::default()
                     .render()
                     .expect("Should render markup"),
-            "text/html",
-            None,
-        )
-        .await
-    }
+                "text/html",
+                None,
+            )
+            .await
+        }
     _ => four_oh_four().await,
     }
 }
