@@ -3,6 +3,12 @@ authors = ["Ben Lovy <ben@deciduously.com>"]
 edition = "2018"
 name = "deciduously-com"
 version = "1.0.0"
+description = "Webserver and static site generator for a personal homepage"
+homepage = "deciduously.com"
+repository = "https://github.com/deciduously/deciduously-com"
+readme = "readme.md"
+keywords = ["static", "hyper", "askama", "website"]
+license = "BSD-3-Clause"
 
 [dependencies]
 askama = "0.9"
@@ -19,6 +25,14 @@ toml = "0.5"
 [dependencies.tokio]
 features = ["full"]
 version = "0.2"
+
+[build-dependencies]
+pest = "2.1"
+pest_derive = "2.1"
+
+[build-dependencies.pulldown-cmark]
+default-features = false
+version = "0.6"
 
 [dev-dependencies]
 pretty_assertions = "0.6"

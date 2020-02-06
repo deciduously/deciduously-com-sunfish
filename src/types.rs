@@ -1,6 +1,10 @@
 use serde_derive::Deserialize;
 use std::fmt;
 
+//
+// General
+//
+
 /// Link icon do display in header
 #[derive(Default, Deserialize, Debug, Clone)]
 pub struct Hyperlink {
@@ -16,6 +20,10 @@ impl Hyperlink {
         }
     }
 }
+
+//
+// Resume/CV
+//
 
 /// Link icon do display in header
 #[derive(Default, Deserialize, Debug)]

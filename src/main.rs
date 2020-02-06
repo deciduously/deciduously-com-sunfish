@@ -11,11 +11,12 @@ use std::convert::Infallible;
 mod blog;
 mod config;
 mod handlers;
+mod router;
 mod templates;
 mod types;
 
 use config::{init_logging, OPT};
-use handlers::router;
+use router::router;
 
 #[tokio::main]
 async fn main() {

@@ -1,61 +1,51 @@
 // templates.rs
 // Typed structs for each template in /templates/
 
-use crate::types::*;
+use crate::{blog::{LINKINFO, LinkInfo}, config::NAV, types::*};
 use askama::Template;
 use lazy_static::lazy_static;
 use std::str::FromStr;
 
-type HeaderLinks = Vec<Hyperlink>;
-
 lazy_static! {
-    static ref NAV: Vec<Hyperlink> = vec![
-        Hyperlink::new("deciduously.com", "/"),
-        Hyperlink::new("Resume/CV", "/cv"),
-        Hyperlink::new("Projects", "/projects"),
-    ];
+
 }
 
 #[derive(Template)]
 #[template(path = "skel.html")]
 pub struct SkelTemplate {
-    links: HeaderLinks,
+    links: &'static [Hyperlink],
 }
 
 impl Default for SkelTemplate {
     fn default() -> Self {
-        Self {
-            links: NAV.to_vec(),
-        }
+        Self { links: &NAV }
     }
 }
 
 #[derive(Template)]
 #[template(path = "404.html")]
 pub struct FourOhFourTemplate {
-    links: HeaderLinks,
+    links: &'static [Hyperlink],
 }
 
 impl Default for FourOhFourTemplate {
     fn default() -> Self {
-        Self {
-            links: NAV.to_vec(),
-        }
+        Self { links: &NAV }
     }
 }
 
 #[derive(Template)]
 #[template(path = "index.html")]
 pub struct IndexTemplate {
-    links: HeaderLinks,
-    posts: Vec<Hyperlink>,
+    links: &'static [Hyperlink],
+    posts: &'static [LinkInfo],
 }
 
 impl Default for IndexTemplate {
     fn default() -> Self {
         Self {
-            links: NAV.to_vec(),
-            posts: vec![Hyperlink::new("test", "#")],
+            links: &NAV,
+            posts: &LINKINFO.published,
         }
     }
 }
@@ -65,7 +55,7 @@ impl Default for IndexTemplate {
 pub struct CvTemplate {
     cv: CV,
     img_dim: usize,
-    links: HeaderLinks,
+    links: &'static [Hyperlink],
 }
 
 impl CvTemplate {
@@ -73,7 +63,7 @@ impl CvTemplate {
         Ok(Self {
             cv: toml::from_str(&s)?,
             img_dim: 32,
-            links: NAV.to_vec(),
+            links: &NAV,
         })
     }
 }

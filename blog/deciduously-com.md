@@ -1,10 +1,9 @@
 ---
-title: I Scrapped My Stencil Project And Wrote A Static Site In Rust Instead And I'm Not Even Sorry
+title: I Scrapped My Stencil Project And Wrote A Static Site Instead
 description: Despite everything, I wrote another DIY static site in Rust.
 cover_image: crab_medium.jpg
-tags: hooray
+tags: hooray, works
 published: false
-date: 2020-01-31T11:00:00.000Z
 ---
 
 TODO MAKE A TEMPLATE APP ON GITHUB
@@ -32,11 +31,15 @@ pub async fn router(req: Request<Body>) -> Result<Response<Body>, std::convert::
     match (method, path) {
         (&Method::GET, "/") | (&Method::GET, "/index.html") => index().await,
         (&Method::GET, "/cv") => cv().await,
-        (&Method::GET, "/main.css") => stylesheet().await,
-        (&Method::GET, "/manifest.json") => {
-            manifest().await
+        (&Method::GET, "/main.css") => {
+            string_handler(include_str!("assets/main.css"), "text/css", None).await
         }
-        (&Method::GET, "/robots.txt") => string_handler(include_str!("assets/robots.txt")).await,
+        (&Method::GET, "/manifest.json") => {
+            string_handler(include_str!("assets/manifest.json"), "text/json", None).await
+        }
+        (&Method::GET, "/robots.txt") => {
+            string_handler(include_str!("assets/robots.txt"), "text", None).await
+        }
         (&Method::GET, path_str) => image(path_str).await,
         _ => {
             warn!("{}: 404!", path);
@@ -88,37 +91,9 @@ I THINK IT WILL NEED IMAGE ASSETS
 
 ### Tailwind
 
-### Docker
+### Config
 
-I deployed on the DigitalOcean [One-Click Docker](https://marketplace.digitalocean.com/apps/docker) app.  The cheapest tier is $5/month.  My docker image is only 6.82 megabytes!  Updating this thing is super light on bandwidth.  Here's the dockerfile, doing a mutli-stage thing to build a statically-linked application locally then only ship the executable:
-
-```dockerfile
-FROM rust:1.40.0 AS builder
-WORKDIR /usr/src/
-RUN rustup target add x86_64-unknown-linux-musl
-
-# Create a dummy project and build the app's dependencies.
-# If the Cargo.toml or Cargo.lock files have not changed,
-# we can use the docker build cache and skip these (typically slow) steps.
-RUN USER=root cargo new deciduously-com
-WORKDIR /usr/src/deciduously-com
-COPY Cargo.toml Cargo.lock ./
-RUN cargo build --release
-
-# Copy the source and build the application.
-COPY src ./src
-COPY templates ./templates
-RUN cargo install --target x86_64-unknown-linux-musl --path .
-
-# Copy the statically-linked binary into a scratch container.
-FROM scratch
-COPY --from=builder /usr/local/cargo/bin/deciduously-com .
-COPY --from=builder /usr/src/deciduously-com/templates .
-USER 1000
-CMD ["./deciduously-com -p 80 -a 0.0.0.0"]
-```
-
-Many thanks to [this blog post](https://alexbrand.dev/post/how-to-package-rust-applications-into-minimal-docker-containers/) by [@alexbrand](https://twitter.com/alexbrand).
+Toml scrape + Structopt  to same struct
 
 ## Conclusion
 
