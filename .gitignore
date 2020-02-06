@@ -2,4 +2,4 @@
 **/*.rs.bk
 /node_modules
 /src/assets/main.css
-/templates/auto-*
+/templates/post_*

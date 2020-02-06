@@ -27,14 +27,11 @@ pub async fn router(req: Request<Body>) -> HandlerResult {
                 }
             } else {
                 // No extension... is is a published blog post?
-                /*
-                TODO
-                for post in &BLOG.published {
+                for post in &LINKINFO.published {
                     if post.url_name == path_str {
-                        return blog_handler(path_str).await;
+                        return (post.handler)().await;
                     }
                 }
-                */
                 // Otherwise...
                 four_oh_four().await
             }

@@ -7,8 +7,9 @@ use crate::{
 };
 use lazy_static::lazy_static;
 
-#[derive(Debug, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy)]
 pub struct LinkInfo {
+    pub handler: fn() -> Box<dyn std::future::Future<Output=HandlerResult>>,
     pub id: usize,
     pub url_name: &'static str,
     pub title: &'static str,
@@ -24,36 +25,43 @@ lazy_static! {
     pub static ref LINKINFO: BlogLinkInfo = {
         let mut ret = BlogLinkInfo::default();
     ret.drafts.push(LinkInfo {
+        handler: deciduously_com,
         id: 3,
         title: "I Scrapped My Stencil Project And Wrote A Static Site Instead",
         url_name: "deciduously-com",
     });
     ret.published.push(LinkInfo {
+        handler: green_squares,
         id: 0,
         title: "Thirty Green Squares",
         url_name: "green-squares",
     });
     ret.published.push(LinkInfo {
+        handler: actix_wrap,
         id: 1,
         title: "That About Wraps It Up For Actix-Web",
         url_name: "actix-wrap",
     });
     ret.published.push(LinkInfo {
+        handler: cpp_template_specialization,
         id: 2,
         title: "C++ Template Specialization - Syntax Note",
         url_name: "cpp-template-specialization",
     });
     ret.published.push(LinkInfo {
+        handler: deciduously,
         id: 4,
         title: "deciduously",
         url_name: "deciduously",
     });
     ret.published.push(LinkInfo {
+        handler: rust_arena_trees,
         id: 5,
         title: "No More Tears, No More Knots: Arena-Allocated Trees in Rust",
         url_name: "rust-arena-trees",
     });
     ret.published.push(LinkInfo {
+        handler: multi_stage_docker,
         id: 6,
         title: "Use Multi-Stage Docker Builds For Statically-Linked Rust Binaries",
         url_name: "multi-stage-docker",
@@ -63,7 +71,7 @@ lazy_static! {
 }
 
 #[derive(Template)]
-#[template(path = "deciduously-com.html")]
+#[template(path = "post_deciduously-com.html")]
 pub struct Blog3Template {
 
     links: &'static [Hyperlink],
@@ -75,7 +83,7 @@ impl Default for Blog3Template {
 }
 
 #[derive(Template)]
-#[template(path = "green-squares.html")]
+#[template(path = "post_green-squares.html")]
 pub struct Blog0Template {
 
     links: &'static [Hyperlink],
@@ -87,7 +95,7 @@ impl Default for Blog0Template {
 }
 
 #[derive(Template)]
-#[template(path = "actix-wrap.html")]
+#[template(path = "post_actix-wrap.html")]
 pub struct Blog1Template {
 
     links: &'static [Hyperlink],
@@ -99,7 +107,7 @@ impl Default for Blog1Template {
 }
 
 #[derive(Template)]
-#[template(path = "cpp-template-specialization.html")]
+#[template(path = "post_cpp-template-specialization.html")]
 pub struct Blog2Template {
 
     links: &'static [Hyperlink],
@@ -111,7 +119,7 @@ impl Default for Blog2Template {
 }
 
 #[derive(Template)]
-#[template(path = "deciduously.html")]
+#[template(path = "post_deciduously.html")]
 pub struct Blog4Template {
 
     links: &'static [Hyperlink],
@@ -123,7 +131,7 @@ impl Default for Blog4Template {
 }
 
 #[derive(Template)]
-#[template(path = "rust-arena-trees.html")]
+#[template(path = "post_rust-arena-trees.html")]
 pub struct Blog5Template {
 
     links: &'static [Hyperlink],
@@ -135,7 +143,7 @@ impl Default for Blog5Template {
 }
 
 #[derive(Template)]
-#[template(path = "multi-stage-docker.html")]
+#[template(path = "post_multi-stage-docker.html")]
 pub struct Blog6Template {
 
     links: &'static [Hyperlink],
@@ -146,7 +154,7 @@ impl Default for Blog6Template {
     }
 }
 
-async fn blog_3_handler() -> HandlerResult {
+pub async fn deciduously_com() -> HandlerResult {
     string_handler(
         &Blog3Template::default()
             .render()
@@ -156,7 +164,7 @@ async fn blog_3_handler() -> HandlerResult {
     )
     .await
 }
-async fn blog_0_handler() -> HandlerResult {
+pub async fn green_squares() -> HandlerResult {
     string_handler(
         &Blog0Template::default()
             .render()
@@ -166,7 +174,7 @@ async fn blog_0_handler() -> HandlerResult {
     )
     .await
 }
-async fn blog_1_handler() -> HandlerResult {
+pub async fn actix_wrap() -> HandlerResult {
     string_handler(
         &Blog1Template::default()
             .render()
@@ -176,7 +184,7 @@ async fn blog_1_handler() -> HandlerResult {
     )
     .await
 }
-async fn blog_2_handler() -> HandlerResult {
+pub async fn cpp_template_specialization() -> HandlerResult {
     string_handler(
         &Blog2Template::default()
             .render()
@@ -186,7 +194,7 @@ async fn blog_2_handler() -> HandlerResult {
     )
     .await
 }
-async fn blog_4_handler() -> HandlerResult {
+pub async fn deciduously() -> HandlerResult {
     string_handler(
         &Blog4Template::default()
             .render()
@@ -196,7 +204,7 @@ async fn blog_4_handler() -> HandlerResult {
     )
     .await
 }
-async fn blog_5_handler() -> HandlerResult {
+pub async fn rust_arena_trees() -> HandlerResult {
     string_handler(
         &Blog5Template::default()
             .render()
@@ -206,7 +214,7 @@ async fn blog_5_handler() -> HandlerResult {
     )
     .await
 }
-async fn blog_6_handler() -> HandlerResult {
+pub async fn multi_stage_docker() -> HandlerResult {
     string_handler(
         &Blog6Template::default()
             .render()
