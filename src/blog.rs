@@ -65,7 +65,6 @@ lazy_static! {
 #[derive(Template)]
 #[template(path = "post_deciduously-com.html")]
 pub struct Blog3Template {
-
     links: &'static [Hyperlink],
 }
 impl Default for Blog3Template {
@@ -77,7 +76,6 @@ impl Default for Blog3Template {
 #[derive(Template)]
 #[template(path = "post_green-squares.html")]
 pub struct Blog0Template {
-
     links: &'static [Hyperlink],
 }
 impl Default for Blog0Template {
@@ -89,7 +87,6 @@ impl Default for Blog0Template {
 #[derive(Template)]
 #[template(path = "post_actix-wrap.html")]
 pub struct Blog1Template {
-
     links: &'static [Hyperlink],
 }
 impl Default for Blog1Template {
@@ -101,7 +98,6 @@ impl Default for Blog1Template {
 #[derive(Template)]
 #[template(path = "post_cpp-template-specialization.html")]
 pub struct Blog2Template {
-
     links: &'static [Hyperlink],
 }
 impl Default for Blog2Template {
@@ -113,7 +109,6 @@ impl Default for Blog2Template {
 #[derive(Template)]
 #[template(path = "post_deciduously.html")]
 pub struct Blog4Template {
-
     links: &'static [Hyperlink],
 }
 impl Default for Blog4Template {
@@ -125,7 +120,6 @@ impl Default for Blog4Template {
 #[derive(Template)]
 #[template(path = "post_rust-arena-trees.html")]
 pub struct Blog5Template {
-
     links: &'static [Hyperlink],
 }
 impl Default for Blog5Template {
@@ -137,7 +131,6 @@ impl Default for Blog5Template {
 #[derive(Template)]
 #[template(path = "post_multi-stage-docker.html")]
 pub struct Blog6Template {
-
     links: &'static [Hyperlink],
 }
 impl Default for Blog6Template {
