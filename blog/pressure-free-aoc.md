@@ -10,8 +10,8 @@ I'm really glad I didn't start [Advent of Code 2019](https://adventofcode.com/20
 
 I am *not good* at follow through with this challenge, and in previous years I think I made two mistakes:
 
-1) I used it to learn brand new, funky languages (Clojure, F#, Haskell) instead of leveraging a skill I've cultivated and care about continuing to hone (Rust, C++, JavaScript).
-2) I rushed through the solutions.
+1. I used it to learn brand new, funky languages (Clojure, F#, Haskell) instead of leveraging a skill I've cultivated and care about continuing to hone (Rust, C++, JavaScript).
+2. I rushed through the solutions.
 
 I'm not super competitive by nature, but when I realized I was at a comfort level with programming such that I could complete the first few days quickly, I got too in my head about it.  The pressure to "deliver" leads me to inevitably burn out sometime in week 2 and never come back.  The days I do get solved are usually not well optimized, as I was just looking for the correct output to get my little star.  Once I solved it I didn't spend enough time revisiting to learn something about the problem - there's another one waiting!
 
@@ -19,7 +19,7 @@ Additionally, using those types of fancy functional languages gave me a bad habi
 
 I wrote about one such case here, where I missed an algorithm I even already knew in favor of a simple brute-force approach which needlessly abused my laptop's CPU, costing me my speedrun:
 
-{% post deciduously/a-tale-of-two-functions-44h5 %}
+{# {% post deciduously/a-tale-of-two-functions-44h5 %} #}
 
 If I had just slowed down, I would have seen the "proper" way myself and probably still gotten there that morning, but AoC is a trip.
 

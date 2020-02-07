@@ -94,7 +94,7 @@ impl BlogPost {
         writeln!(file, "{{% block title %}}{}{{% endblock %}}", self.title)?;
         writeln!(
             file,
-            "{{% block content %}}<main>{}</main>{{% endblock %}}",
+            "{{% block content %}}{}{{% endblock %}}",
             html
         )?;
         Ok(())

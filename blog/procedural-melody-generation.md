@@ -18,7 +18,7 @@ In other words, we're going to teach our [computers](https://en.wikipedia.org/wi
 
 The [one-liner](https://en.wikipedia.org/wiki/One-liner_program) in the cover image [procedurally generates](https://en.wikipedia.org/wiki/Procedural_generation) a [melody](https://en.wikipedia.org/wiki/Melody) using [tools assumed to be present](https://en.wikipedia.org/wiki/Unix_philosophy) on a standard [desktop](https://en.wikipedia.org/wiki/Desktop_computer) [Linux distribution](https://en.wikipedia.org/wiki/Linux_distribution) like [Ubuntu](https://en.wikipedia.org/wiki/Ubuntu).  The melody produced will be composed of notes along a single [octave](https://en.wikipedia.org/wiki/Octave) in a hardcoded [key](https://en.wikipedia.org/wiki/Key_(music)) ([A major](https://en.wikipedia.org/wiki/A_major)):
 
-{% youtube uLhQQSKhTok %}
+{# {% youtube uLhQQSKhTok %} #}
 
 By the end of this post our program will:
 

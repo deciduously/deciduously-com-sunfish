@@ -9,12 +9,11 @@ edited: 2020-01-01T12:00:00.000Z
 
 This was an unexpectedly phenomenal discussion:
 
-{% post deciduously/au-revoir-gentoo-sell-me-a-new-linux-distro-4d3e %}
+{# {% post deciduously/au-revoir-gentoo-sell-me-a-new-linux-distro-4d3e %} #}
 
 Thank you, DEV, seriously, I'm blown away by how many of you were compelled to add your take.  The discussion there turned into a highly useful resource with a wide array of perspectives, experiences, and opinions from people who really know what they're talking about, and I'll be returning to it as a reference time and again.
 
 I carefully read every single comment, and took all of your well-informed perspectives into consideration, but ultimately went with my initial instinct and installed [Debian Buster](https://www.debian.org/releases/buster/).
-
 
 The [first half](#trusting-instinct) of this post is a somewhat defensive run-down of why I picked [Debian](https://www.debian.org/) instead of, oh, pretty much anything else, and the [second half](#installation-log) is a log of the installation process and post-install configuration I've done so far, more for my own reference than anything else.
 

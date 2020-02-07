@@ -41,7 +41,7 @@ The Web is an inherently complicated platform, and frontend is not my primary ta
 
 Now, it's a valid point that Web Components may very well represent yet another step along this chain.  There's a phenomenal discussion here:
 
-{% post richharris/why-i-don-t-use-web-components-2cia %}
+{# {% post richharris/why-i-don-t-use-web-components-2cia %} #}
 
 My favorite quote from that discussion came from [@josepot](https://dev.to/josepot), who noted that "web-components are just leaky abstractions built on top of other leaky abstractions".  That's hard to argue with.  Still, though, what isn't?
 
