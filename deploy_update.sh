@@ -10,3 +10,4 @@ stop_current () {
 stop_current $1
 docker pull deciduously0/deciduously-com:$2
 docker run -dit -p 3000:8080 deciduously0/deciduously-com
+docker system prune
