@@ -94,7 +94,11 @@ impl BlogPost {
         writeln!(file, "{{% block title %}}{}{{% endblock %}}", self.title)?;
         writeln!(file, "{{% block content %}}")?;
         if let Some(cover_image) = &self.cover_image {
-            writeln!(file, "<figure><img src={} alt=\"Cover splash\"></img></figure>", cover_image)?;
+            writeln!(
+                file,
+                "<figure><img src={} alt=\"Cover splash\"></img></figure>",
+                cover_image
+            )?;
         }
         writeln!(file, "{}{{% endblock %}}", html)?;
         Ok(())
@@ -117,15 +121,13 @@ impl BlogPost {
     }
     fn write_handler_match_arm(&self, file: &mut fs::File) -> Result<(), io::Error> {
         writeln!(file, "        \"/{}\" => {{", self.url_name)?;
-        writeln!(file, "            string_handler(")?;
+        writeln!(file, "            html_str_handler(")?;
         writeln!(file, "                &{}::default()", self.struct_name())?;
         writeln!(file, "                    .render()")?;
         writeln!(
             file,
-            "                    .expect(\"Should render markup\"),"
+            "                    .expect(\"Should render markup\")"
         )?;
-        writeln!(file, "                \"text/html\",")?;
-        writeln!(file, "                None,")?;
         writeln!(file, "            )")?;
         writeln!(file, "            .await")?;
         writeln!(file, "        }}")?;
@@ -228,7 +230,7 @@ fn write_imports(file: &mut fs::File) -> Result<(), io::Error> {
     writeln!(file, "    config::NAV,")?;
     writeln!(
         file,
-        "    handlers::{{four_oh_four, string_handler, HandlerResult}},"
+        "    handlers::{{four_oh_four, html_str_handler, HandlerResult}},"
     )?;
     writeln!(file, "    types::Hyperlink,")?;
     writeln!(file, "}};")?;

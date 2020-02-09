@@ -11,8 +11,24 @@ pub async fn router(req: Request<Body>) -> HandlerResult {
         (&Method::GET, "/main.css") => {
             string_handler(include_str!("assets/main.css"), "text/css", None).await
         }
+        (&Method::GET, "/tomorrow-night.min.css") => {
+            string_handler(
+                include_str!("assets/tomorrow-night.min.css"),
+                "text/css",
+                None,
+            )
+            .await
+        }
         (&Method::GET, "/manifest.json") => {
             string_handler(include_str!("assets/manifest.json"), "text/json", None).await
+        }
+        (&Method::GET, "/highlight.pack.js") => {
+            string_handler(
+                include_str!("assets/highlight.pack.js"),
+                "application/javascript",
+                None,
+            )
+            .await
         }
         (&Method::GET, "/robots.txt") => {
             string_handler(include_str!("assets/robots.txt"), "text", None).await

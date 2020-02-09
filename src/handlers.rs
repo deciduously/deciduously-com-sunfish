@@ -70,3 +70,7 @@ pub async fn string_handler(
         .body(Body::from(compressed))
         .unwrap())
 }
+
+pub async fn html_str_handler(body: &str) -> HandlerResult {
+    string_handler(body, "text/html", None).await
+}

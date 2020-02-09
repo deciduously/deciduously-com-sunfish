@@ -1,14 +1,16 @@
 // templates.rs
 // Typed structs for each template in /templates/
 
-use crate::{blog::{LINKINFO, LinkInfo}, config::NAV, types::*};
+use crate::{
+    blog::{LinkInfo, LINKINFO},
+    config::NAV,
+    types::*,
+};
 use askama::Template;
 use lazy_static::lazy_static;
 use std::str::FromStr;
 
-lazy_static! {
-
-}
+lazy_static! {}
 
 #[derive(Template)]
 #[template(path = "skel.html")]
