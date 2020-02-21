@@ -6,7 +6,6 @@ use hyper::{
     Server,
 };
 use log::info;
-use std::convert::Infallible;
 
 mod blog;
 mod config;
@@ -24,7 +23,7 @@ async fn main() {
     let addr = format!("{}:{}", OPT.address, OPT.port)
         .parse()
         .expect("Should parse net::SocketAddr");
-    let make_svc = make_service_fn(|_conn| async { Ok::<_, Infallible>(service_fn(router)) });
+    let make_svc = make_service_fn(|_conn| async { Ok::<_, anyhow::Error>(service_fn(router)) });
 
     let server = Server::bind(&addr).serve(make_svc);
 

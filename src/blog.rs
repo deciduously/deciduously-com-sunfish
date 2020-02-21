@@ -24,297 +24,302 @@ lazy_static! {
     pub static ref LINKINFO: BlogLinkInfo = {
         let mut ret = BlogLinkInfo::default();
         ret.drafts.push(LinkInfo {
-            id: 22,
+            id: 23,
             title: "I Scrapped My Stencil Project And Wrote A Static Site Instead",
             url_name: "deciduously-com",
         });
         ret.published.push(LinkInfo {
             id: 0,
+            title: "Hyper Webapp Template",
+            url_name: "hyper-template",
+        });
+        ret.published.push(LinkInfo {
+            id: 1,
             title: "Reactive Canvas with TypeScript and Vue",
             url_name: "canvas-ts-vue",
         });
         ret.published.push(LinkInfo {
-            id: 1,
+            id: 2,
             title: "A Tale of Two Functions",
             url_name: "tale-two-functions",
         });
         ret.published.push(LinkInfo {
-            id: 2,
+            id: 3,
             title: "Solving Problems By Avoiding Them",
             url_name: "avoiding-problems",
         });
         ret.published.push(LinkInfo {
-            id: 3,
+            id: 4,
             title: "Let's Build a Rust Frontend with Yew - Part 2",
             url_name: "yew-2",
         });
         ret.published.push(LinkInfo {
-            id: 4,
+            id: 5,
             title: "Rust + ReasonML - a beginner's love story",
             url_name: "rust-reason-love",
         });
         ret.published.push(LinkInfo {
-            id: 5,
+            id: 6,
             title: "F# is Pretty Cool",
             url_name: "fsharp-pretty-cool",
         });
         ret.published.push(LinkInfo {
-            id: 6,
+            id: 7,
             title: "Callbacks, Trait Objects & Associated Types, Oh My!",
             url_name: "callbacks-trait-objects-associated-types",
         });
         ret.published.push(LinkInfo {
-            id: 7,
+            id: 8,
             title: "FormData in TypeScript",
             url_name: "formdata-ts",
         });
         ret.published.push(LinkInfo {
-            id: 8,
+            id: 9,
             title: "Thirty Green Squares",
             url_name: "green-squares",
         });
         ret.published.push(LinkInfo {
-            id: 9,
+            id: 10,
             title: "Stalk a Click through a Re-Frame/actix_web App",
             url_name: "stalk-a-click",
         });
         ret.published.push(LinkInfo {
-            id: 10,
+            id: 11,
             title: "That About Wraps It Up For Actix-Web",
             url_name: "actix-wrap",
         });
         ret.published.push(LinkInfo {
-            id: 11,
+            id: 12,
             title: "C++ Template Specialization - Syntax Note",
             url_name: "cpp-template-specialization",
         });
         ret.published.push(LinkInfo {
-            id: 12,
+            id: 13,
             title: "Overly Functional C++",
             url_name: "overly-functional-cpp",
         });
         ret.published.push(LinkInfo {
-            id: 13,
+            id: 14,
             title: "Some Haskell, English'd",
             url_name: "haskell-english",
         });
         ret.published.push(LinkInfo {
-            id: 14,
+            id: 15,
             title: "Pressure-Free AoC",
             url_name: "pressure-free-aoc",
         });
         ret.published.push(LinkInfo {
-            id: 15,
+            id: 16,
             title: "Stencil: I Think I Found My Frontend Home",
             url_name: "stencil-home",
         });
         ret.published.push(LinkInfo {
-            id: 16,
+            id: 17,
             title: "Reactive Canvas with ClojureScript and Vue",
             url_name: "canvas-cljs-vue",
         });
         ret.published.push(LinkInfo {
-            id: 17,
+            id: 18,
             title: " Parser Combinators are Easy",
             url_name: "parser-combinators-easy",
         });
         ret.published.push(LinkInfo {
-            id: 18,
+            id: 19,
             title: "The Builder Pattern",
             url_name: "actix-trials",
         });
         ret.published.push(LinkInfo {
-            id: 19,
+            id: 20,
             title: "In And Out Of Rabbit Holes",
             url_name: "rabbit-holes",
         });
         ret.published.push(LinkInfo {
-            id: 20,
+            id: 21,
             title: "How I Emacs And So Can You: Packages",
             url_name: "how-i-emacs-packages",
         });
         ret.published.push(LinkInfo {
-            id: 21,
+            id: 22,
             title: "Getting Cozy With C++",
             url_name: "getting-cozy-cpp",
         });
         ret.published.push(LinkInfo {
-            id: 23,
+            id: 24,
             title: "The Builder Pattern",
             url_name: "builder-pattern",
         });
         ret.published.push(LinkInfo {
-            id: 24,
+            id: 25,
             title: "Overly Functional C++: The Fold",
             url_name: "the-fold",
         });
         ret.published.push(LinkInfo {
-            id: 25,
+            id: 26,
             title: "Getting Cozy With Debian Buster",
             url_name: "debian-buster",
         });
         ret.published.push(LinkInfo {
-            id: 26,
+            id: 27,
             title: "Haskell as Training Wheels",
             url_name: "haskell-training-wheels",
         });
         ret.published.push(LinkInfo {
-            id: 27,
+            id: 28,
             title: "Tail Recursion",
             url_name: "tail-recursion",
         });
         ret.published.push(LinkInfo {
-            id: 28,
+            id: 29,
             title: "Real-Time Communication in ReasonML with bs-socket",
             url_name: "reason-rtc",
         });
         ret.published.push(LinkInfo {
-            id: 29,
+            id: 30,
             title: "deciduously",
             url_name: "deciduously",
         });
         ret.published.push(LinkInfo {
-            id: 30,
+            id: 31,
             title: "The Dumb Things I Did And How I'm Going To Fix Them",
             url_name: "dumb-things-i-did",
         });
         ret.published.push(LinkInfo {
-            id: 31,
+            id: 32,
             title: "Steam Proton Is Great",
             url_name: "steam-proton",
         });
         ret.published.push(LinkInfo {
-            id: 32,
+            id: 33,
             title: "Towards Complexity",
             url_name: "towards-complexity",
         });
         ret.published.push(LinkInfo {
-            id: 33,
+            id: 34,
             title: " Interesting Board Game Mechanics",
             url_name: "board-game-mechanics",
         });
         ret.published.push(LinkInfo {
-            id: 34,
+            id: 35,
             title: "Procedural Melody Generation in Rust",
             url_name: "procedural-melody-generation",
         });
         ret.published.push(LinkInfo {
-            id: 35,
+            id: 36,
             title: "No More Tears, No More Knots: Arena-Allocated Trees in Rust",
             url_name: "rust-arena-trees",
         });
         ret.published.push(LinkInfo {
-            id: 36,
+            id: 37,
             title: "Back to school",
             url_name: "back-to-school",
         });
         ret.published.push(LinkInfo {
-            id: 37,
+            id: 38,
             title: "Know When to Fold 'Em",
             url_name: "fold-em",
         });
         ret.published.push(LinkInfo {
-            id: 38,
+            id: 39,
             title: "Let's Build a Rust Frontend with Yew - Part 1",
             url_name: "yew-1",
         });
         ret.published.push(LinkInfo {
-            id: 39,
+            id: 40,
             title: "Oops, I'm Making A Framework",
             url_name: "oops-framework",
         });
         ret.published.push(LinkInfo {
-            id: 40,
+            id: 41,
             title: "Validate a Credit Card Number with Functional JavaScript",
             url_name: "luhn-functional-javascript",
         });
         ret.published.push(LinkInfo {
-            id: 41,
+            id: 42,
             title: "Build You A Markov Chain In Rust (Or Whatever)",
             url_name: "rust-markov",
         });
         ret.published.push(LinkInfo {
-            id: 42,
+            id: 43,
             title: "I Am Mesmerized By Our New Robotic Vacuum",
             url_name: "robotic-vacuum",
         });
         ret.published.push(LinkInfo {
-            id: 43,
+            id: 44,
             title: "The Value Of Your Time",
             url_name: "value-of-your-time",
         });
         ret.published.push(LinkInfo {
-            id: 44,
+            id: 45,
             title: "Scrape your Dev.to pageviews with Rust",
             url_name: "dev-to-scrape-rust",
         });
         ret.published.push(LinkInfo {
-            id: 45,
+            id: 46,
             title: "Overly Functional C++: The BenFolds Five",
             url_name: "ben-folds-five",
         });
         ret.published.push(LinkInfo {
-            id: 46,
+            id: 47,
             title: "Creative Coding in Rust with Nannou",
             url_name: "creative-coding-nannou",
         });
         ret.published.push(LinkInfo {
-            id: 47,
+            id: 48,
             title: "Crates I Have Known And Loved",
             url_name: "crates-known-loved",
         });
         ret.published.push(LinkInfo {
-            id: 48,
+            id: 49,
             title: "How To Make A Makefile",
             url_name: "make-a-makefile",
         });
         ret.published.push(LinkInfo {
-            id: 49,
+            id: 50,
             title: "Use Multi-Stage Docker Builds For Statically-Linked Rust Binaries",
             url_name: "multi-stage-docker",
         });
         ret.published.push(LinkInfo {
-            id: 50,
+            id: 51,
             title: "Higher-Order Functions in Rust",
             url_name: "hof-rust",
         });
         ret.published.push(LinkInfo {
-            id: 51,
+            id: 52,
             title: "Interesting Video Game Mechanics",
             url_name: "video-game-mechanics",
         });
         ret.published.push(LinkInfo {
-            id: 52,
+            id: 53,
             title: "Let's Build a Rust Frontend with Yew - Part 3",
             url_name: "yew-3",
         });
         ret.published.push(LinkInfo {
-            id: 53,
+            id: 54,
             title: "Get Started Writing Scheme",
             url_name: "get-started-writing-scheme",
         });
         ret.published.push(LinkInfo {
-            id: 54,
+            id: 55,
             title: "Skip the Framework: Build A Simple Rust API with Hyper",
             url_name: "hyper-api",
         });
         ret.published.push(LinkInfo {
-            id: 55,
+            id: 56,
             title: "A ClojureScript exercise template",
             url_name: "cljs-exercise",
         });
         ret.published.push(LinkInfo {
-            id: 56,
+            id: 57,
             title: "Up and Running with Clojure for the Web",
             url_name: "clojure-web",
         });
         ret.published.push(LinkInfo {
-            id: 57,
+            id: 58,
             title: "Create Graphviz graphs in Clojure with dorothy",
             url_name: "clojure-dorothy",
         });
         ret.published.push(LinkInfo {
-            id: 58,
+            id: 59,
             title: "Pass-By-Value in C++ and Rust",
             url_name: "pass-by-value-cpp-rust",
         });
@@ -324,259 +329,6 @@ lazy_static! {
 
 #[derive(Template)]
 #[template(path = "post_deciduously-com.html")]
-pub struct Blog22Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog22Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_canvas-ts-vue.html")]
-pub struct Blog0Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog0Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_tale-two-functions.html")]
-pub struct Blog1Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog1Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_avoiding-problems.html")]
-pub struct Blog2Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog2Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_yew-2.html")]
-pub struct Blog3Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog3Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_rust-reason-love.html")]
-pub struct Blog4Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog4Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_fsharp-pretty-cool.html")]
-pub struct Blog5Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog5Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_callbacks-trait-objects-associated-types.html")]
-pub struct Blog6Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog6Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_formdata-ts.html")]
-pub struct Blog7Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog7Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_green-squares.html")]
-pub struct Blog8Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog8Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_stalk-a-click.html")]
-pub struct Blog9Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog9Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_actix-wrap.html")]
-pub struct Blog10Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog10Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_cpp-template-specialization.html")]
-pub struct Blog11Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog11Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_overly-functional-cpp.html")]
-pub struct Blog12Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog12Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_haskell-english.html")]
-pub struct Blog13Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog13Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_pressure-free-aoc.html")]
-pub struct Blog14Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog14Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_stencil-home.html")]
-pub struct Blog15Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog15Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_canvas-cljs-vue.html")]
-pub struct Blog16Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog16Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_parser-combinators-easy.html")]
-pub struct Blog17Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog17Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_actix-trials.html")]
-pub struct Blog18Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog18Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_rabbit-holes.html")]
-pub struct Blog19Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog19Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_how-i-emacs-packages.html")]
-pub struct Blog20Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog20Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_getting-cozy-cpp.html")]
-pub struct Blog21Template {
-    links: &'static [Hyperlink],
-}
-impl Default for Blog21Template {
-    fn default() -> Self {
-        Self { links: &NAV }
-    }
-}
-
-#[derive(Template)]
-#[template(path = "post_builder-pattern.html")]
 pub struct Blog23Template {
     links: &'static [Hyperlink],
 }
@@ -587,7 +339,260 @@ impl Default for Blog23Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_the-fold.html")]
+#[template(path = "post_hyper-template.html")]
+pub struct Blog0Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog0Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_canvas-ts-vue.html")]
+pub struct Blog1Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog1Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_tale-two-functions.html")]
+pub struct Blog2Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog2Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_avoiding-problems.html")]
+pub struct Blog3Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog3Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_yew-2.html")]
+pub struct Blog4Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog4Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_rust-reason-love.html")]
+pub struct Blog5Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog5Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_fsharp-pretty-cool.html")]
+pub struct Blog6Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog6Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_callbacks-trait-objects-associated-types.html")]
+pub struct Blog7Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog7Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_formdata-ts.html")]
+pub struct Blog8Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog8Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_green-squares.html")]
+pub struct Blog9Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog9Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_stalk-a-click.html")]
+pub struct Blog10Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog10Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_actix-wrap.html")]
+pub struct Blog11Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog11Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_cpp-template-specialization.html")]
+pub struct Blog12Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog12Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_overly-functional-cpp.html")]
+pub struct Blog13Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog13Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_haskell-english.html")]
+pub struct Blog14Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog14Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_pressure-free-aoc.html")]
+pub struct Blog15Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog15Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_stencil-home.html")]
+pub struct Blog16Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog16Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_canvas-cljs-vue.html")]
+pub struct Blog17Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog17Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_parser-combinators-easy.html")]
+pub struct Blog18Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog18Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_actix-trials.html")]
+pub struct Blog19Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog19Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_rabbit-holes.html")]
+pub struct Blog20Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog20Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_how-i-emacs-packages.html")]
+pub struct Blog21Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog21Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_getting-cozy-cpp.html")]
+pub struct Blog22Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog22Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_builder-pattern.html")]
 pub struct Blog24Template {
     links: &'static [Hyperlink],
 }
@@ -598,7 +603,7 @@ impl Default for Blog24Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_debian-buster.html")]
+#[template(path = "post_the-fold.html")]
 pub struct Blog25Template {
     links: &'static [Hyperlink],
 }
@@ -609,7 +614,7 @@ impl Default for Blog25Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_haskell-training-wheels.html")]
+#[template(path = "post_debian-buster.html")]
 pub struct Blog26Template {
     links: &'static [Hyperlink],
 }
@@ -620,7 +625,7 @@ impl Default for Blog26Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_tail-recursion.html")]
+#[template(path = "post_haskell-training-wheels.html")]
 pub struct Blog27Template {
     links: &'static [Hyperlink],
 }
@@ -631,7 +636,7 @@ impl Default for Blog27Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_reason-rtc.html")]
+#[template(path = "post_tail-recursion.html")]
 pub struct Blog28Template {
     links: &'static [Hyperlink],
 }
@@ -642,7 +647,7 @@ impl Default for Blog28Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_deciduously.html")]
+#[template(path = "post_reason-rtc.html")]
 pub struct Blog29Template {
     links: &'static [Hyperlink],
 }
@@ -653,7 +658,7 @@ impl Default for Blog29Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_dumb-things-i-did.html")]
+#[template(path = "post_deciduously.html")]
 pub struct Blog30Template {
     links: &'static [Hyperlink],
 }
@@ -664,7 +669,7 @@ impl Default for Blog30Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_steam-proton.html")]
+#[template(path = "post_dumb-things-i-did.html")]
 pub struct Blog31Template {
     links: &'static [Hyperlink],
 }
@@ -675,7 +680,7 @@ impl Default for Blog31Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_towards-complexity.html")]
+#[template(path = "post_steam-proton.html")]
 pub struct Blog32Template {
     links: &'static [Hyperlink],
 }
@@ -686,7 +691,7 @@ impl Default for Blog32Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_board-game-mechanics.html")]
+#[template(path = "post_towards-complexity.html")]
 pub struct Blog33Template {
     links: &'static [Hyperlink],
 }
@@ -697,7 +702,7 @@ impl Default for Blog33Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_procedural-melody-generation.html")]
+#[template(path = "post_board-game-mechanics.html")]
 pub struct Blog34Template {
     links: &'static [Hyperlink],
 }
@@ -708,7 +713,7 @@ impl Default for Blog34Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_rust-arena-trees.html")]
+#[template(path = "post_procedural-melody-generation.html")]
 pub struct Blog35Template {
     links: &'static [Hyperlink],
 }
@@ -719,7 +724,7 @@ impl Default for Blog35Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_back-to-school.html")]
+#[template(path = "post_rust-arena-trees.html")]
 pub struct Blog36Template {
     links: &'static [Hyperlink],
 }
@@ -730,7 +735,7 @@ impl Default for Blog36Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_fold-em.html")]
+#[template(path = "post_back-to-school.html")]
 pub struct Blog37Template {
     links: &'static [Hyperlink],
 }
@@ -741,7 +746,7 @@ impl Default for Blog37Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_yew-1.html")]
+#[template(path = "post_fold-em.html")]
 pub struct Blog38Template {
     links: &'static [Hyperlink],
 }
@@ -752,7 +757,7 @@ impl Default for Blog38Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_oops-framework.html")]
+#[template(path = "post_yew-1.html")]
 pub struct Blog39Template {
     links: &'static [Hyperlink],
 }
@@ -763,7 +768,7 @@ impl Default for Blog39Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_luhn-functional-javascript.html")]
+#[template(path = "post_oops-framework.html")]
 pub struct Blog40Template {
     links: &'static [Hyperlink],
 }
@@ -774,7 +779,7 @@ impl Default for Blog40Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_rust-markov.html")]
+#[template(path = "post_luhn-functional-javascript.html")]
 pub struct Blog41Template {
     links: &'static [Hyperlink],
 }
@@ -785,7 +790,7 @@ impl Default for Blog41Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_robotic-vacuum.html")]
+#[template(path = "post_rust-markov.html")]
 pub struct Blog42Template {
     links: &'static [Hyperlink],
 }
@@ -796,7 +801,7 @@ impl Default for Blog42Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_value-of-your-time.html")]
+#[template(path = "post_robotic-vacuum.html")]
 pub struct Blog43Template {
     links: &'static [Hyperlink],
 }
@@ -807,7 +812,7 @@ impl Default for Blog43Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_dev-to-scrape-rust.html")]
+#[template(path = "post_value-of-your-time.html")]
 pub struct Blog44Template {
     links: &'static [Hyperlink],
 }
@@ -818,7 +823,7 @@ impl Default for Blog44Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_ben-folds-five.html")]
+#[template(path = "post_dev-to-scrape-rust.html")]
 pub struct Blog45Template {
     links: &'static [Hyperlink],
 }
@@ -829,7 +834,7 @@ impl Default for Blog45Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_creative-coding-nannou.html")]
+#[template(path = "post_ben-folds-five.html")]
 pub struct Blog46Template {
     links: &'static [Hyperlink],
 }
@@ -840,7 +845,7 @@ impl Default for Blog46Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_crates-known-loved.html")]
+#[template(path = "post_creative-coding-nannou.html")]
 pub struct Blog47Template {
     links: &'static [Hyperlink],
 }
@@ -851,7 +856,7 @@ impl Default for Blog47Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_make-a-makefile.html")]
+#[template(path = "post_crates-known-loved.html")]
 pub struct Blog48Template {
     links: &'static [Hyperlink],
 }
@@ -862,7 +867,7 @@ impl Default for Blog48Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_multi-stage-docker.html")]
+#[template(path = "post_make-a-makefile.html")]
 pub struct Blog49Template {
     links: &'static [Hyperlink],
 }
@@ -873,7 +878,7 @@ impl Default for Blog49Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_hof-rust.html")]
+#[template(path = "post_multi-stage-docker.html")]
 pub struct Blog50Template {
     links: &'static [Hyperlink],
 }
@@ -884,7 +889,7 @@ impl Default for Blog50Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_video-game-mechanics.html")]
+#[template(path = "post_hof-rust.html")]
 pub struct Blog51Template {
     links: &'static [Hyperlink],
 }
@@ -895,7 +900,7 @@ impl Default for Blog51Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_yew-3.html")]
+#[template(path = "post_video-game-mechanics.html")]
 pub struct Blog52Template {
     links: &'static [Hyperlink],
 }
@@ -906,7 +911,7 @@ impl Default for Blog52Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_get-started-writing-scheme.html")]
+#[template(path = "post_yew-3.html")]
 pub struct Blog53Template {
     links: &'static [Hyperlink],
 }
@@ -917,7 +922,7 @@ impl Default for Blog53Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_hyper-api.html")]
+#[template(path = "post_get-started-writing-scheme.html")]
 pub struct Blog54Template {
     links: &'static [Hyperlink],
 }
@@ -928,7 +933,7 @@ impl Default for Blog54Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_cljs-exercise.html")]
+#[template(path = "post_hyper-api.html")]
 pub struct Blog55Template {
     links: &'static [Hyperlink],
 }
@@ -939,7 +944,7 @@ impl Default for Blog55Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_clojure-web.html")]
+#[template(path = "post_cljs-exercise.html")]
 pub struct Blog56Template {
     links: &'static [Hyperlink],
 }
@@ -950,7 +955,7 @@ impl Default for Blog56Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_clojure-dorothy.html")]
+#[template(path = "post_clojure-web.html")]
 pub struct Blog57Template {
     links: &'static [Hyperlink],
 }
@@ -961,7 +966,7 @@ impl Default for Blog57Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_pass-by-value-cpp-rust.html")]
+#[template(path = "post_clojure-dorothy.html")]
 pub struct Blog58Template {
     links: &'static [Hyperlink],
 }
@@ -971,9 +976,20 @@ impl Default for Blog58Template {
     }
 }
 
+#[derive(Template)]
+#[template(path = "post_pass-by-value-cpp-rust.html")]
+pub struct Blog59Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog59Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
 pub async fn blog_handler(path_str: &str) -> HandlerResult {
     match path_str {
-        "/canvas-ts-vue" => {
+        "/hyper-template" => {
             html_str_handler(
                 &Blog0Template::default()
                     .render()
@@ -981,7 +997,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/tale-two-functions" => {
+        "/canvas-ts-vue" => {
             html_str_handler(
                 &Blog1Template::default()
                     .render()
@@ -989,7 +1005,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/avoiding-problems" => {
+        "/tale-two-functions" => {
             html_str_handler(
                 &Blog2Template::default()
                     .render()
@@ -997,7 +1013,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/yew-2" => {
+        "/avoiding-problems" => {
             html_str_handler(
                 &Blog3Template::default()
                     .render()
@@ -1005,7 +1021,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/rust-reason-love" => {
+        "/yew-2" => {
             html_str_handler(
                 &Blog4Template::default()
                     .render()
@@ -1013,7 +1029,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/fsharp-pretty-cool" => {
+        "/rust-reason-love" => {
             html_str_handler(
                 &Blog5Template::default()
                     .render()
@@ -1021,7 +1037,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/callbacks-trait-objects-associated-types" => {
+        "/fsharp-pretty-cool" => {
             html_str_handler(
                 &Blog6Template::default()
                     .render()
@@ -1029,7 +1045,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/formdata-ts" => {
+        "/callbacks-trait-objects-associated-types" => {
             html_str_handler(
                 &Blog7Template::default()
                     .render()
@@ -1037,7 +1053,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/green-squares" => {
+        "/formdata-ts" => {
             html_str_handler(
                 &Blog8Template::default()
                     .render()
@@ -1045,7 +1061,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/stalk-a-click" => {
+        "/green-squares" => {
             html_str_handler(
                 &Blog9Template::default()
                     .render()
@@ -1053,7 +1069,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/actix-wrap" => {
+        "/stalk-a-click" => {
             html_str_handler(
                 &Blog10Template::default()
                     .render()
@@ -1061,7 +1077,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/cpp-template-specialization" => {
+        "/actix-wrap" => {
             html_str_handler(
                 &Blog11Template::default()
                     .render()
@@ -1069,7 +1085,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/overly-functional-cpp" => {
+        "/cpp-template-specialization" => {
             html_str_handler(
                 &Blog12Template::default()
                     .render()
@@ -1077,7 +1093,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/haskell-english" => {
+        "/overly-functional-cpp" => {
             html_str_handler(
                 &Blog13Template::default()
                     .render()
@@ -1085,7 +1101,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/pressure-free-aoc" => {
+        "/haskell-english" => {
             html_str_handler(
                 &Blog14Template::default()
                     .render()
@@ -1093,7 +1109,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/stencil-home" => {
+        "/pressure-free-aoc" => {
             html_str_handler(
                 &Blog15Template::default()
                     .render()
@@ -1101,7 +1117,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/canvas-cljs-vue" => {
+        "/stencil-home" => {
             html_str_handler(
                 &Blog16Template::default()
                     .render()
@@ -1109,7 +1125,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/parser-combinators-easy" => {
+        "/canvas-cljs-vue" => {
             html_str_handler(
                 &Blog17Template::default()
                     .render()
@@ -1117,7 +1133,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/actix-trials" => {
+        "/parser-combinators-easy" => {
             html_str_handler(
                 &Blog18Template::default()
                     .render()
@@ -1125,7 +1141,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/rabbit-holes" => {
+        "/actix-trials" => {
             html_str_handler(
                 &Blog19Template::default()
                     .render()
@@ -1133,7 +1149,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/how-i-emacs-packages" => {
+        "/rabbit-holes" => {
             html_str_handler(
                 &Blog20Template::default()
                     .render()
@@ -1141,7 +1157,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/getting-cozy-cpp" => {
+        "/how-i-emacs-packages" => {
             html_str_handler(
                 &Blog21Template::default()
                     .render()
@@ -1149,15 +1165,15 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/builder-pattern" => {
+        "/getting-cozy-cpp" => {
             html_str_handler(
-                &Blog23Template::default()
+                &Blog22Template::default()
                     .render()
                     .expect("Should render markup")
             )
             .await
         }
-        "/the-fold" => {
+        "/builder-pattern" => {
             html_str_handler(
                 &Blog24Template::default()
                     .render()
@@ -1165,7 +1181,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/debian-buster" => {
+        "/the-fold" => {
             html_str_handler(
                 &Blog25Template::default()
                     .render()
@@ -1173,7 +1189,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/haskell-training-wheels" => {
+        "/debian-buster" => {
             html_str_handler(
                 &Blog26Template::default()
                     .render()
@@ -1181,7 +1197,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/tail-recursion" => {
+        "/haskell-training-wheels" => {
             html_str_handler(
                 &Blog27Template::default()
                     .render()
@@ -1189,7 +1205,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/reason-rtc" => {
+        "/tail-recursion" => {
             html_str_handler(
                 &Blog28Template::default()
                     .render()
@@ -1197,7 +1213,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/deciduously" => {
+        "/reason-rtc" => {
             html_str_handler(
                 &Blog29Template::default()
                     .render()
@@ -1205,7 +1221,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/dumb-things-i-did" => {
+        "/deciduously" => {
             html_str_handler(
                 &Blog30Template::default()
                     .render()
@@ -1213,7 +1229,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/steam-proton" => {
+        "/dumb-things-i-did" => {
             html_str_handler(
                 &Blog31Template::default()
                     .render()
@@ -1221,7 +1237,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/towards-complexity" => {
+        "/steam-proton" => {
             html_str_handler(
                 &Blog32Template::default()
                     .render()
@@ -1229,7 +1245,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/board-game-mechanics" => {
+        "/towards-complexity" => {
             html_str_handler(
                 &Blog33Template::default()
                     .render()
@@ -1237,7 +1253,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/procedural-melody-generation" => {
+        "/board-game-mechanics" => {
             html_str_handler(
                 &Blog34Template::default()
                     .render()
@@ -1245,7 +1261,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/rust-arena-trees" => {
+        "/procedural-melody-generation" => {
             html_str_handler(
                 &Blog35Template::default()
                     .render()
@@ -1253,7 +1269,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/back-to-school" => {
+        "/rust-arena-trees" => {
             html_str_handler(
                 &Blog36Template::default()
                     .render()
@@ -1261,7 +1277,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/fold-em" => {
+        "/back-to-school" => {
             html_str_handler(
                 &Blog37Template::default()
                     .render()
@@ -1269,7 +1285,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/yew-1" => {
+        "/fold-em" => {
             html_str_handler(
                 &Blog38Template::default()
                     .render()
@@ -1277,7 +1293,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/oops-framework" => {
+        "/yew-1" => {
             html_str_handler(
                 &Blog39Template::default()
                     .render()
@@ -1285,7 +1301,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/luhn-functional-javascript" => {
+        "/oops-framework" => {
             html_str_handler(
                 &Blog40Template::default()
                     .render()
@@ -1293,7 +1309,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/rust-markov" => {
+        "/luhn-functional-javascript" => {
             html_str_handler(
                 &Blog41Template::default()
                     .render()
@@ -1301,7 +1317,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/robotic-vacuum" => {
+        "/rust-markov" => {
             html_str_handler(
                 &Blog42Template::default()
                     .render()
@@ -1309,7 +1325,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/value-of-your-time" => {
+        "/robotic-vacuum" => {
             html_str_handler(
                 &Blog43Template::default()
                     .render()
@@ -1317,7 +1333,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/dev-to-scrape-rust" => {
+        "/value-of-your-time" => {
             html_str_handler(
                 &Blog44Template::default()
                     .render()
@@ -1325,7 +1341,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/ben-folds-five" => {
+        "/dev-to-scrape-rust" => {
             html_str_handler(
                 &Blog45Template::default()
                     .render()
@@ -1333,7 +1349,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/creative-coding-nannou" => {
+        "/ben-folds-five" => {
             html_str_handler(
                 &Blog46Template::default()
                     .render()
@@ -1341,7 +1357,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/crates-known-loved" => {
+        "/creative-coding-nannou" => {
             html_str_handler(
                 &Blog47Template::default()
                     .render()
@@ -1349,7 +1365,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/make-a-makefile" => {
+        "/crates-known-loved" => {
             html_str_handler(
                 &Blog48Template::default()
                     .render()
@@ -1357,7 +1373,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/multi-stage-docker" => {
+        "/make-a-makefile" => {
             html_str_handler(
                 &Blog49Template::default()
                     .render()
@@ -1365,7 +1381,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/hof-rust" => {
+        "/multi-stage-docker" => {
             html_str_handler(
                 &Blog50Template::default()
                     .render()
@@ -1373,7 +1389,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/video-game-mechanics" => {
+        "/hof-rust" => {
             html_str_handler(
                 &Blog51Template::default()
                     .render()
@@ -1381,7 +1397,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/yew-3" => {
+        "/video-game-mechanics" => {
             html_str_handler(
                 &Blog52Template::default()
                     .render()
@@ -1389,7 +1405,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/get-started-writing-scheme" => {
+        "/yew-3" => {
             html_str_handler(
                 &Blog53Template::default()
                     .render()
@@ -1397,7 +1413,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/hyper-api" => {
+        "/get-started-writing-scheme" => {
             html_str_handler(
                 &Blog54Template::default()
                     .render()
@@ -1405,7 +1421,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/cljs-exercise" => {
+        "/hyper-api" => {
             html_str_handler(
                 &Blog55Template::default()
                     .render()
@@ -1413,7 +1429,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/clojure-web" => {
+        "/cljs-exercise" => {
             html_str_handler(
                 &Blog56Template::default()
                     .render()
@@ -1421,7 +1437,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/clojure-dorothy" => {
+        "/clojure-web" => {
             html_str_handler(
                 &Blog57Template::default()
                     .render()
@@ -1429,7 +1445,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/pass-by-value-cpp-rust" => {
+        "/clojure-dorothy" => {
             html_str_handler(
                 &Blog58Template::default()
                     .render()
@@ -1437,9 +1453,17 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
+        "/pass-by-value-cpp-rust" => {
+            html_str_handler(
+                &Blog59Template::default()
+                    .render()
+                    .expect("Should render markup")
+            )
+            .await
+        }
         "/deciduously-com" => {
             html_str_handler(
-                &Blog22Template::default()
+                &Blog23Template::default()
                     .render()
                     .expect("Should render markup")
             )

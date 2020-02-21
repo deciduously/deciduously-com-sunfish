@@ -11,6 +11,7 @@ keywords = ["static", "hyper", "askama", "website"]
 license = "BSD-3-Clause"
 
 [dependencies]
+anyhow = "1.0"
 askama = "0.9"
 flate2 = "1.0"
 hyper = "0.13"
@@ -32,7 +33,7 @@ pest_derive = "2.1"
 
 [build-dependencies.pulldown-cmark]
 default-features = false
-version = "0.6"
+version = "0.7"
 
 [dev-dependencies]
 pretty_assertions = "0.6"

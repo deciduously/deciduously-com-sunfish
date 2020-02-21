@@ -3,12 +3,11 @@
 
 use crate::{
     blog::{LinkInfo, LINKINFO},
-    config::NAV,
+    config::{CVDATA, NAV},
     types::*,
 };
 use askama::Template;
 use lazy_static::lazy_static;
-use std::str::FromStr;
 
 lazy_static! {}
 
@@ -40,10 +39,28 @@ impl Default for FourOhFourTemplate {
 #[template(path = "index.html")]
 pub struct IndexTemplate {
     links: &'static [Hyperlink],
-    posts: &'static [LinkInfo],
+    header: &'static CvHeader,
+    img_dim: usize,
 }
 
 impl Default for IndexTemplate {
+    fn default() -> Self {
+        Self {
+            links: &NAV,
+            header: &CVDATA.header,
+            img_dim: 32,
+        }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "blog.html")]
+pub struct BlogTemplate {
+    links: &'static [Hyperlink],
+    posts: &'static [LinkInfo],
+}
+
+impl Default for BlogTemplate {
     fn default() -> Self {
         Self {
             links: &NAV,
@@ -55,24 +72,17 @@ impl Default for IndexTemplate {
 #[derive(Template)]
 #[template(path = "cv.html")]
 pub struct CvTemplate {
-    cv: CV,
+    cv: &'static CV,
     img_dim: usize,
     links: &'static [Hyperlink],
 }
 
-impl CvTemplate {
-    fn new(s: &str) -> Result<Self, toml::de::Error> {
-        Ok(Self {
-            cv: toml::from_str(&s)?,
+impl Default for CvTemplate {
+    fn default() -> Self {
+        Self {
+            cv: &CVDATA,
             img_dim: 32,
             links: &NAV,
-        })
-    }
-}
-
-impl<'a> FromStr for CvTemplate {
-    type Err = toml::de::Error;
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Ok(CvTemplate::new(s)?)
+        }
     }
 }

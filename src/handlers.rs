@@ -5,26 +5,31 @@ use crate::templates::*;
 use askama::Template;
 use flate2::{write::ZlibEncoder, Compression};
 use hyper::{header, Body, Response, StatusCode};
-use std::{convert::Infallible, io::prelude::*, path::PathBuf, str::FromStr};
+use std::{io::prelude::*, path::PathBuf};
 
-pub type HandlerResult = Result<Response<Body>, Infallible>;
+pub type HandlerResult = Result<Response<Body>, anyhow::Error>;
+
+pub async fn blog() -> HandlerResult {
+    let template = BlogTemplate::default();
+    let html = template.render()?;
+    string_handler(&html, "text/html", None).await
+}
 
 pub async fn cv() -> HandlerResult {
-    let template =
-        CvTemplate::from_str(include_str!("assets/cv.toml")).expect("Should parse cv.toml");
-    let html = template.render().expect("Should render markup");
+    let template = CvTemplate::default();
+    let html = template.render()?;
     string_handler(&html, "text/html", None).await
 }
 
 pub async fn four_oh_four() -> HandlerResult {
     let template = FourOhFourTemplate::default();
-    let html = template.render().expect("Should render markup");
+    let html = template.render()?;
     string_handler(&html, "text/html", Some(StatusCode::NOT_FOUND)).await
 }
 
 pub async fn index() -> HandlerResult {
     let template = IndexTemplate::default();
-    let html = template.render().expect("Should render markup");
+    let html = template.render()?;
     string_handler(&html, "text/html", None).await
 }
 
@@ -60,15 +65,14 @@ pub async fn string_handler(
 ) -> HandlerResult {
     // Compress
     let mut e = ZlibEncoder::new(Vec::new(), Compression::default());
-    e.write_all(body.as_bytes()).unwrap();
-    let compressed = e.finish().unwrap();
+    e.write_all(body.as_bytes())?;
+    let compressed = e.finish()?;
     // Return response
     Ok(Response::builder()
         .status(status.unwrap_or_default())
         .header(header::CONTENT_TYPE, content_type)
         .header(header::CONTENT_ENCODING, "deflate")
-        .body(Body::from(compressed))
-        .unwrap())
+        .body(Body::from(compressed))?)
 }
 
 pub async fn html_str_handler(body: &str) -> HandlerResult {

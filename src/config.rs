@@ -1,6 +1,6 @@
 // config.rs
 // CLI options and logging setup
-use crate::types::Hyperlink;
+use crate::types::{Hyperlink, CV};
 use lazy_static::lazy_static;
 use log::{info, trace, warn};
 use serde_derive::Deserialize;
@@ -20,8 +20,10 @@ pub struct Opt {
 }
 
 lazy_static! {
+    pub static ref CVDATA: CV = toml::from_str(include_str!("assets/cv.toml")).expect("Should parse CV");
     pub static ref NAV: Vec<Hyperlink> = vec![
         Hyperlink::new("deciduously.com", "/"),
+        Hyperlink::new("Blog", "/blog"),
         Hyperlink::new("Resume/CV", "/cv"),
         Hyperlink::new("Projects", "/projects"),
     ];

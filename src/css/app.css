@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+a:hover {
+  @apply underline;
+}
+
 .address {
   @apply text-sm;
 }
