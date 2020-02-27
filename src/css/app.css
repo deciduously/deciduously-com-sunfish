@@ -6,6 +6,26 @@ a:hover {
   @apply underline;
 }
 
+h1 {
+  @apply font-bold font-sans text-2xl;
+}
+
+h2 {
+  @apply font-bold font-sans text-xl;
+}
+
+h3 {
+  @apply font-bold font-sans text-lg;
+}
+
+h4 {
+  @apply font-semibold font-sans text-lg;
+}
+
+p {
+  @apply p-2 font-sans;
+}
+
 .address {
   @apply text-sm;
 }

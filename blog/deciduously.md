@@ -3,7 +3,7 @@ title: deciduously
 cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--6Lzm3L2e--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/f1ptv4j5ptgx8kbcrp72.jpg
 tags: mentalhealth
 published: true
-edited: 2020-01-012T12:00:00.000Z
+edited: 2020-01-12T12:00:00.000Z
 ---
 ## I Can't Trace Time
 
