@@ -96,11 +96,11 @@ impl BlogPost {
         if let Some(cover_image) = &self.cover_image {
             writeln!(
                 file,
-                "<figure><img src={} alt=\"Cover splash\"></img></figure>",
+                "<figure class=\"h-370px\"><img src={} alt=\"Cover splash\"></img></figure>",
                 cover_image
             )?;
         }
-        writeln!(file, "{}{{% endblock %}}", html)?;
+        writeln!(file, "<article><h1>{}</h1><p class=\"text-center text-gray-200 text-md\">{}</p>{}</article>{{% endblock %}}", self.title, self.edited.as_ref().unwrap_or(&String::new()), html)?;
         Ok(())
     }
     fn struct_name(&self) -> String {
@@ -215,6 +215,7 @@ fn generate_blog_link_info(blog: &Blog, file: &mut fs::File) -> Result<(), io::E
 }
 
 fn generate_template_structs(blog: &Blog, file: &mut fs::File) -> Result<(), io::Error> {
+    //TODO: auth?
     for p in &blog.drafts {
         p.write_template_struct(file)?;
     }
