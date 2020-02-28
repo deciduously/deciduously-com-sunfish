@@ -242,6 +242,7 @@ fn write_imports(file: &mut fs::File) -> Result<(), io::Error> {
 }
 
 fn generate_handler(blog: &Blog, file: &mut fs::File) -> Result<(), io::Error> {
+    writeln!(file, "#[allow(clippy::cognitive_complexity)]")?;
     writeln!(
         file,
         "pub async fn blog_handler(path_str: &str) -> HandlerResult {{"

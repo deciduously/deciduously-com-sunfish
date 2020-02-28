@@ -166,7 +166,7 @@ impl CvHeader {
     }
 }
 
-/// Projects
+/// CV Projects
 #[derive(Default, Deserialize, Debug)]
 pub struct CvProject {
     pub name: String,
@@ -193,4 +193,20 @@ pub struct CV {
     pub intro: Intro,
     pub projects: Vec<CvProject>,
     pub employment: Vec<CvEmployment>,
+}
+
+/// Single project
+#[derive(Default, Deserialize, Debug)]
+pub struct Project {
+    pub demo: String,
+    pub repo: String,
+    pub name: String,
+    pub language: String,
+    pub synopsis: String,
+}
+
+/// Projects
+#[derive(Default, Deserialize, Debug)]
+pub struct Projects {
+    pub projects: Vec<Project>,
 }

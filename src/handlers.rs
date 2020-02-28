@@ -9,6 +9,18 @@ use std::{io::prelude::*, path::PathBuf};
 
 pub type HandlerResult = Result<Response<Body>, anyhow::Error>;
 
+/* doesn't work, need a proc macro
+macro_rules! template_handler {
+    (&name:item, $template:expr) => {
+        pub async fn $name -> HandlerResult {
+            let template = $template::default();
+            let html = template.render()?;
+            string_handler(&html, "text/html", None).await
+        }
+    }
+}
+*/
+
 pub async fn blog() -> HandlerResult {
     let template = BlogTemplate::default();
     let html = template.render()?;
@@ -19,6 +31,12 @@ pub async fn cv() -> HandlerResult {
     let template = CvTemplate::default();
     let html = template.render()?;
     string_handler(&html, "text/html", None).await
+}
+
+pub async fn projects() -> HandlerResult {
+    let template = ProjectTemplate::default();
+    let html = template.render()?;
+    string_handler(&html, "text/html", Some(StatusCode::NOT_FOUND)).await
 }
 
 pub async fn four_oh_four() -> HandlerResult {
