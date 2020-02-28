@@ -125,7 +125,7 @@ lazy_static! {
         });
         ret.published.push(LinkInfo {
             id: 19,
-            title: "The Builder Pattern",
+            title: "The Trials and Tribulations of actix-web and the OSS community",
             url_name: "actix-trials",
         });
         ret.published.push(LinkInfo {
@@ -987,6 +987,7 @@ impl Default for Blog59Template {
     }
 }
 
+#[allow(clippy::cognitive_complexity)]
 pub async fn blog_handler(path_str: &str) -> HandlerResult {
     match path_str {
         "/hyper-template" => {

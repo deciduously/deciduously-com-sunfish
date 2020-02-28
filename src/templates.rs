@@ -3,7 +3,7 @@
 
 use crate::{
     blog::{LinkInfo, LINKINFO},
-    config::{CVDATA, NAV},
+    config::{CVDATA, NAV, PROJECTS},
     types::*,
 };
 use askama::Template;
@@ -82,6 +82,22 @@ impl Default for CvTemplate {
         Self {
             cv: &CVDATA,
             img_dim: 32,
+            links: &NAV,
+        }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "projects.html")]
+pub struct ProjectTemplate {
+    projects: &'static [Project],
+    links: &'static [Hyperlink],
+}
+
+impl Default for ProjectTemplate {
+    fn default() -> Self {
+        Self {
+            projects: PROJECTS.projects.as_slice(),
             links: &NAV,
         }
     }

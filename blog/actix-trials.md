@@ -1,9 +1,9 @@
 ---
 cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--E0qFrBnr--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/6byozbu5ld672kjcctwb.jpg
 edited: 2019-07-17T12:00:00.000Z
-title: The Builder Pattern
+title: The Trials and Tribulations of actix-web and the OSS community
 published: true
-description: The Trials and Tribulations of actix-web and the OSS community
+description: A lamentation on the situation of actix-web's maintainer vs. the Rust community.
 tags: rust, actix, discuss
 ---
 EDIT: The crate maintainer has now merged the offending PR and acknowledged an understanding gap regarding what `unsafe` means in Rust.  And so the wheel turns...

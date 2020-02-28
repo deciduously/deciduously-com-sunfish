@@ -1,0 +1,13 @@
+[[projects]]
+name = "Hunt the Wumpus"
+repo = "https://github.com/deciduously/hunt-the-wumpus"
+demo = "https://deciduously.github.io/hunt-the-wumpus/"
+language = "Rust/Yew"
+synopsis = "A WebAssembly Hunt The Wumpus game."
+
+[[projects]]
+name = "Dots"
+repo = "https://github.com/deciduously/dots"
+demo = "https://deciduously.github.io/dots/"
+language = "Rust"
+synopsis = "A WebAssembly clone of Boomshine."
