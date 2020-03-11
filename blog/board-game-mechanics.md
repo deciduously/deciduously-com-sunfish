@@ -4,7 +4,7 @@ edited: 2019-08-13T12:00:00.000Z
 title:  Interesting Board Game Mechanics
 published: true
 description: A reflection on taking my time with Advent of Code problems
-tags: watercooler, games
+tags: offtopic, games
 ---
 # Nerd Alert
 

@@ -4,7 +4,7 @@ edited: 2020-02-08T12:00:00.000Z
 title: Steam Proton Is Great
 published: true
 description: My experience with Steam Proton.
-tags: watercooler, games, linux
+tags: offtopic, games, linux
 ---
 My (awesome) fiancé picked me up a copy of [Disco Elysium](https://zaumstudio.com/) for my birthday recently (she's *really awesome*).
 

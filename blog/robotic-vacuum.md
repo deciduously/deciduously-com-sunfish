@@ -3,9 +3,9 @@ cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--5juB8G4w--/c
 edited: 2019-07-21T12:00:00.000Z
 title: I Am Mesmerized By Our New Robotic Vacuum
 published: true
-tags: watercooler, help
+tags: offtopic, help
 ---
-Disclaimer: this is more a rant than anything else.  Maybe more #crazydudewontstoptalkingavoidthewatercooler but that's unwieldy as a hashtag.  The #help part is in the TL;DR.
+Disclaimer: this is more a rant than anything else.  Maybe more #crazydudewontstoptalkingavoidtheofftopic but that's unwieldy as a hashtag.  The #help part is in the TL;DR.
 
 My girlfriend (somewhat impulsively) recently bought us a new robotic vacuum.  We'd had the idea in the back of our heads for a while but I always assumed we were talking about at least a $500+ purchase having only heard of the big name brands like Roomba.  Thanks to Lord Bezos, we got a [Eufy RoboVac 30](https://www.eufylife.com/products/variant/robovac-30/T2116111) for under $200 - selling at $270 from the manufacturer, still considerably cheaper than I had anticipated.  It's a pretty well-reviewed "budget" model.  I can't even bring myself to be that upset, this thing is really cool.  Dammit, Amazon, it's so hard to quit you.  Her only other purchase?  God of War for PS4.  I'm gonna keep her.
 

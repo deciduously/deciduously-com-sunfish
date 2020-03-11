@@ -4,7 +4,7 @@ edited: 2019-10-09T12:00:00.000Z
 title: Interesting Video Game Mechanics
 published: true
 description: Some video games I've known and loved
-tags: watercooler, games
+tags: offtopic, games
 ---
 # Un-Productive Time
 

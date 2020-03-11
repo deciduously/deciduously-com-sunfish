@@ -4,7 +4,7 @@ edited: 2019-12-16T12:00:00.000Z
 title: Pressure-Free AoC
 published: true
 description: A reflection on taking my time with Advent of Code problems
-tags: adventofcode, devjournal, watercooler, beginners
+tags: adventofcode, devjournal, offtopic, beginners
 ---
 I'm really glad I didn't start [Advent of Code 2019](https://adventofcode.com/2019) until halfway through December.
 
