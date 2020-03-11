@@ -7,8 +7,8 @@ devDependencies:
   npm-run-all: 4.1.5
   postcss: 7.0.27
   postcss-cli: 7.1.0
-  stylelint: 13.2.0
-  stylelint-config-standard: 20.0.0_stylelint@13.2.0
+  stylelint: 13.2.1
+  stylelint-config-standard: 20.0.0_stylelint@13.2.1
 lockfileVersion: 5.1
 packages:
   /@babel/code-frame/7.8.3:
@@ -313,7 +313,7 @@ packages:
   /autoprefixer/9.7.4:
     dependencies:
       browserslist: 4.9.1
-      caniuse-lite: 1.0.30001032
+      caniuse-lite: 1.0.30001033
       chalk: 2.4.2
       normalize-range: 0.1.2
       num2fraction: 1.2.2
@@ -357,9 +357,9 @@ packages:
       integrity: sha512-b8um+L1RzM3WDSzvhm6gIz1yfTbBt6YTlcEKAvsmqCZZFw46z626lVj9j1yEPW33H5H+lBQpZMP1k8l+78Ha0A==
   /browserslist/4.9.1:
     dependencies:
-      caniuse-lite: 1.0.30001032
-      electron-to-chromium: 1.3.372
-      node-releases: 1.1.50
+      caniuse-lite: 1.0.30001033
+      electron-to-chromium: 1.3.374
+      node-releases: 1.1.51
     hasBin: true
     resolution:
       integrity: sha512-Q0DnKq20End3raFulq6Vfp1ecB9fh8yUNV55s8sekaDDeqBaCtWlRHCUdaWyUeSSBJM7IbM6HcsyaeYqgeDhnw==
@@ -422,15 +422,15 @@ packages:
   /caniuse-api/3.0.0:
     dependencies:
       browserslist: 4.9.1
-      caniuse-lite: 1.0.30001032
+      caniuse-lite: 1.0.30001033
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: true
     resolution:
       integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==
-  /caniuse-lite/1.0.30001032:
+  /caniuse-lite/1.0.30001033:
     resolution:
-      integrity: sha512-8joOm7BwcpEN4BfVHtfh0hBXSAPVYk+eUIcNntGtMkUWy/6AKRCDZINCLe3kB1vHhT2vBxBF85Hh9VlPXi/qjA==
+      integrity: sha512-8Ibzxee6ibc5q88cM1usPsMpJOG5CTq0s/dKOmlekPbDGKt+UrnOOTPSjQz3kVo6yL7N4SB5xd+FGLHQmbzh6A==
   /ccount/1.0.5:
     dev: true
     resolution:
@@ -772,7 +772,7 @@ packages:
     dependencies:
       acorn-node: 1.8.2
       defined: 1.0.0
-      minimist: 1.2.0
+      minimist: 1.2.3
     dev: false
     engines:
       node: '>=0.8.0'
@@ -823,9 +823,9 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-uEUyaDKoSQ1M4Oq8l45hSE26SnTxL6snNnqvK/VWx5wJhmff5z0FUVJDKDanor/6w3kzE3i7XZOk+7wC0EXr1A==
-  /electron-to-chromium/1.3.372:
+  /electron-to-chromium/1.3.374:
     resolution:
-      integrity: sha512-77a4jYC52OdisHM+Tne7dgWEvQT1FoNu/jYl279pP88ZtG4ZRIPyhQwAKxj6C2rzsyC1OwsOds9JlZtNncSz6g==
+      integrity: sha512-M4Y9onOJ4viRk3A4M/LH+r9+1zQioRZJvGJn/S/o7KaBJQLgFiaHMUlDwM0QMJd5ki6hFxKiWdC6jp5Ub0zMmw==
   /emoji-regex/7.0.3:
     dev: true
     resolution:
@@ -1447,7 +1447,7 @@ packages:
       integrity: sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg==
   /json5/2.1.1:
     dependencies:
-      minimist: 1.2.0
+      minimist: 1.2.3
     dev: true
     engines:
       node: '>=6'
@@ -1634,9 +1634,9 @@ packages:
     dev: true
     resolution:
       integrity: sha1-O+39kaktOQFvz6ocaB6Pqhoe/ag=
-  /minimist/1.2.0:
+  /minimist/1.2.3:
     resolution:
-      integrity: sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=
+      integrity: sha512-+bMdgqjMN/Z77a6NlY/I3U5LlRDbnmaAk6lDveAPKwSpcPM4tKAuYsvYF8xjhOPXhOYGe/73vVLVez5PW+jqhw==
   /mkdirp/0.5.1:
     dependencies:
       minimist: 0.0.8
@@ -1658,11 +1658,11 @@ packages:
     dev: false
     resolution:
       integrity: sha512-Yt3384If5H6BYGVHiHwTL+99OzJKHhgp82S8/dktEK73T26BazdgZ4JZh92xSVtGNJvz9UbXdNAc5hcrXV42vw==
-  /node-releases/1.1.50:
+  /node-releases/1.1.51:
     dependencies:
       semver: 6.3.0
     resolution:
-      integrity: sha512-lgAmPv9eYZ0bGwUYAKlr8MG6K4CvWliWqnkcT2P8mMAgVrH3lqfBPorFlxiG1pHQnqmavJZ9vbMXUTNyMLbrgQ==
+      integrity: sha512-1eQEs6HFYY1kMXQPOLzCf7HdjReErmvn85tZESMczdCNVWP3Y7URYLBAyYynuI7yef1zj4HN5q+oB2x67QU0lw==
   /normalize-package-data/2.5.0:
     dependencies:
       hosted-git-info: 2.8.8
@@ -1916,7 +1916,7 @@ packages:
       postcss-reporter: 6.0.1
       pretty-hrtime: 1.0.3
       read-cache: 1.0.0
-      yargs: 15.1.0
+      yargs: 15.3.0
     dev: true
     engines:
       node: '>=10'
@@ -2807,24 +2807,24 @@ packages:
       node: '>=6.9.0'
     resolution:
       integrity: sha512-7GlLk9JwlElY4Y6a/rmbH2MhVlTyVmiJd1PfTCqFaIBEGMYNsrO/v3SeGTdhBThLg4Z+NbOk/qFMwCa+J+3p/g==
-  /stylelint-config-recommended/3.0.0_stylelint@13.2.0:
+  /stylelint-config-recommended/3.0.0_stylelint@13.2.1:
     dependencies:
-      stylelint: 13.2.0
+      stylelint: 13.2.1
     dev: true
     peerDependencies:
       stylelint: '>=10.1.0'
     resolution:
       integrity: sha512-F6yTRuc06xr1h5Qw/ykb2LuFynJ2IxkKfCMf+1xqPffkxh0S09Zc902XCffcsw/XMFq/OzQ1w54fLIDtmRNHnQ==
-  /stylelint-config-standard/20.0.0_stylelint@13.2.0:
+  /stylelint-config-standard/20.0.0_stylelint@13.2.1:
     dependencies:
-      stylelint: 13.2.0
-      stylelint-config-recommended: 3.0.0_stylelint@13.2.0
+      stylelint: 13.2.1
+      stylelint-config-recommended: 3.0.0_stylelint@13.2.1
     dev: true
     peerDependencies:
       stylelint: '>=10.1.0'
     resolution:
       integrity: sha512-IB2iFdzOTA/zS4jSVav6z+wGtin08qfj+YyExHB3LF9lnouQht//YyB0KZq9gGz5HNPkddHOzcY8HsUey6ZUlA==
-  /stylelint/13.2.0:
+  /stylelint/13.2.1:
     dependencies:
       autoprefixer: 9.7.4
       balanced-match: 1.0.0
@@ -2877,7 +2877,7 @@ packages:
     dev: true
     hasBin: true
     resolution:
-      integrity: sha512-isf31yjkm0DQesx+Yk1b/WQpFkf1MicwaAVR22Hprx9HRFGhhEkWdrVCyrkK6HFymL0rhzynG97Tu53q/WCsAg==
+      integrity: sha512-461ZV4KpUe7pEHHgMOsH4kkjF7qsjkCIMJYOf7QQC4cvgPUJ0z4Nj+ah5fvKl1rzqBqc5EZa6P0nna4CGoJX+A==
   /sugarss/2.0.0:
     dependencies:
       postcss: 7.0.27
@@ -3222,7 +3222,16 @@ packages:
     dev: true
     resolution:
       integrity: sha512-H/V41UNZQPkUMIT5h5hiwg4QKIY1RPvoBV4XcjUbRM8Bk2oKqqyZ0DIEbTFZB0XjbtSPG8SAa/0DxCQmiRgzKg==
-  /yargs/15.1.0:
+  /yargs-parser/18.1.0:
+    dependencies:
+      camelcase: 5.3.1
+      decamelize: 1.2.0
+    dev: true
+    engines:
+      node: '>=6'
+    resolution:
+      integrity: sha512-o/Jr6JBOv6Yx3pL+5naWSoIA2jJ+ZkMYQG/ie9qFbukBe4uzmBatlXFOiu/tNKRWEtyf+n5w7jc/O16ufqOTdQ==
+  /yargs/15.3.0:
     dependencies:
       cliui: 6.0.0
       decamelize: 1.2.0
@@ -3234,12 +3243,12 @@ packages:
       string-width: 4.2.0
       which-module: 2.0.0
       y18n: 4.0.0
-      yargs-parser: 16.1.0
+      yargs-parser: 18.1.0
     dev: true
     engines:
       node: '>=8'
     resolution:
-      integrity: sha512-T39FNN1b6hCW4SOIk1XyTOWxtXdcen0t+XYrysQmChzSipvhBO8Bj0nK1ozAasdk24dNWuMZvr4k24nz+8HHLg==
+      integrity: sha512-g/QCnmjgOl1YJjGsnUg2SatC7NUYEiLXJqxNOQU9qSpjzGtGXda9b+OKccr1kLTy8BN9yqEyqfq5lxlwdc13TA==
 specifiers:
   '@fullhuman/postcss-purgecss': ^2.1.0
   autoprefixer: ^9.7.4
@@ -3247,6 +3256,6 @@ specifiers:
   npm-run-all: ^4.1.5
   postcss: ^7.0.27
   postcss-cli: ^7.1.0
-  stylelint: ^13.2.0
+  stylelint: ^13.2.1
   stylelint-config-standard: ^20.0.0
   tailwindcss: ^1.2.0
