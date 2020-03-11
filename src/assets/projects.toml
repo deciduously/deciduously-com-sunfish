@@ -11,3 +11,10 @@ repo = "https://github.com/deciduously/dots"
 demo = "https://deciduously.github.io/dots/"
 language = "Rust"
 synopsis = "A WebAssembly clone of Boomshine."
+
+[[projects]]
+name = "Mazes"
+repo = "https://github.com/deciduously/mazes"
+demo = "https://deciduously.github.io/mazes/"
+language = "TypeScript/Vue"
+synopsis = "Maze Generator and Solver"
