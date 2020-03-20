@@ -270,71 +270,76 @@ lazy_static! {
         });
         ret.published.push(LinkInfo {
             id: 49,
+            title: "Setting Up A Fresh Ruby Project",
+            url_name: "fresh-ruby-project",
+        });
+        ret.published.push(LinkInfo {
+            id: 50,
             title: "Overly Functional C++: The BenFolds Five",
             url_name: "ben-folds-five",
         });
         ret.published.push(LinkInfo {
-            id: 50,
+            id: 51,
             title: "Creative Coding in Rust with Nannou",
             url_name: "creative-coding-nannou",
         });
         ret.published.push(LinkInfo {
-            id: 51,
+            id: 52,
             title: "Crates I Have Known And Loved",
             url_name: "crates-known-loved",
         });
         ret.published.push(LinkInfo {
-            id: 52,
+            id: 53,
             title: "How To Make A Makefile",
             url_name: "make-a-makefile",
         });
         ret.published.push(LinkInfo {
-            id: 53,
+            id: 54,
             title: "Use Multi-Stage Docker Builds For Statically-Linked Rust Binaries",
             url_name: "multi-stage-docker",
         });
         ret.published.push(LinkInfo {
-            id: 54,
+            id: 55,
             title: "Higher-Order Functions in Rust",
             url_name: "hof-rust",
         });
         ret.published.push(LinkInfo {
-            id: 55,
+            id: 56,
             title: "Interesting Video Game Mechanics",
             url_name: "video-game-mechanics",
         });
         ret.published.push(LinkInfo {
-            id: 56,
+            id: 57,
             title: "Let's Build a Rust Frontend with Yew - Part 3",
             url_name: "yew-3",
         });
         ret.published.push(LinkInfo {
-            id: 57,
+            id: 58,
             title: "Get Started Writing Scheme",
             url_name: "get-started-writing-scheme",
         });
         ret.published.push(LinkInfo {
-            id: 58,
+            id: 59,
             title: "Skip the Framework: Build A Simple Rust API with Hyper",
             url_name: "hyper-api",
         });
         ret.published.push(LinkInfo {
-            id: 59,
+            id: 60,
             title: "A ClojureScript exercise template",
             url_name: "cljs-exercise",
         });
         ret.published.push(LinkInfo {
-            id: 60,
+            id: 61,
             title: "Up and Running with Clojure for the Web",
             url_name: "clojure-web",
         });
         ret.published.push(LinkInfo {
-            id: 61,
+            id: 62,
             title: "Create Graphviz graphs in Clojure with dorothy",
             url_name: "clojure-dorothy",
         });
         ret.published.push(LinkInfo {
-            id: 62,
+            id: 63,
             title: "Pass-By-Value in C++ and Rust",
             url_name: "pass-by-value-cpp-rust",
         });
@@ -882,7 +887,7 @@ impl Default for Blog48Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_ben-folds-five.html")]
+#[template(path = "post_fresh-ruby-project.html")]
 pub struct Blog49Template {
     links: &'static [Hyperlink],
 }
@@ -893,7 +898,7 @@ impl Default for Blog49Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_creative-coding-nannou.html")]
+#[template(path = "post_ben-folds-five.html")]
 pub struct Blog50Template {
     links: &'static [Hyperlink],
 }
@@ -904,7 +909,7 @@ impl Default for Blog50Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_crates-known-loved.html")]
+#[template(path = "post_creative-coding-nannou.html")]
 pub struct Blog51Template {
     links: &'static [Hyperlink],
 }
@@ -915,7 +920,7 @@ impl Default for Blog51Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_make-a-makefile.html")]
+#[template(path = "post_crates-known-loved.html")]
 pub struct Blog52Template {
     links: &'static [Hyperlink],
 }
@@ -926,7 +931,7 @@ impl Default for Blog52Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_multi-stage-docker.html")]
+#[template(path = "post_make-a-makefile.html")]
 pub struct Blog53Template {
     links: &'static [Hyperlink],
 }
@@ -937,7 +942,7 @@ impl Default for Blog53Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_hof-rust.html")]
+#[template(path = "post_multi-stage-docker.html")]
 pub struct Blog54Template {
     links: &'static [Hyperlink],
 }
@@ -948,7 +953,7 @@ impl Default for Blog54Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_video-game-mechanics.html")]
+#[template(path = "post_hof-rust.html")]
 pub struct Blog55Template {
     links: &'static [Hyperlink],
 }
@@ -959,7 +964,7 @@ impl Default for Blog55Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_yew-3.html")]
+#[template(path = "post_video-game-mechanics.html")]
 pub struct Blog56Template {
     links: &'static [Hyperlink],
 }
@@ -970,7 +975,7 @@ impl Default for Blog56Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_get-started-writing-scheme.html")]
+#[template(path = "post_yew-3.html")]
 pub struct Blog57Template {
     links: &'static [Hyperlink],
 }
@@ -981,7 +986,7 @@ impl Default for Blog57Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_hyper-api.html")]
+#[template(path = "post_get-started-writing-scheme.html")]
 pub struct Blog58Template {
     links: &'static [Hyperlink],
 }
@@ -992,7 +997,7 @@ impl Default for Blog58Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_cljs-exercise.html")]
+#[template(path = "post_hyper-api.html")]
 pub struct Blog59Template {
     links: &'static [Hyperlink],
 }
@@ -1003,7 +1008,7 @@ impl Default for Blog59Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_clojure-web.html")]
+#[template(path = "post_cljs-exercise.html")]
 pub struct Blog60Template {
     links: &'static [Hyperlink],
 }
@@ -1014,7 +1019,7 @@ impl Default for Blog60Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_clojure-dorothy.html")]
+#[template(path = "post_clojure-web.html")]
 pub struct Blog61Template {
     links: &'static [Hyperlink],
 }
@@ -1025,11 +1030,22 @@ impl Default for Blog61Template {
 }
 
 #[derive(Template)]
-#[template(path = "post_pass-by-value-cpp-rust.html")]
+#[template(path = "post_clojure-dorothy.html")]
 pub struct Blog62Template {
     links: &'static [Hyperlink],
 }
 impl Default for Blog62Template {
+    fn default() -> Self {
+        Self { links: &NAV }
+    }
+}
+
+#[derive(Template)]
+#[template(path = "post_pass-by-value-cpp-rust.html")]
+pub struct Blog63Template {
+    links: &'static [Hyperlink],
+}
+impl Default for Blog63Template {
     fn default() -> Self {
         Self { links: &NAV }
     }
@@ -1422,7 +1438,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/ben-folds-five" => {
+        "/fresh-ruby-project" => {
             html_str_handler(
                 &Blog49Template::default()
                     .render()
@@ -1430,7 +1446,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/creative-coding-nannou" => {
+        "/ben-folds-five" => {
             html_str_handler(
                 &Blog50Template::default()
                     .render()
@@ -1438,7 +1454,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/crates-known-loved" => {
+        "/creative-coding-nannou" => {
             html_str_handler(
                 &Blog51Template::default()
                     .render()
@@ -1446,7 +1462,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/make-a-makefile" => {
+        "/crates-known-loved" => {
             html_str_handler(
                 &Blog52Template::default()
                     .render()
@@ -1454,7 +1470,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/multi-stage-docker" => {
+        "/make-a-makefile" => {
             html_str_handler(
                 &Blog53Template::default()
                     .render()
@@ -1462,7 +1478,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/hof-rust" => {
+        "/multi-stage-docker" => {
             html_str_handler(
                 &Blog54Template::default()
                     .render()
@@ -1470,7 +1486,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/video-game-mechanics" => {
+        "/hof-rust" => {
             html_str_handler(
                 &Blog55Template::default()
                     .render()
@@ -1478,7 +1494,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/yew-3" => {
+        "/video-game-mechanics" => {
             html_str_handler(
                 &Blog56Template::default()
                     .render()
@@ -1486,7 +1502,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/get-started-writing-scheme" => {
+        "/yew-3" => {
             html_str_handler(
                 &Blog57Template::default()
                     .render()
@@ -1494,7 +1510,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/hyper-api" => {
+        "/get-started-writing-scheme" => {
             html_str_handler(
                 &Blog58Template::default()
                     .render()
@@ -1502,7 +1518,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/cljs-exercise" => {
+        "/hyper-api" => {
             html_str_handler(
                 &Blog59Template::default()
                     .render()
@@ -1510,7 +1526,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/clojure-web" => {
+        "/cljs-exercise" => {
             html_str_handler(
                 &Blog60Template::default()
                     .render()
@@ -1518,7 +1534,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/clojure-dorothy" => {
+        "/clojure-web" => {
             html_str_handler(
                 &Blog61Template::default()
                     .render()
@@ -1526,9 +1542,17 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             )
             .await
         }
-        "/pass-by-value-cpp-rust" => {
+        "/clojure-dorothy" => {
             html_str_handler(
                 &Blog62Template::default()
+                    .render()
+                    .expect("Should render markup")
+            )
+            .await
+        }
+        "/pass-by-value-cpp-rust" => {
+            html_str_handler(
+                &Blog63Template::default()
                     .render()
                     .expect("Should render markup")
             )
