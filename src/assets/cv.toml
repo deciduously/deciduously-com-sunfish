@@ -61,7 +61,7 @@ country = "United States"
 
 [[education.degrees]]
 gpa = 4.0
-expected = true
+expected = false
 degree_type = "Cert"
 subject = "C++ Programming"
 
