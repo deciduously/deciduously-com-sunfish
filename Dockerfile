@@ -1,4 +1,4 @@
-FROM rust:1.43.1 AS builder
+FROM rust:1.48 AS builder
 WORKDIR /usr/src/
 RUN rustup target add x86_64-unknown-linux-musl
 

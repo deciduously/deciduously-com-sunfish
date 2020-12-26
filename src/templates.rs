@@ -7,9 +7,6 @@ use crate::{
     types::*,
 };
 use askama::Template;
-use lazy_static::lazy_static;
-
-lazy_static! {}
 
 #[derive(Template)]
 #[template(path = "skel.html")]

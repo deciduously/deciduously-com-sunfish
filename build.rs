@@ -65,12 +65,7 @@ impl BlogPost {
                 "cover_image" => ret.cover_image = Some(value.to_string()),
                 "description" => ret.description = Some(value.to_string()),
                 "edited" => ret.edited = Some(value.to_string()),
-                "published" => {
-                    ret.published = match value {
-                        "true" => true,
-                        _ => false,
-                    }
-                }
+                "published" => ret.published = matches!(value, "true"),
                 "tags" => ret.tags = value.to_string(),
                 "title" => ret.title = value.to_string(),
                 _ => {}
@@ -237,7 +232,7 @@ fn write_imports(file: &mut fs::File) -> Result<(), io::Error> {
     writeln!(file, "}};")?;
     writeln!(file, "use askama::Template;")?;
     writeln!(file, "use lazy_static::lazy_static;")?;
-    writeln!(file, "")?;
+    writeln!(file)?;
     Ok(())
 }
 

@@ -12,6 +12,13 @@ name = "deciduously"
 target = "https://github.com/deciduously"
 
 [[header.links]]
+icon = "srht.svg"
+
+[header.links.hyperlink]
+name = "~deciduously"
+target = "https://sr.ht/~deciduously/"
+
+[[header.links]]
 icon = "dev-badge.svg"
 
 [header.links.hyperlink]

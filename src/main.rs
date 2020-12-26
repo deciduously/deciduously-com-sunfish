@@ -2,8 +2,8 @@
 // Entry point - tokio
 
 use hyper::{
+    server::Server,
     service::{make_service_fn, service_fn},
-    Server,
 };
 use log::info;
 

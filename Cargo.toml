@@ -2,7 +2,7 @@
 authors = ["Ben Lovy <ben@deciduously.com>"]
 edition = "2018"
 name = "deciduously-com"
-version = "1.0.1"
+version = "1.0.2"
 description = "Webserver and static site generator for a personal homepage"
 homepage = "deciduously.com"
 repository = "https://github.com/deciduously/deciduously-com"
@@ -12,9 +12,8 @@ license = "BSD-3-Clause"
 
 [dependencies]
 anyhow = "1.0"
-askama = "0.9"
+askama = "0.10"
 flate2 = "1.0"
-hyper = "0.13"
 lazy_static = "1.4"
 log = "0.4"
 pretty_env_logger = "0.4"
@@ -23,9 +22,13 @@ serde_derive = "1.0"
 structopt = "0.3"
 toml = "0.5"
 
+[dependencies.hyper]
+features = ["full"]
+version = "0.14"
+
 [dependencies.tokio]
 features = ["full"]
-version = "0.2"
+version = "1.0"
 
 [build-dependencies]
 pest = "2.1"
@@ -33,7 +36,7 @@ pest_derive = "2.1"
 
 [build-dependencies.pulldown-cmark]
 default-features = false
-version = "0.7"
+version = "0.8"
 
 [dev-dependencies]
 pretty_assertions = "0.6"
