@@ -33,18 +33,18 @@ name = "bendlovy"
 target = "https://www.linkedin.com/in/benlovy/"
 
 [intro]
-one_liner = "Entry-level software developer with a life-long passion for creative problem solving."
+one_liner = "Software developer with a life-long passion for creative problem solving."
 about = "Eager to apply my self-learned programming knowledge, utilizing my background in high-intensity, fast paced work environments to bring strong positive energy mixed with technical expertise to the team and product."
 skills = "Quick to internalize new concepts.  Highly motivated and resourceful self-learner.  Thrives in fast-paced, high-intensity environments without sacrificing attention to detail. Effective, diplomatic communicator in difficult or delicate situations."
 techs = "Productive when working with a range of languages including C++, JavaScript, TypeScript, Python, and Rust, as well as modern ecosystem tools such as Git/GitHub, Linux, Docker, GraphQL vs RESTful API design, test-driven development."
 
 [header.address]
-street = "37 Capitol St"
-line2 = "Unit 1"
+street = "125 Chiswick Rd"
+line2 = "Apt 204"
 
 [header.address.locality]
-name = "Watertown"
-postal_code = "02472"
+name = "Brighton"
+postal_code = "02135"
 
 [header.address.locality.state]
 abbreviation = "MA"
@@ -103,9 +103,34 @@ name = "deciduously-com"
 synopsis = "This website and CV is built with a DIY static site generator and API server, using the hyper HTTP library for Rust."
 
 [[employment]]
+title = "Interim Business Office Coordinator"
+employer = "JCC Greater Boston"
+current = true
+bullets = [
+  "Oversee all accounts receivable activity for the organization",
+  "Develop and enforce policies to ensure accurate and timely collections.",
+]
+
+[employment.begin_date]
+year = 2020
+month = "Oct"
+
+[employment.address]
+street = "333 Nahanton St"
+
+[employment.address.locality]
+name = "Newton"
+postal_code = "02459"
+
+[employment.address.locality.state]
+abbreviation = "MA"
+full_name = "Massachussetts"
+country = "United States"
+
+[[employment]]
 title = "Programming Intern I"
 employer = "MousePaw Media"
-current = true
+current = false
 bullets = [
   "Design, implement, and test new libraries and features for a suite of vector animation-based content creation software.",
   "Collaborate with a team of developers via Git and Phabricator.",
@@ -116,6 +141,10 @@ bullets = [
 [employment.begin_date]
 year = 2020
 month = "Jan"
+
+[employment.end_date]
+year = 2020
+month = "Jun"
 
 [employment.address]
 street = "Remote"
@@ -132,7 +161,7 @@ country = "United States"
 [[employment]]
 title = "Accounts Receivable/Billing"
 employer = "JCC Greater Boston"
-current = true
+current = false
 bullets = [
   "Accurately completed daily billing/receiving tasks, interfacing with our accounting and membership database software.",
   "Created and maintained extensive documentation of job tasks as they pertain to the software.",
@@ -142,6 +171,10 @@ bullets = [
 [employment.begin_date]
 year = 2018
 month = "Apr"
+
+[employment.end_date]
+year = 2020
+month = "Sep"
 
 [employment.address]
 street = "333 Nahanton St"

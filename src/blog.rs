@@ -1058,7 +1058,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog0Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1066,7 +1066,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog1Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1074,7 +1074,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog2Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1082,7 +1082,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog3Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1090,7 +1090,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog4Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1098,7 +1098,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog5Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1106,7 +1106,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog6Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1114,7 +1114,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog7Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1122,7 +1122,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog8Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1130,7 +1130,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog9Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1138,7 +1138,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog10Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1146,7 +1146,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog11Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1154,7 +1154,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog12Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1162,7 +1162,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog13Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1170,7 +1170,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog14Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1178,7 +1178,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog15Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1186,7 +1186,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog16Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1194,7 +1194,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog17Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1202,7 +1202,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog19Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1210,7 +1210,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog20Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1218,7 +1218,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog21Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1226,7 +1226,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog22Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1234,7 +1234,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog23Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1242,7 +1242,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog24Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1250,7 +1250,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog25Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1258,7 +1258,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog26Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1266,7 +1266,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog27Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1274,7 +1274,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog28Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1282,7 +1282,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog29Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1290,7 +1290,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog30Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1298,7 +1298,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog31Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1306,7 +1306,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog32Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1314,7 +1314,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog33Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1322,7 +1322,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog34Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1330,7 +1330,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog35Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1338,7 +1338,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog36Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1346,7 +1346,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog37Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1354,7 +1354,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog38Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1362,7 +1362,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog39Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1370,7 +1370,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog40Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1378,7 +1378,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog41Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1386,7 +1386,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog42Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1394,7 +1394,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog43Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1402,7 +1402,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog44Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1410,7 +1410,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog45Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1418,7 +1418,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog46Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1426,7 +1426,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog47Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1434,7 +1434,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog48Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1442,7 +1442,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog49Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1450,7 +1450,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog50Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1458,7 +1458,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog51Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1466,7 +1466,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog52Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1474,7 +1474,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog53Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1482,7 +1482,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog54Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1490,7 +1490,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog55Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1498,7 +1498,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog56Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1506,7 +1506,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog57Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1514,7 +1514,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog58Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1522,7 +1522,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog59Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1530,7 +1530,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog60Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1538,7 +1538,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog61Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1546,7 +1546,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog62Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1554,7 +1554,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog63Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }
@@ -1562,7 +1562,7 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
             html_str_handler(
                 &Blog18Template::default()
                     .render()
-                    .expect("Should render markup"),
+                    .expect("Should render markup")
             )
             .await
         }

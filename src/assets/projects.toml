@@ -1,4 +1,11 @@
 [[projects]]
+name = "Chip8"
+repo = "https://github.com/deciduously/chip8"
+demo = "https://deciduously.github.io/chip8"
+language = "Rust"
+synopsis = "A Chip-8 emulator targeting SDL2 and/or WebAssembly"
+
+[[projects]]
 name = "Hunt the Wumpus"
 repo = "https://github.com/deciduously/hunt-the-wumpus"
 demo = "https://deciduously.github.io/hunt-the-wumpus/"
