@@ -2,7 +2,7 @@
 authors = ["Ben Lovy <ben@deciduously.com>"]
 edition = "2018"
 name = "deciduously-com"
-version = "1.0.3"
+version = "1.0.4"
 description = "Webserver and static site generator for a personal homepage"
 homepage = "deciduously.com"
 repository = "https://github.com/deciduously/deciduously-com"
