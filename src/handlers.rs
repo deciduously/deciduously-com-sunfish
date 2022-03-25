@@ -27,11 +27,13 @@ pub async fn blog() -> HandlerResult {
     string_handler(&html, "text/html", None).await
 }
 
+/*
 pub async fn cv() -> HandlerResult {
     let template = CvTemplate::default();
     let html = template.render()?;
     string_handler(&html, "text/html", None).await
 }
+*/
 
 pub async fn projects() -> HandlerResult {
     let template = ProjectTemplate::default();

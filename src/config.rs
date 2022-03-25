@@ -25,7 +25,7 @@ lazy_static! {
     pub static ref NAV: Vec<Hyperlink> = vec![
         Hyperlink::new("deciduously.com", "/"),
         Hyperlink::new("Blog", "/blog"),
-        Hyperlink::new("Resume/CV", "/cv"),
+        //Hyperlink::new("Resume/CV", "/cv"),
         Hyperlink::new("Projects", "/projects"),
     ];
 

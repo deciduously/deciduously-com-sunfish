@@ -8,7 +8,7 @@ pub async fn router(req: Request<Body>) -> HandlerResult {
     match (method, path) {
         (&Method::GET, "/") | (&Method::GET, "/index.html") => index().await,
         (&Method::GET, "/blog") => blog().await,
-        (&Method::GET, "/cv") => cv().await,
+        //(&Method::GET, "/cv") => cv().await,
         (&Method::GET, "/projects") => projects().await,
         (&Method::GET, "/main.css") => {
             string_handler(include_str!("assets/main.css"), "text/css", None).await
