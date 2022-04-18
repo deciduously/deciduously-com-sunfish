@@ -53,19 +53,3 @@ impl Component for Page {
 			.into_node()
 	}
 }
-
-#[derive(builder, Default, new)]
-#[new(default)]
-pub struct Author {
-	#[builder]
-	pub name: String,
-}
-
-impl Component for Author {
-	fn into_node(self) -> Node {
-		div()
-			.class("blog-post-author")
-			.child(div().child(format!("By {}", self.name)))
-			.into_node()
-	}
-}
