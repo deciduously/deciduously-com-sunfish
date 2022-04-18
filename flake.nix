@@ -32,10 +32,10 @@
         src = ./.;
         doCheck = false;
         cargoLock = { lockFile = ./Cargo.lock; };
-        cargoBuildFlags = "--package deciduously_com";
       });
       devShell = pkgs.mkShell {
         packages = with pkgs; [
+          mold
           rust
         ];
       };
