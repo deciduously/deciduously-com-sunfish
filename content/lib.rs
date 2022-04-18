@@ -3,6 +3,7 @@ use deciduously_com_ui as ui;
 use std::io::Read;
 use std::path::{Path, PathBuf};
 use sunfish::{include_dir, include_dir::IncludeDir};
+use url::Url;
 
 pub struct BlogPost;
 
@@ -10,12 +11,8 @@ pub struct BlogPost;
 pub struct BlogPostFrontMatter {
 	pub title: String,
 	pub date: String,
-	pub author: Option<BlogPostAuthor>,
-}
-
-#[derive(serde::Deserialize)]
-pub struct BlogPostAuthor {
-	pub name: String,
+	pub tags: Option<Vec<String>>,
+	pub cover_image: Option<Url>,
 }
 
 impl Content for BlogPost {
