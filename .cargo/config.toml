@@ -1,0 +1,4 @@
+target-applies-to-host = false
+
+[env]
+CFLAGS = "-fno-sanitize=undefined"

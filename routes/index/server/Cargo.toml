@@ -1,0 +1,14 @@
+[package]
+edition = "2021"
+name = "deciduously_com_index_server"
+publish = false
+version = "0.0.0"
+
+[lib]
+path = "lib.rs"
+
+[dependencies]
+pinwheel = "0.2"
+futures = "0.3"
+sunfish = "0.7"
+deciduously_com_layouts = { path = "../../../layouts" }

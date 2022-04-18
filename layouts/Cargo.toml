@@ -1,0 +1,14 @@
+[package]
+edition = "2021"
+name = "deciduously_com_layouts"
+publish = false
+version = "0.0.0"
+
+[lib]
+path = "lib.rs"
+
+[dependencies]
+deciduously_com_ui = { path = "../ui" }
+pinwheel = "0.2"
+sunfish = "0.7"
+time = "0.3"
