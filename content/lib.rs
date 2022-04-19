@@ -60,10 +60,9 @@ pub trait Content: Sized {
 	fn from_slug(slug: String) -> Result<ContentItem<Self::FrontMatter>> {
 		let post_path = Path::new(&slug).join("post.md");
 		let post = Self::content().read(&post_path).unwrap().data();
-		let post = std::str::from_utf8(&post)?.to_owned();
-		let (front_matter, post_markdown) = parse_and_find_content(&post)?;
+		let post_str = std::str::from_utf8(&post)?.to_owned();
+		let (front_matter, markdown) = parse_and_find_content(&post_str)?;
 		let front_matter = serde_yaml::from_reader(front_matter)?;
-		let markdown = ui::Markdown::new(post_markdown);
 		let ret = ContentItem {
 			path: post_path,
 			slug,
@@ -74,14 +73,12 @@ pub trait Content: Sized {
 	}
 }
 
-fn find_yaml_block(text: impl AsRef<[u8]>) -> Option<(usize, usize, usize)> {
-	let text = text.as_ref();
-	let text = std::str::from_utf8(&text).ok()?;
+fn find_yaml_block(text: &str) -> Option<(usize, usize, usize)> {
 	let marker = "---\n";
 	let marker_len = marker.len();
 	match text.starts_with(marker) {
 		true => {
-			let slice_after_marker = &text[4..];
+			let slice_after_marker = &text[marker_len..];
 			let front_matter_end = slice_after_marker.find(marker)?;
 			Some((
 				marker_len,
@@ -93,13 +90,14 @@ fn find_yaml_block(text: impl AsRef<[u8]>) -> Option<(usize, usize, usize)> {
 	}
 }
 
-pub fn parse_and_find_content(text: &str) -> Result<(impl std::io::Read + '_, String)> {
+pub fn parse_and_find_content(text: &str) -> Result<(impl std::io::Read + '_, ui::Markdown)> {
 	match find_yaml_block(text) {
-		Some((fm_start, fm_end, content_start)) => {
-			let yaml_str = &text[fm_start..fm_end];
-			let front_matter = std::io::Cursor::new(yaml_str);
-			let rest_of_text = text[content_start..].to_string();
-			Ok((front_matter, rest_of_text))
+		Some((front_matter_start, front_matter_end, content_start)) => {
+			let yaml_str = &text[front_matter_start..front_matter_end];
+			let front_matter = yaml_str.as_bytes();
+			let post = text[content_start..].to_string();
+			let post = ui::Markdown::new(post);
+			Ok((front_matter, post))
 		}
 		None => Err(anyhow!("Invalid YAML frontmatter")),
 	}
