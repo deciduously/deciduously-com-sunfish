@@ -1,6 +1,5 @@
-use anyhow::Result;
+use anyhow::{anyhow, Result};
 use deciduously_com_ui as ui;
-use std::io::Read;
 use std::path::{Path, PathBuf};
 use sunfish::{include_dir, include_dir::IncludeDir};
 use url::Url;
@@ -11,7 +10,7 @@ pub struct BlogPost;
 pub struct BlogPostFrontMatter {
 	pub title: String,
 	pub date: String,
-	pub tags: Option<Vec<String>>,
+	pub tags: Option<String>,
 	pub cover_image: Option<Url>,
 }
 
@@ -61,19 +60,47 @@ pub trait Content: Sized {
 	fn from_slug(slug: String) -> Result<ContentItem<Self::FrontMatter>> {
 		let post_path = Path::new(&slug).join("post.md");
 		let post = Self::content().read(&post_path).unwrap().data();
-		let mut reader = std::io::Cursor::new(post);
-		let front_matter: Self::FrontMatter = serde_json::Deserializer::from_reader(&mut reader)
-			.into_iter()
-			.next()
-			.unwrap()?;
-		let mut markdown = String::new();
-		reader.read_to_string(&mut markdown)?;
-		let markdown = ui::Markdown::new(markdown);
-		Ok(ContentItem {
+		let post = std::str::from_utf8(&post)?.to_owned();
+		let (front_matter, post_markdown) = parse_and_find_content(&post)?;
+		let front_matter = serde_yaml::from_reader(front_matter)?;
+		let markdown = ui::Markdown::new(post_markdown);
+		let ret = ContentItem {
 			path: post_path,
 			slug,
 			front_matter,
 			markdown,
-		})
+		};
+		Ok(ret)
+	}
+}
+
+fn find_yaml_block(text: impl AsRef<[u8]>) -> Option<(usize, usize, usize)> {
+	let text = text.as_ref();
+	let text = std::str::from_utf8(&text).ok()?;
+	let marker = "---\n";
+	let marker_len = marker.len();
+	match text.starts_with(marker) {
+		true => {
+			let slice_after_marker = &text[4..];
+			let front_matter_end = slice_after_marker.find(marker)?;
+			Some((
+				marker_len,
+				front_matter_end + marker_len,
+				front_matter_end + 2 * marker_len,
+			))
+		}
+		false => None,
+	}
+}
+
+pub fn parse_and_find_content(text: &str) -> Result<(impl std::io::Read + '_, String)> {
+	match find_yaml_block(text) {
+		Some((fm_start, fm_end, content_start)) => {
+			let yaml_str = &text[fm_start..fm_end];
+			let front_matter = std::io::Cursor::new(yaml_str);
+			let rest_of_text = text[content_start..].to_string();
+			Ok((front_matter, rest_of_text))
+		}
+		None => Err(anyhow!("Invalid YAML frontmatter")),
 	}
 }

@@ -12,14 +12,7 @@ impl Component for Page {
 	fn into_node(self) -> Node {
 		let blog_post = BlogPost::from_slug(self.slug).unwrap();
 		let tags = if let Some(tags) = blog_post.front_matter.tags {
-			let list_items = format!(
-				"tags: {}",
-				tags.iter()
-					.map(|tag| format!("#{}", tag))
-					.collect::<Vec<_>>()
-					.join(", ")
-			);
-			div().class("tags").child(ol().child(list_items))
+			div().class("tags").child(tags)
 		} else {
 			div()
 		};
