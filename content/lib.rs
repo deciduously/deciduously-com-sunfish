@@ -10,7 +10,7 @@ pub struct BlogPost;
 pub struct BlogPostFrontMatter {
 	pub title: String,
 	pub date: String,
-	pub tags: Option<String>,
+	pub tags: Option<Vec<String>>,
 	pub cover_image: Option<Url>,
 }
 
