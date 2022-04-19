@@ -8,7 +8,7 @@ tags:
   - beginners
 ---
 
-# In Which Ben Learns 1 Is The Loneliest Number
+## In Which Ben Learns 1 Is The Loneliest Number
 
 So, my biggest shortcoming as a developer is my toolkit of algorithms at my fingertips by instinct. It's not that I'm not pretty familiar with the basics, at least, but I still haven't put in the time necessary to immediately look at a problem and say "oh, this is that that other problem". At least not at 7 in the morning warming up from the frigid trudge up the hill well before my shift. Advent of Code makes fools of us all.
 
