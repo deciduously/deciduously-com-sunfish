@@ -1,22 +1,25 @@
 ---
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/rwta9vb9b44e38nj3i4v.png
-edited: 2018-11-19T12:00:00.000Z
+date: November 19, 2018
 title: Let's Build a Rust Frontend with Yew - Part 2
-published: true
-description: Build a Rust client-side application with Yew
-tags: rust, webassembly, beginners, webdev
+tags:
+  - rust
+  - webassembly
+  - beginners
+  - webdev
 ---
+
 ## **PART 2**
 
-In the first part, we set up our development environment and ensured we can compile and run our webapp.  This part starts assuming your project folder mirrors [this one](https://github.com/deciduously/hunt-the-wumpus/tree/master/part1).  Please start with [Part 1](https://dev.to/deciduously/lets-build-a-rust-frontend-with-yew---part-1-3k2o) if you have not already done so - or you can skip this one and go right to [Part 3](https://dev.to/deciduously/lets-build-a-rust-frontend-with-yew---part-3-ch3) but you'll likely need to come back through here anyway.
+In the first part, we set up our development environment and ensured we can compile and run our webapp. This part starts assuming your project folder mirrors [this one](https://github.com/deciduously/hunt-the-wumpus/tree/master/part1). Please start with [Part 1](https://dev.to/deciduously/lets-build-a-rust-frontend-with-yew---part-1-3k2o) if you have not already done so - or you can skip this one and go right to [Part 3](https://dev.to/deciduously/lets-build-a-rust-frontend-with-yew---part-3-ch3) but you'll likely need to come back through here anyway.
 
-Now we can start modelling the logic.  We'll start by defining the cave.  The traditional game is played in a cave where each room is a vertex of a regular dodecahedron:
+Now we can start modelling the logic. We'll start by defining the cave. The traditional game is played in a cave where each room is a vertex of a regular dodecahedron:
 
 ![dodecahedron](https://upload.wikimedia.org/wikipedia/commons/3/33/Dodecahedron.png)
 
 From each room we are connected to exactly three other rooms.
 
-To model this we'll simply use a function to map room IDs to available exits.  This will allow us to traverse around the cave.  Place the following in `lib.rs`, above your `Model` declaration:
+To model this we'll simply use a function to map room IDs to available exits. This will allow us to traverse around the cave. Place the following in `lib.rs`, above your `Model` declaration:
 
 ```rust
 fn room_exits(id: u8) -> Option<[u8; 3]> {
@@ -66,7 +69,7 @@ Don't forget to add it to our initial model too:
   }
 ```
 
-Now we can start adding to our UI.  We'll need a new component that will be responsible for rendering the controls.  I like keeping all of these in a folder:
+Now we can start adding to our UI. We'll need a new component that will be responsible for rendering the controls. I like keeping all of these in a folder:
 
 ```
 $ mkdir src/components
@@ -124,17 +127,17 @@ impl Renderable<Controls> for Controls {
 }
 ```
 
-Unlike our top-level component, this one accepts some props - we're going to pass in the exits to the room our player is in.  A couple of "gotchas" - take a look at the `html!` macro in the `Renderable` impl block.  We're attaching two classes to the top-level `div` - to do so, you need to wrap them up in a tuple like shown.  Also, if you're using an attribute in your tag like `<div class="title",>`, you need to include that trailing comma for the macro to work.  If you don't, you might end up with a very dense error message - check for these commas before panicking.  Rust macros tend to generate pretty opaque error info - one major drawback of the tech at this point in time.
+Unlike our top-level component, this one accepts some props - we're going to pass in the exits to the room our player is in. A couple of "gotchas" - take a look at the `html!` macro in the `Renderable` impl block. We're attaching two classes to the top-level `div` - to do so, you need to wrap them up in a tuple like shown. Also, if you're using an attribute in your tag like `<div class="title",>`, you need to include that trailing comma for the macro to work. If you don't, you might end up with a very dense error message - check for these commas before panicking. Rust macros tend to generate pretty opaque error info - one major drawback of the tech at this point in time.
 
-Also of note - we *must* provide a `Default` impl for our `Props`.  I'm just setting it to `[0, 0, 0]`.
+Also of note - we _must_ provide a `Default` impl for our `Props`. I'm just setting it to `[0, 0, 0]`.
 
-Let's position it within our app.  First, we have to organize our component module:
+Let's position it within our app. First, we have to organize our component module:
 
 ```
 $ echo 'pub mod controls;' > src/components/mod.rs
 ```
 
-When we add new components, don't forget to add the declaration to this file.  Back up in `lib.rs`, add the module directly after your `extern crate` declarations and bring it into scope:
+When we add new components, don't forget to add the declaration to this file. Back up in `lib.rs`, add the module directly after your `extern crate` declarations and bring it into scope:
 
 ```rust
 mod components;
@@ -142,7 +145,7 @@ mod components;
 use self::components::controls::Controls;
 ```
 
-Now we can attach it to the app.  Down in the `html!` macro let's add the component right below our `<span>` element displaying the arrows.  We'll also section off the stats printout and display the current room.  Adjust yours to match this:
+Now we can attach it to the app. Down in the `html!` macro let's add the component right below our `<span>` element displaying the arrows. We'll also section off the stats printout and display the current room. Adjust yours to match this:
 
 ```rust
 <div class="hunt",>
@@ -168,7 +171,7 @@ Current Room: 1
 Controls
 exits: 2, 5, 8
 
-Pretty plain, but just what we asked for!  Before we get too far into the logic, let's give ourselves something resembling a layout.  This is just going to be a skeleton - I'm no CSS guru.  Feel free to make this whatever you like, this should be enough to get you started.
+Pretty plain, but just what we asked for! Before we get too far into the logic, let's give ourselves something resembling a layout. This is just going to be a skeleton - I'm no CSS guru. Feel free to make this whatever you like, this should be enough to get you started.
 
 Replace `scss/hunt.scss` with the following:
 
@@ -194,25 +197,25 @@ Replace `scss/hunt.scss` with the following:
   }
 
   .container {
-      border: solid 1px #000;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      margin: 10px;
-      padding: 5px;
+    border: solid 1px #000;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin: 10px;
+    padding: 5px;
 
-      >.title {
-          border-bottom: dashed 1px #000;
-          font-weight: bold;
-          text-align: center;
-      }
+    > .title {
+      border-bottom: dashed 1px #000;
+      font-weight: bold;
+      text-align: center;
+    }
   }
 }
 ```
 
 Don't forget to run `yarn build:style` to regenerate the compiled CSS.
 
-Let's also go ahead and take the opportunity to just break out the Stats out into their own component.  Make a new file `src/components/stats.rs`:
+Let's also go ahead and take the opportunity to just break out the Stats out into their own component. Make a new file `src/components/stats.rs`:
 
 ```rust
 use yew::prelude::*;
@@ -302,11 +305,11 @@ impl Renderable<Model> for Model {
 }
 ```
 
-This gives us a simple flexbox layout that will be easy to extend.  Re-run `yarn build:css-once` and reload `localhost:8000` in your browser to make sure the new style got picked up.
+This gives us a simple flexbox layout that will be easy to extend. Re-run `yarn build:css-once` and reload `localhost:8000` in your browser to make sure the new style got picked up.
 
 Now we're ready to get **interactive** with it.
 
-Our next order of business is moving around the cave.  All of our actual update logic is going to happen in our top-level component.  When we first created `lib.rs`, we just made an empty `Msg` type:
+Our next order of business is moving around the cave. All of our actual update logic is going to happen in our top-level component. When we first created `lib.rs`, we just made an empty `Msg` type:
 
 ```rust
 #[derive(Debug, Clone)]
@@ -322,7 +325,7 @@ pub enum Msg {
 }
 ```
 
-Now we have to handle that message.  Inside the `impl Component for Model` block we currently have a stub for `update()`, returning `true`.  Now lets actually use the `Self::Message` parameter it accepts:
+Now we have to handle that message. Inside the `impl Component for Model` block we currently have a stub for `update()`, returning `true`. Now lets actually use the `Self::Message` parameter it accepts:
 
 ```rust
   fn update(&mut self, msg: Self::Message) -> ShouldRender {
@@ -337,9 +340,9 @@ Now we have to handle that message.  Inside the `impl Component for Model` block
 
 Don't forget to remove the underscore from `_msg` in the parameter list!
 
-The great thing about using an `enum` for your messages is that the compiler won't let you miss any when you `match` on them - it must be exhaustive.  We also get to easily destructure the variant.  This pattern is not unlike what Elm offers.  You just need to make sure each match arm returns a boolean - or if you like, you can simply return `true` after the `match` block.  Controlling on a per-message basis may allow for more granular performance control - some messages may not require a re-render.
+The great thing about using an `enum` for your messages is that the compiler won't let you miss any when you `match` on them - it must be exhaustive. We also get to easily destructure the variant. This pattern is not unlike what Elm offers. You just need to make sure each match arm returns a boolean - or if you like, you can simply return `true` after the `match` block. Controlling on a per-message basis may allow for more granular performance control - some messages may not require a re-render.
 
-This message is simple - it just switches `current_room`.  Next we need to generate these messages.  Let's dive back in to `src/components/controls.rs`.  We can use `crate::Msg` to refer to the toplevel message our buttons will generate.
+This message is simple - it just switches `current_room`. Next we need to generate these messages. Let's dive back in to `src/components/controls.rs`. We can use `crate::Msg` to refer to the toplevel message our buttons will generate.
 
 We can now create a message that can be passed within this component:
 
@@ -349,7 +352,7 @@ pub enum Msg {
 }
 ```
 
-We also need to add the callback to our props.  Yew has a type ready to go:
+We also need to add the callback to our props. Yew has a type ready to go:
 
 ```rust
 pub struct Controls {
@@ -386,7 +389,7 @@ fn create(props: Self::Properties, _: ComponentLink<Self>) -> Self {
 }
 ```
 
-Now we can dynamically create buttons to generate our `crate::Msg`.  We already have the room targets coming in to the component - we just need a way to create a different button for each.  We can abstract this logic out with a local closure in our `view` function:
+Now we can dynamically create buttons to generate our `crate::Msg`. We already have the room targets coming in to the component - we just need a way to create a different button for each. We can abstract this logic out with a local closure in our `view` function:
 
 ```rust
 impl Renderable<Controls> for Controls {
@@ -410,9 +413,9 @@ impl Renderable<Controls> for Controls {
 }
 ```
 
-We then map `move_button` over the exits in our state.  Another gotcha - you've got to dereference `target` outside of the `html!` macro: `let t = *target`.  If our type wasn't `Copy` like `u8`, we'd need to clone it here.
+We then map `move_button` over the exits in our state. Another gotcha - you've got to dereference `target` outside of the `html!` macro: `let t = *target`. If our type wasn't `Copy` like `u8`, we'd need to clone it here.
 
-Now we need to handle the message.  Let's fill in our `update`:
+Now we need to handle the message. Let's fill in our `update`:
 
 ```rust
 fn update(&mut self, msg: Self::Message) -> ShouldRender {
@@ -427,15 +430,15 @@ fn update(&mut self, msg: Self::Message) -> ShouldRender {
 }
 ```
 
-No need to re-render on the click.  We'll handle that later when the state actually changes.  We return `false` to make sure we dont waste time on an exra render.  Now we just add the prop to `lib.rs`, down in the `view` function:
+No need to re-render on the click. We'll handle that later when the state actually changes. We return `false` to make sure we dont waste time on an exra render. Now we just add the prop to `lib.rs`, down in the `view` function:
 
 ```rust
 <Controls: exits=room_exits(self.current_room).unwrap(), onsignal=|msg| msg,/>
 ```
 
-When the button is clicked the `msg` will fire and our toplevel `update` will handle changing the state.  Now we can pass any message we want up as a callback.
+When the button is clicked the `msg` will fire and our toplevel `update` will handle changing the state. Now we can pass any message we want up as a callback.
 
-There's one final change to make before it all works - we need to tell any component that takes `Props` what to do when those props change.  Define these  `change` functions in the `impl Component for <...>` blocks of these respective components:
+There's one final change to make before it all works - we need to tell any component that takes `Props` what to do when those props change. Define these `change` functions in the `impl Component for <...>` blocks of these respective components:
 
 First, `controls.rs`:
 
@@ -457,9 +460,9 @@ fn change(&mut self, props: Self::Properties) -> ShouldRender {
 }
 ```
 
-Now make sure your `yarn watch:rs` watcher is running and open up `localhost:8000`.  You should be able to use the buttons to "explore" the maze.
+Now make sure your `yarn watch:rs` watcher is running and open up `localhost:8000`. You should be able to use the buttons to "explore" the maze.
 
-To keep track of where we've been, let's display a running history for the player.  First, we'll add a field to our toplevel state in `lib.rs`:
+To keep track of where we've been, let's display a running history for the player. First, we'll add a field to our toplevel state in `lib.rs`:
 
 ```rust
 pub struct Model {
@@ -546,7 +549,7 @@ impl Renderable<Messages> for Messages {
 }
 ```
 
-We're showing the messages in reverse - otherwise, this isn't too different from `controls.rs`.  Protip - I use a snippet something like this when I'm starting a new component!
+We're showing the messages in reverse - otherwise, this isn't too different from `controls.rs`. Protip - I use a snippet something like this when I'm starting a new component!
 
 Don't forget to add it to `src/components/mod.rs`:
 
@@ -579,11 +582,11 @@ impl Renderable<Model> for Model {
 }
 ```
 
-Now let's add a little style in `scss/hunt.scss`.  Add the following below the `>.title` block inside the `.container` block:
+Now let's add a little style in `scss/hunt.scss`. Add the following below the `>.title` block inside the `.container` block:
 
 ```scss
->.scroller {
-    overflow: auto;
+> .scroller {
+  overflow: auto;
 }
 ```
 
@@ -591,7 +594,7 @@ and then add right at the end:
 
 ```scss
 .hunt {
-// ..
+  // ..
   .container-messages {
     flex: 0 0 192px;
     ul {
@@ -603,7 +606,7 @@ and then add right at the end:
 
 To pull in the changes, run `yarn build:style`.
 
-Now let's add some messages!  We can welcome the player to their likely doom when the game initiates in `lib.rs`:
+Now let's add some messages! We can welcome the player to their likely doom when the game initiates in `lib.rs`:
 
 ```rust
 fn create(_: Self::Properties, _: ComponentLink<Self>) -> Self {
@@ -633,7 +636,7 @@ We'll also log each move:
   }
 ```
 
-Nifty!  Our cave isn't terribly interesting though.  There's some low-hanging fruit, here - there's gotta be a wumpus to hunt!
+Nifty! Our cave isn't terribly interesting though. There's some low-hanging fruit, here - there's gotta be a wumpus to hunt!
 
 Join me in [Part 3](https://dev.to/deciduously/lets-build-a-rust-frontend-with-yew---part-3-ch3) to make a game out of this treacherous dodecacave.
 

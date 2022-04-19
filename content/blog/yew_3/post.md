@@ -1,18 +1,21 @@
 ---
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/rwta9vb9b44e38nj3i4v.png
-edited: 2018-11-20T12:00:00.000Z
+date: November 20, 2018
 title: Let's Build a Rust Frontend with Yew - Part 3
-published: true
-description: Adding game logic to a Yew skeleton app
-tags: rust, webassembly, beginners, webdev
+tags:
+  - rust
+  - webassembly
+  - beginners
+  - webdev
 ---
+
 ## Game On
 
-This is the third and final part of a 3 part series.  This post starts off with a project that looks something like [this](https://github.com/deciduously/hunt-the-wumpus/tree/master/part2).  Here are links for [Part 1](https://dev.to/deciduously/lets-build-a-rust-frontend-with-yew---part-1-3k2o) and [Part 2](https://dev.to/deciduously/lets-build-a-rust-frontend-with-yew---part-2-1ech) if you need to catch up.
+This is the third and final part of a 3 part series. This post starts off with a project that looks something like [this](https://github.com/deciduously/hunt-the-wumpus/tree/master/part2). Here are links for [Part 1](https://dev.to/deciduously/lets-build-a-rust-frontend-with-yew---part-1-3k2o) and [Part 2](https://dev.to/deciduously/lets-build-a-rust-frontend-with-yew---part-2-1ech) if you need to catch up.
 
-Part 2 left us with a cave we can wander around, but not much in the way of danger.  The name of the game is "Hunt the Wumpus" and there's nary a wumpus in sight!
+Part 2 left us with a cave we can wander around, but not much in the way of danger. The name of the game is "Hunt the Wumpus" and there's nary a wumpus in sight!
 
-Open up `src/lib.rs`.  Let's add one to our `Model`:
+Open up `src/lib.rs`. Let's add one to our `Model`:
 
 ```rust
 pub struct Model {
@@ -38,9 +41,9 @@ fn create(_: Self::Properties, _: ComponentLink<Self>) -> Self {
 }
 ```
 
-We'll place him in a moment.  That's not quite scary enough, though.  In addition to the ravenous monstrosity loafing about there are two gigantic bats.  If you end up in a room with a bat, it'll quite literally sweep you off your feet and deposit you elsewhere in the cave.
+We'll place him in a moment. That's not quite scary enough, though. In addition to the ravenous monstrosity loafing about there are two gigantic bats. If you end up in a room with a bat, it'll quite literally sweep you off your feet and deposit you elsewhere in the cave.
 
-Now we're gonna crank the horror up to eleven.  Forget the two chaos-inducing hellbats.  There are also two rooms that are bottomless pits.  What the flip, man. **Bottomless**.  You'll die of thirst, after three days of falling.  Gives me the crimineys, I'll tell you hwat.
+Now we're gonna crank the horror up to eleven. Forget the two chaos-inducing hellbats. There are also two rooms that are bottomless pits. What the flip, man. **Bottomless**. You'll die of thirst, after three days of falling. Gives me the crimineys, I'll tell you hwat.
 
 We'll keep track of them too:
 
@@ -74,7 +77,7 @@ impl Default for Model {
 
 To place the horribleness, we'll use a helper function that will generate random numbers avoiding a list that we specify.
 
-We're going to call out out to JS to generate the random number.  First add the `#[macro_use]` annotation to the `extern crate stdweb` line in `lib.rs`:
+We're going to call out out to JS to generate the random number. First add the `#[macro_use]` annotation to the `extern crate stdweb` line in `lib.rs`:
 
 ```rust
 #[macro_use]
@@ -105,7 +108,7 @@ pub fn gen_range_avoiding(bottom: u8, top: u8, avoid: Vec<u8>) -> u8 {
 
 The `js_rand` function wraps up our interop so we deal with Rust types as much as we can - we only need JS for the entropy. The helper `gen_range_avoiding` will give us back a `u8` that doesn't appear in `avoid`.
 
-We can also move `room_exits` from `lib.rs` into this file and mark it `pub`.  Don't forget to add it to the top of `lib.rs`:
+We can also move `room_exits` from `lib.rs` into this file and mark it `pub`. Don't forget to add it to the top of `lib.rs`:
 
 ```rust
 mod components;
@@ -162,7 +165,7 @@ fn create(_: Self::Properties, _: ComponentLink<Self>) -> Self {
 
 With all this danger lurking around every corner, we should give the player a few warnings as they're stepping around.
 
-Let's add another method to `Model` to sniff around our surroundings.  If any of our adjacent rooms has a hazard, we'll alert the player with a spooky message.  Add this to the `impl Model` block:
+Let's add another method to `Model` to sniff around our surroundings. If any of our adjacent rooms has a hazard, we'll alert the player with a spooky message. Add this to the `impl Model` block:
 
 ```rust
 fn warning_messages(&mut self) {
@@ -200,7 +203,7 @@ fn update(&mut self, msg: Self::Message) -> ShouldRender {
 }
 ```
 
-Before we start dealing with larger level states, let's go ahead and abstract out our `Game` from our `Model`.  Create a new file called `src/game.rs`.  We're going to pull a lot of the logic we had defined on `Model` and put it here instead.
+Before we start dealing with larger level states, let's go ahead and abstract out our `Game` from our `Model`. Create a new file called `src/game.rs`. We're going to pull a lot of the logic we had defined on `Model` and put it here instead.
 
 ```rust
 use crate::util::*;
@@ -292,7 +295,7 @@ use self::{
 };
 ```
 
-We also moved the "new game" setup into the `Default` implementation. We're going to have to make some changes to `lib.rs`.  First, we're going to define a few different types of `Model` we want to be able to render.  Change your `struct` to this `enum`:
+We also moved the "new game" setup into the `Default` implementation. We're going to have to make some changes to `lib.rs`. First, we're going to define a few different types of `Model` we want to be able to render. Change your `struct` to this `enum`:
 
 ```rust
 pub enum Model {
@@ -301,7 +304,7 @@ pub enum Model {
 }
 ```
 
-Now we have a gamestate for when there isn't an active game.  You can remove the old `impl Model` block - that logic ll ended up in `game.rs`.  When the app starts, we're waiting to start a new game:
+Now we have a gamestate for when there isn't an active game. You can remove the old `impl Model` block - that logic ll ended up in `game.rs`. When the app starts, we're waiting to start a new game:
 
 ```rust
 impl Default for Model {
@@ -328,7 +331,7 @@ pub enum Msg {
 }
 ```
 
-This will require a few changes to our `update` function too.  We have a new message to handle, and we need to do some extra checking to make sure we're in a gamestate that makes sense:
+This will require a few changes to our `update` function too. We have a new message to handle, and we need to do some extra checking to make sure we're in a gamestate that makes sense:
 
 ```rust
 fn update(&mut self, msg: Self::Message) -> ShouldRender {
@@ -377,7 +380,7 @@ impl Renderable<Model> for Model {
 }
 ```
 
-Each state has it's own `html!` macro to render.  For good measure, add a little style just below the final closing brace in `hunt.scss`:
+Each state has it's own `html!` macro to render. For good measure, add a little style just below the final closing brace in `hunt.scss`:
 
 ```rust
 .over-message {
@@ -386,7 +389,7 @@ Each state has it's own `html!` macro to render.  For good measure, add a little
 }
 ```
 
-Over in `game.rs` lets flesh out everything that we want to check on a move end.  Add a new method in our `impl Game` block:
+Over in `game.rs` lets flesh out everything that we want to check on a move end. Add a new method in our `impl Game` block:
 
 ```rust
 pub fn move_effects(&mut self) -> Option<String> {
@@ -415,11 +418,11 @@ pub fn move_effects(&mut self) -> Option<String> {
 }
 ```
 
-Now we've got some actual behavior!  If we run into the wumpus or a bottomless pit, we die.  If we hit a bat, `current_room` will get a new random value, and we get a new set of warnings for our new location.
+Now we've got some actual behavior! If we run into the wumpus or a bottomless pit, we die. If we hit a bat, `current_room` will get a new random value, and we get a new set of warnings for our new location.
 
-I'm having this function return an `Option<String>`.  We'll use this to decide if we want to end the game - a `None` will indicate the game should continue, and a `Some(string)` will trigger the end of the game.
+I'm having this function return an `Option<String>`. We'll use this to decide if we want to end the game - a `None` will indicate the game should continue, and a `Some(string)` will trigger the end of the game.
 
-Back in `lib.rs`, lets adjust our `update` function.  Adjust the `SwitchRoom` message handler:
+Back in `lib.rs`, lets adjust our `update` function. Adjust the `SwitchRoom` message handler:
 
 ```rust
 SwitchRoom(target) => match self {
@@ -433,11 +436,11 @@ SwitchRoom(target) => match self {
      },
 ```
 
-Great!  Now we can wander around the maze with advance warning of all the horrors within.  Click around a while - you'll eventually die.  Isn't that fun?
+Great! Now we can wander around the maze with advance warning of all the horrors within. Click around a while - you'll eventually die. Isn't that fun?
 
 Of course, one final step remains - we must be able to **shoot** this accursed beast.
 
-First, let's create the message for it.  Open up `lib.rs` and add the new message type:
+First, let's create the message for it. Open up `lib.rs` and add the new message type:
 
 ```rust
 #[derive(Debug, Clone)]
@@ -448,7 +451,7 @@ pub enum Msg {
 }
 ```
 
-There are a few things we need to handle when the payer makes a shot.  If we hit the wumpus, the game will end and show a victory message.  If we missed and it was our last arrow - we're out of luck - the wumpus will eventually find you.  That's an immediate loss.  Also, we're not necessarily subtle - each time we shoot there's a 75% chance we spook the Wumpus into an adjacent chamber.  If that adjacent chamber happens to contain you, you're wumpus food.  Here's what that might look like in Rust - add this as a new match arm in your `update` function:
+There are a few things we need to handle when the payer makes a shot. If we hit the wumpus, the game will end and show a victory message. If we missed and it was our last arrow - we're out of luck - the wumpus will eventually find you. That's an immediate loss. Also, we're not necessarily subtle - each time we shoot there's a 75% chance we spook the Wumpus into an adjacent chamber. If that adjacent chamber happens to contain you, you're wumpus food. Here's what that might look like in Rust - add this as a new match arm in your `update` function:
 
 ```rust
       ShootArrow(target) => match self {
@@ -491,7 +494,7 @@ There are a few things we need to handle when the payer makes a shot.  If we hit
         }
 ```
 
-Great!  Now all we need are some buttons to actually fire arrows.  Luckily, we've already got almost everything we need.  Over in `src/components/controls.rs`, lets make a little tweak to our `move_button` closure:
+Great! Now all we need are some buttons to actually fire arrows. Luckily, we've already got almost everything we need. Over in `src/components/controls.rs`, lets make a little tweak to our `move_button` closure:
 
 ```rust
 let move_button = |target: &u8| {
@@ -506,6 +509,6 @@ let move_button = |target: &u8| {
 };
 ```
 
-And that's the way the news goes!  Happy Wumpus huntin'.  Here's the [part 3](https://github.com/deciduously/hunt-the-wumpus/tree/master/part3) code to compare.
+And that's the way the news goes! Happy Wumpus huntin'. Here's the [part 3](https://github.com/deciduously/hunt-the-wumpus/tree/master/part3) code to compare.
 
-Please show me if you improve this app!  I want to see what you come up with.
+Please show me if you improve this app! I want to see what you come up with.
