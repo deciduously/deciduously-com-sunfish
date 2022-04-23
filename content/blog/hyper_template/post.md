@@ -1,37 +1,40 @@
 ---
 cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--WeqCPPqP--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/sx49v0fgpkipgyfd3n53.jpg
-edited: 2020-02-20T12:00:00.000Z
+date: 2020-02-20T12:00:00.000Z
 title: Hyper Webapp Template
-published: true
 description: A Hyper template including Askama, TailwindCSS, and Docker.
-tags: beginners, rust, webdev, showdev
+tags:
+  - beginners
+  - rust
+  - webdev
+  - showdev
 ---
-Like many of us, I'm quite lazy.  When making a wep application, lots of the core functionality will be the same from codebase to codebase.  You need to respond to HTTP requests, generate and return HTML bodies, serve static assets, handle unknown routes.  There's no pressing need to reinvent all of this from the ground up just to render a new webpage.
+
+Like many of us, I'm quite lazy. When making a wep application, lots of the core functionality will be the same from codebase to codebase. You need to respond to HTTP requests, generate and return HTML bodies, serve static assets, handle unknown routes. There's no pressing need to reinvent all of this from the ground up just to render a new webpage.
 
 This is why we have frameworks, we don't like doing this stuff over and over again.
 
-However, also like many of us, I'm quite particular.  This [XKCD](https://xkcd.com/1988/) comes to mind a lot:
+However, also like many of us, I'm quite particular. This [XKCD](https://xkcd.com/1988/) comes to mind a lot:
 
 ![xkcd](https://explainxkcd.com/wiki/images/5/53/containers.png)
 
-Most CLI scaffolding tools  give me this feeling.  I get that all the extra boilerplate is actually stuff I want, but I don't know what it all *is*.
+Most CLI scaffolding tools give me this feeling. I get that all the extra boilerplate is actually stuff I want, but I don't know what it all _is_.
 
 So, I made my own.
 
-If you're like me, you won't use this or any other template.  However, if you ARE me, you will, because you built it!  Otherwise, it may be helpful for doing your own.
+If you're like me, you won't use this or any other template. However, if you ARE me, you will, because you built it! Otherwise, it may be helpful for doing your own.
 
-Here's the [GitHub repo](https://github.com/deciduously/hyper-template).  You can click the handy "Use this template" button and get going.
+Here's the [GitHub repo](https://github.com/deciduously/hyper-template). You can click the handy "Use this template" button and get going.
 
 Here's the highlights:
 
-* [Hyper](https://hyper.rs/) - No framework, just a small and fast HTTP server library.
-* [Askama](https://github.com/djc/askama) - Typesafe, compiled templates.
-* [TailwindCSS](https://tailwindcss.com/) - Granular styling for people who don't know how to use actual CSS.
-* [Docker](https://www.docker.com/) - Simple, quick deployment.
-* [Github Action](https://github.com/features/actions) - Get a fancy green check mark next to your commits.
+- [Hyper](https://hyper.rs/) - No framework, just a small and fast HTTP server library.
+- [Askama](https://github.com/djc/askama) - Typesafe, compiled templates.
+- [TailwindCSS](https://tailwindcss.com/) - Granular styling for people who don't know how to use actual CSS.
+- [Docker](https://www.docker.com/) - Simple, quick deployment.
+- [Github Action](https://github.com/features/actions) - Get a fancy green check mark next to your commits.
 
 Let's take a quick tour.
-
 
 ```txt
 $ tree
@@ -69,7 +72,7 @@ $ tree
 5 directories, 24 files
 ```
 
-One of the oddities (and cool things) is that the `assets/` directory actually lives inside `src/`.  This is because all of these text file assets are included right in the binary as static strings via the `include_str!()` macro.  When you deploy, none of this extra stuff is present.  The deployment directory will look like this, if Docker is not used:
+One of the oddities (and cool things) is that the `assets/` directory actually lives inside `src/`. This is because all of these text file assets are included right in the binary as static strings via the `include_str!()` macro. When you deploy, none of this extra stuff is present. The deployment directory will look like this, if Docker is not used:
 
 ```txt
 $ tree
@@ -83,7 +86,7 @@ $ tree
 
 Just run the thing!
 
-I'll briefly unpack a few of these files.  Let's look at `main.rs` first:
+I'll briefly unpack a few of these files. Let's look at `main.rs` first:
 
 ```rust
 #[tokio::main]
@@ -104,11 +107,11 @@ async fn main() {
 }
 ```
 
-The only part of this file you might touch is in the `make_service_fn` call.  This stub assumes your handlers cannot fail and uses [`std::convert::Infallible`](https://doc.rust-lang.org/std/convert/enum.Infallible.html).  This means that any errors that do pop up in this call (so, your router and handlers) will need to be handled right there, with `unwrap()` or `expect()`.  You can get yourself a little more flexibility by simply swapping in [`anyhow::Error`](https://github.com/dtolnay/anyhow)!  That way, all those `unwrap()`s can turn into `?`s.  This is what I've done personally when using this template, but I decided not to make that choice for you - that felt like an overreach in a minimal template.
+The only part of this file you might touch is in the `make_service_fn` call. This stub assumes your handlers cannot fail and uses [`std::convert::Infallible`](https://doc.rust-lang.org/std/convert/enum.Infallible.html). This means that any errors that do pop up in this call (so, your router and handlers) will need to be handled right there, with `unwrap()` or `expect()`. You can get yourself a little more flexibility by simply swapping in [`anyhow::Error`](https://github.com/dtolnay/anyhow)! That way, all those `unwrap()`s can turn into `?`s. This is what I've done personally when using this template, but I decided not to make that choice for you - that felt like an overreach in a minimal template.
 
-Also, notably, Rust has `async/await` now!  This is very cool syntax for some features (Futures) that have already existed, making the whole thing much much more accessible.  No more crazy 120-char types!  For a primer, [start here](https://rust-lang.github.io/async-book/01_getting_started/04_async_await_primer.html).
+Also, notably, Rust has `async/await` now! This is very cool syntax for some features (Futures) that have already existed, making the whole thing much much more accessible. No more crazy 120-char types! For a primer, [start here](https://rust-lang.github.io/async-book/01_getting_started/04_async_await_primer.html).
 
-You won't really need to touch this.  It just sets up the asynchoronous runtime and converts your actual application to a state machine that can use it.  In this case, our actual application is the function `router()`.  That looks like this:
+You won't really need to touch this. It just sets up the asynchoronous runtime and converts your actual application to a state machine that can use it. In this case, our actual application is the function `router()`. That looks like this:
 
 ```rust
 pub async fn router(req: Request<Body>) -> HandlerResult {
@@ -170,7 +173,7 @@ pub async fn bytes_handler(
 }
 ```
 
-It takes your response body as a [byte slice](https://doc.rust-lang.org/book/ch04-03-slices.html) and compresses it before returning it, adding the proper headers.  Lots of resources are going to be HTML, but we're always using this anyway:
+It takes your response body as a [byte slice](https://doc.rust-lang.org/book/ch04-03-slices.html) and compresses it before returning it, adding the proper headers. Lots of resources are going to be HTML, but we're always using this anyway:
 
 ```rust
 pub async fn string_handler(
@@ -204,7 +207,7 @@ pub struct FourOhFourTemplate {}
 pub struct IndexTemplate {}
 ```
 
-They're blank for now, there's no data flowing through.  If you wanted to pass a string into the index, it might look like this:
+They're blank for now, there's no data flowing through. If you wanted to pass a string into the index, it might look like this:
 
 ```rust
 #[derive(Default, Template)]
@@ -224,12 +227,12 @@ This template comes pre-hooked up with Tailwind - here's `app.css`:
 @tailwind utilities;
 ```
 
-Again, it's your app, not mine.  When you're ready to style, just start right below these directives - or directly in your templates!  The provided NPM scripts will compile all your CSS into `src/assets/main.css` before compiling the Rust binary, so it too can be included as a static string.
+Again, it's your app, not mine. When you're ready to style, just start right below these directives - or directly in your templates! The provided NPM scripts will compile all your CSS into `src/assets/main.css` before compiling the Rust binary, so it too can be included as a static string.
 
-That's pretty much it!  This app is *extremely barebones*, just how I like my templates.  I just successfully used this template to spin up a more complicated application, with a database and some scraping logic, and starting from here instead of from scratch saved me a few hours at the beginning.  YMMV.
+That's pretty much it! This app is _extremely barebones_, just how I like my templates. I just successfully used this template to spin up a more complicated application, with a database and some scraping logic, and starting from here instead of from scratch saved me a few hours at the beginning. YMMV.
 
 Stay tuned for two less-minimal variants of this - one for building a static blog, and one with a database and ORM hooked up!
 
-There is definitely room for improvement, here.  The code could be refactored (middleware, maybe?), there needs to be tests, etc.  I'll get there eventually, but also, I'll take a PR :)
+There is definitely room for improvement, here. The code could be refactored (middleware, maybe?), there needs to be tests, etc. I'll get there eventually, but also, I'll take a PR :)
 
-*Photo by Shiro hatori on Unsplash*
+_Photo by Shiro hatori on Unsplash_
