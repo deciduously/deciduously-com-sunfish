@@ -1,11 +1,12 @@
 ---
 cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--Y4hPNjmr--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/secp1t029jvyrsftd5ew.jpg
-edited: 2019-08-30T12:00:00.000Z
+date: 2019-08-30T12:00:00.000Z
 title: In And Out Of Rabbit Holes
-published: true
-tags: devjournal, rust, webassembly
+tags:
+  - devjournal
+  - rust
+  - webassembly
 ---
-# More Fun With WebAssembly
 
 In the past week, I've fallen into the following rabbit holes wholly outside of the necessary requirements while getting my new side project off the ground. Here's how I've gotten out.
 
@@ -253,4 +254,4 @@ Also, `wasm-pack build` runs a release build by default, with no debug symbols. 
 
 Even with all this time....alternatively spent, the _thing does the thing_ and my little grid of test widgets is accurately painted to the canvas, so I chalk it up as a successful week. Up next, Ben attempts to provide a procedural macro-style DSL! This should be a _mess_, you won't want to miss it.
 
-*Photo by Gary Bendig on Unsplash*
+_Photo by Gary Bendig on Unsplash_
