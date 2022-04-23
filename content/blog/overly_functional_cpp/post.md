@@ -1,8 +1,12 @@
 ---
 cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--vk5AiHBF--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/zdhqlnof5w8m2eivc21l.jpg
-date: "October 19, 2019"
-title: Overly Functional C++: The Fold
-tags: cpp, beginners, devjournal, help
+date: 2019-10-19T12:00:00.000Z
+title: "Overly Functional C++: The Fold"
+tags:
+  - cpp
+  - beginners
+  - devjournal
+  - help
 ---
 
 # C++ For Hipsters
