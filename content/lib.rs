@@ -1,3 +1,5 @@
+#![warn(clippy::pedantic)]
+
 use anyhow::{anyhow, Result};
 use deciduously_com_ui as ui;
 use std::path::{Path, PathBuf};

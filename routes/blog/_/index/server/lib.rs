@@ -1,3 +1,5 @@
+#![warn(clippy::pedantic)]
+
 use deciduously_com_content::{BlogPost, Content};
 use pinwheel::prelude::*;
 

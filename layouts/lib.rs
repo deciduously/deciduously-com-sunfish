@@ -1,3 +1,5 @@
+#![warn(clippy::pedantic)]
+
 pub mod document;
 pub mod footer;
 pub mod layout;

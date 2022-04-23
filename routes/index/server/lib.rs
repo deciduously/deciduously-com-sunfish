@@ -1,3 +1,5 @@
+#![warn(clippy::pedantic)]
+
 use pinwheel::prelude::*;
 
 mod page;
