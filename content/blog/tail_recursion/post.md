@@ -1,6 +1,6 @@
 ---
 cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--aId0glXB--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/zrrpq5uedlhiguf9haid.jpg
-date: May 22, 2019
+date: 2019-05-22T12:00:00.000Z
 title: Tail Recursion
 tags:
   - beginners

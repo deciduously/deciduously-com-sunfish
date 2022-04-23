@@ -1,6 +1,6 @@
 ---
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/gmxpjdhz2cgv8irnpcjc.jpg
-date: November 14, 2018
+date: 2018-11-14T12:00:00.000Z
 title: Stalk a Click through a Re-Frame/actix_web App
 tags:
   - beginners

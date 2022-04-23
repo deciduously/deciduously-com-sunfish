@@ -1,6 +1,6 @@
 ---
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/rwta9vb9b44e38nj3i4v.png
-date: November 19, 2018
+date: 2018-11-19T12:00:00Z
 title: Let's Build a Rust Frontend with Yew - Part 2
 tags:
   - rust

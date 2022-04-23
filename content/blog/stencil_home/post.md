@@ -5,7 +5,7 @@ tags:
   - typescript
   - webdev
 cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--2JthHaiM--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/314jlc0r54roahmfzkxh.jpg
-date: "January 8, 2020"
+date: 2020-01-08T12:00:00.000Z
 title: "Stencil: I Think I Found My Frontend Home"
 ---
 

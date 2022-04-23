@@ -1,6 +1,6 @@
 ---
 cover_image: http://theboardgamingway.com/wp-content/uploads/2015/02/Hastings-from-Bayeux-Tapestry.jpg
-date: December 8, 2018
+date: 2018-12-08T12:00:00.000Z
 title: A Tale of Two Functions
 tags:
   - adventofcode

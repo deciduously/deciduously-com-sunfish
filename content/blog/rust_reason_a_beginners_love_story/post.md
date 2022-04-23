@@ -1,5 +1,5 @@
 ---
-date: October 28, 2018
+date: 2018-10-28T12:00:00.000Z
 title: Rust + ReasonML - a beginner's love story
 tags:
   - react

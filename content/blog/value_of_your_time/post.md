@@ -1,6 +1,6 @@
 ---
 cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--ntbK0tBl--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/6zimvou9gmn8fyaj2lci.jpg
-date: June 26, 2019
+date: 2019-06-26T12:00:00.000Z
 title: The Value Of Your Time
 tags:
   - help

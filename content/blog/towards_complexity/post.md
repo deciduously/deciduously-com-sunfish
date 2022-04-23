@@ -1,6 +1,6 @@
 ---
 cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--oOapkgSo--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/wpefgictl0bj29ir9y8d.jpg
-date: August 5, 2019
+date: 2019-08-04T12:00:00.000Z
 title: Towards Complexity
 tags:
   - beginners

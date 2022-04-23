@@ -2,6 +2,10 @@ use deciduously_com_content::{BlogPost, Content};
 use deciduously_com_layouts::{document::Document, page_layout::PageLayout};
 use deciduously_com_ui as ui;
 use pinwheel::prelude::*;
+use time::format_description::FormatItem;
+
+const DATE_FORMAT: &[FormatItem<'_>] =
+	time::macros::format_description!("[month repr:long] [day padding:none], [year]");
 
 #[derive(new)]
 pub struct Page {
@@ -29,14 +33,11 @@ impl Component for Page {
 		} else {
 			div()
 		};
+		let date = blog_post.front_matter.date.format(&DATE_FORMAT).unwrap();
 		let heading = div()
 			.style("line-height", "1.5")
 			.child(h1().child(blog_post.front_matter.title.clone()))
-			.child(
-				div()
-					.class("blog-post-date")
-					.child(format!("{}", blog_post.front_matter.date)),
-			)
+			.child(div().class("blog-post-date").child(date))
 			.child(cover_image)
 			.child(tags);
 		Document::new()

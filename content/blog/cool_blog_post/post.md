@@ -1,6 +1,6 @@
 ---
 cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--N4JEMcnO--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/ljmiophg9dpous9i2rjc.jpg
-date: April 17, 2022
+date: 2022-04-17T12:00:00.000Z
 tags:
   - rust
   - code

@@ -1,6 +1,6 @@
 ---
 cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--xVx2wib8--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/64ox1zbuydq1va8n6bfj.jpg
-date: February 8, 2020
+date: 2020-02-08T12:00:00.000Z
 title: Steam Proton Is Great
 tags:
   - offtopic

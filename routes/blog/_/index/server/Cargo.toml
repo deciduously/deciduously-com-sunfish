@@ -10,6 +10,7 @@ path = "lib.rs"
 [dependencies]
 pinwheel = "0.2"
 sunfish = "0.7"
+time = { version = "0.3", features = ["formatting", "macros"] }
 deciduously_com_ui = { path = "../../../../../ui" }
 deciduously_com_content = { path = "../../../../../content" }
 deciduously_com_layouts = { path = "../../../../../layouts" }

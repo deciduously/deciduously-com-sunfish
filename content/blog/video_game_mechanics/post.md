@@ -1,6 +1,6 @@
 ---
 cover_image: https://res.cloudinahttps://thepracticaldev.s3.amazonaws.com/i/lk886f5xd4t64pa2cw9i.jpg
-date: October 19, 2019
+date: 2019-10-19T12:00:00.000Z
 title: Interesting Video Game Mechanics
 tags:
   - games

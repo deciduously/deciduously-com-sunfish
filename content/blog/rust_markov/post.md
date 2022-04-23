@@ -1,6 +1,6 @@
 ---
 cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--q5Ws5y01--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/9c5r1t5vumxukim530px.jpg
-date: April 3, 2019
+date: 2019-04-03T12:00:00.000Z
 title: Build You A Markov Chain In Rust (Or Whatever)
 tags:
   - beginners

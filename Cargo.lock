@@ -301,6 +301,7 @@ dependencies = [
  "deciduously_com_ui",
  "pinwheel",
  "sunfish",
+ "time",
 ]
 
 [[package]]

@@ -2,22 +2,15 @@ use anyhow::{anyhow, Result};
 use deciduously_com_ui as ui;
 use std::path::{Path, PathBuf};
 use sunfish::{include_dir, include_dir::IncludeDir};
-use time::{serde::format_description, Date};
 use url::Url;
 
 pub struct BlogPost;
 
-format_description!(
-	mon_day_comma_year,
-	Date,
-	"[month repr:long] [day padding:none], [year]"
-);
-
 #[derive(serde::Deserialize, PartialEq, Eq)]
 pub struct BlogPostFrontMatter {
 	pub title: String,
-	#[serde(with = "mon_day_comma_year")]
-	pub date: time::Date,
+	#[serde(with = "time::serde::rfc3339")]
+	pub date: time::OffsetDateTime,
 	pub tags: Option<Vec<String>>,
 	pub cover_image: Option<Url>,
 }
