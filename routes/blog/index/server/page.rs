@@ -7,7 +7,11 @@ pub struct Page;
 
 impl Component for Page {
 	fn into_node(self) -> Node {
+		let date_format =
+			time::format_description::parse("[month repr:long] [day padding:none], [year]")
+				.unwrap();
 		let blog_posts = BlogPost::list().unwrap().into_iter().map(|blog_post| {
+			let date = blog_post.front_matter.date.format(&date_format).unwrap();
 			let href = format!("/blog/{}/", blog_post.slug);
 			div()
 				.child(
@@ -15,7 +19,7 @@ impl Component for Page {
 						.href(href)
 						.child(blog_post.front_matter.title),
 				)
-				.child(p().child(blog_post.front_matter.date))
+				.child(p().child(date))
 		});
 		Document::new()
 			.child(

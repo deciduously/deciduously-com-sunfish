@@ -2,14 +2,22 @@ use anyhow::{anyhow, Result};
 use deciduously_com_ui as ui;
 use std::path::{Path, PathBuf};
 use sunfish::{include_dir, include_dir::IncludeDir};
+use time::{serde::format_description, Date};
 use url::Url;
 
 pub struct BlogPost;
 
-#[derive(serde::Deserialize)]
+format_description!(
+	mon_day_comma_year,
+	Date,
+	"[month repr:long] [day padding:none], [year]"
+);
+
+#[derive(serde::Deserialize, PartialEq, Eq)]
 pub struct BlogPostFrontMatter {
 	pub title: String,
-	pub date: String,
+	#[serde(with = "mon_day_comma_year")]
+	pub date: time::Date,
 	pub tags: Option<Vec<String>>,
 	pub cover_image: Option<Url>,
 }
@@ -21,15 +29,40 @@ impl Content for BlogPost {
 	}
 }
 
-pub struct ContentItem<T> {
+impl PartialOrd for BlogPostFrontMatter {
+	fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+		Some(self.cmp(&other))
+	}
+}
+
+impl Ord for BlogPostFrontMatter {
+	fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+		self.date.cmp(&other.date)
+	}
+}
+
+#[derive(PartialEq, Eq)]
+pub struct ContentItem<T: Ord> {
 	pub path: PathBuf,
 	pub slug: String,
 	pub front_matter: T,
 	pub markdown: ui::Markdown,
 }
 
+impl<T: Ord> PartialOrd for ContentItem<T> {
+	fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+		Some(self.cmp(other))
+	}
+}
+
+impl<T: Ord> Ord for ContentItem<T> {
+	fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+		self.front_matter.cmp(&other.front_matter)
+	}
+}
+
 pub trait Content: Sized {
-	type FrontMatter: serde::de::DeserializeOwned;
+	type FrontMatter: serde::de::DeserializeOwned + Ord;
 	fn content() -> IncludeDir;
 
 	fn slugs() -> Result<Vec<String>> {
@@ -51,10 +84,13 @@ pub trait Content: Sized {
 	}
 
 	fn list() -> Result<Vec<ContentItem<Self::FrontMatter>>> {
-		Self::slugs()?
+		let mut list = Self::slugs()?
 			.into_iter()
 			.map(Self::from_slug)
-			.collect::<Result<Vec<_>>>()
+			.collect::<Result<Vec<_>>>()?;
+		list.sort();
+		list.reverse();
+		Ok(list)
 	}
 
 	fn from_slug(slug: String) -> Result<ContentItem<Self::FrontMatter>> {
@@ -91,6 +127,7 @@ fn find_yaml_block(text: &str) -> Option<(usize, usize, usize)> {
 }
 
 pub fn parse_and_find_content(text: &str) -> Result<(impl std::io::Read + '_, ui::Markdown)> {
+	// Here is where you could search for TOML `+++` or JSON `{`
 	match find_yaml_block(text) {
 		Some((front_matter_start, front_matter_end, content_start)) => {
 			let yaml_str = &text[front_matter_start..front_matter_end];
