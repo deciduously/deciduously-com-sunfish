@@ -1,6 +1,6 @@
 # deciduously_com
 
-Minimal template for created a new [Sunfish](https://github.com/tangramdotdev/sunfish/)/[Pinwheel](https://github.com/tangramdotdev/pinwheel/) website.
+A `deciduously-com` to stand the test of time, power by [Sunfish](https://github.com/tangramdotdev/sunfish/) and [Pinwheel](https://github.com/tangramdotdev/pinwheel/).
 
 ## Usage
 
