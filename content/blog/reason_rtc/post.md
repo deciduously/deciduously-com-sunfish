@@ -1,20 +1,24 @@
 ---
 cover_image: https://cdn-images-1.medium.com/max/2000/1*theA-BiTPVjhIlQ4njM9VQ.jpeg
-edited: 2019-03-03T12:00:00.000Z
+date: 2019-03-03T12:00:00.000Z
 title: Real-Time Communication in ReasonML with bs-socket
-published: true
 description: A walkthrough of a demo client and server using bs-socket
-tags: reasonml, react, beginners, tutorial
+tags:
+  - reasonml
+  - react
+  - beginners
+  - tutorial
 ---
-In this post I'll demonstrate some real-time communication in a simple application using [ReasonML](https://reasonml.github.io/).  If you're brand new to Reason, some assumed basic comfort in JavaScript should be most of what you need, and there's a handy [cheatsheet](https://reasonml.github.io/docs/en/syntax-cheatsheet) to get you started.
+
+In this post I'll demonstrate some real-time communication in a simple application using [ReasonML](https://reasonml.github.io/). If you're brand new to Reason, some assumed basic comfort in JavaScript should be most of what you need, and there's a handy [cheatsheet](https://reasonml.github.io/docs/en/syntax-cheatsheet) to get you started.
 
 I'm using the [bs-socket](https://github.com/reasonml-community/bs-socket.io) bindings for [socket.io](https://socket.io/), a widely used Node.js real-time engine, and their [example](https://github.com/reasonml-community/bs-socket.io/tree/master/example) as a base.
 
-The finished application will present each client with a set of named buttons and a dialog box to add a new button, as well as a running total of connected clients.  Clicking a button will remove it from the set, and this set will stay in sync across all connected clients.
+The finished application will present each client with a set of named buttons and a dialog box to add a new button, as well as a running total of connected clients. Clicking a button will remove it from the set, and this set will stay in sync across all connected clients.
 
 ## Requirements
 
-This is a [Node](https://nodejs.org/en/) project.  I'll be using [yarn](https://yarnpkg.com/en/) if you'd like to follow along exactly.  All other dependencies will be handled by node.
+This is a [Node](https://nodejs.org/en/) project. I'll be using [yarn](https://yarnpkg.com/en/) if you'd like to follow along exactly. All other dependencies will be handled by node.
 
 ## Setup
 
@@ -32,7 +36,7 @@ $ cd reason-buttons/
 $ yarn start
 ```
 
-This will start the compiler in watch mode - any changes you make to a file will immediately trigger a recompile of the resulting JavaScript, right next to the source.  Verify you see both `Demo.re` and `Demo.bs.js`. under `reason-buttons/src`.  Rename your Reason file to `ButtonServer.re` and see it immediately recompile to reflect the difference - `Demo.bs.js` is removed and the same contents now fill `ButtonServer.bs.js`.
+This will start the compiler in watch mode - any changes you make to a file will immediately trigger a recompile of the resulting JavaScript, right next to the source. Verify you see both `Demo.re` and `Demo.bs.js`. under `reason-buttons/src`. Rename your Reason file to `ButtonServer.re` and see it immediately recompile to reflect the difference - `Demo.bs.js` is removed and the same contents now fill `ButtonServer.bs.js`.
 
 Add a script to your newly generated `package.json` to execute this file:
 
@@ -49,16 +53,16 @@ Add a script to your newly generated `package.json` to execute this file:
 
 I also renamed `start` to `start:re` - feel free to manage your scripts however is most comfortable.
 
-One change I always immediately make in a Node.js app is pulling the port number out so it can be specified via environment variable.  Luckily, interop is dirt simple!  We can just use Node to grab it from an environment variable.  Create a file at `src/Extern.re` with the following contents:
+One change I always immediately make in a Node.js app is pulling the port number out so it can be specified via environment variable. Luckily, interop is dirt simple! We can just use Node to grab it from an environment variable. Create a file at `src/Extern.re` with the following contents:
 
 ```ocaml
 [@bs.val] external portEnv: option(string) = "process.env.PORT";
 [@bs.val] external parseInt: (string, int) => int = "parseInt";
 ```
 
-The `[@bs.val]` syntax is a BuckleScript compiler directive.  There's an overview of the various syntaxes [here](https://bucklescript.github.io/docs/en/interop-cheatsheet) and the rest of that guide goes in depth about when to use each.  I won't get too far into the nuts and bolts of JS interop in this post, the docs are thorough and for the most part in find the resulting code legible.  The basic idea is that the keyword `external` is kind of like `let` except the body is a string name pointing to the external function.  This way we can incrementally strongly type the JavaScript we need and have Reason typecheck everything smoothly.
+The `[@bs.val]` syntax is a BuckleScript compiler directive. There's an overview of the various syntaxes [here](https://bucklescript.github.io/docs/en/interop-cheatsheet) and the rest of that guide goes in depth about when to use each. I won't get too far into the nuts and bolts of JS interop in this post, the docs are thorough and for the most part in find the resulting code legible. The basic idea is that the keyword `external` is kind of like `let` except the body is a string name pointing to the external function. This way we can incrementally strongly type the JavaScript we need and have Reason typecheck everything smoothly.
 
-This code will also leverage the `option` [data type utilities](https://bucklescript.github.io/bucklescript/api/Belt.Option.html) for nullable values like `getWithDefault` from [`Belt`](https://bucklescript.github.io/bucklescript/api/Belt.html), the standard library that ships with Reason.  Replace the contents of `src/ButtonServer.js` with the following:
+This code will also leverage the `option` [data type utilities](https://bucklescript.github.io/bucklescript/api/Belt.Option.html) for nullable values like `getWithDefault` from [`Belt`](https://bucklescript.github.io/bucklescript/api/Belt.html), the standard library that ships with Reason. Replace the contents of `src/ButtonServer.js` with the following:
 
 ```ocaml
 open Belt.Option;
@@ -75,12 +79,15 @@ Over in `ButtonServer.bs.js` the compiled output is quite readable:
 
 ```javascript
 // Generated by BUCKLESCRIPT VERSION 4.0.18, PLEASE EDIT WITH CARE
-'use strict';
+"use strict";
 
 var Belt_Option = require("bs-platform/lib/js/belt_Option.js");
 var Caml_option = require("bs-platform/lib/js/caml_option.js");
 
-var port = Belt_Option.getWithDefault((process.env.PORT == null) ? undefined : Caml_option.some(process.env.PORT), "3000");
+var port = Belt_Option.getWithDefault(
+  process.env.PORT == null ? undefined : Caml_option.some(process.env.PORT),
+  "3000"
+);
 
 console.log("Listening at *:" + port);
 
@@ -88,7 +95,7 @@ exports.port = port;
 /* port Not a pure module */
 ```
 
-Lets verify it works.  Open up a separate terminal and type `yarn serve`.  You should see the following:
+Lets verify it works. Open up a separate terminal and type `yarn serve`. You should see the following:
 
 ```
 $ yarn serve
@@ -101,7 +108,7 @@ $
 
 ## Dependencies
 
-For an example of how to use node's `Http` module manually see [this post](https://notes.maciejsmolinski.com/2018/03/02/reasonml-http-server-in-node-js/) by Maciej Smolinski.  For simplicity's sake I'll just use the community bindings for [`bs-express`](https://github.com/reasonml-community/bs-express).  We'll also pull in `bs-socket`:
+For an example of how to use node's `Http` module manually see [this post](https://notes.maciejsmolinski.com/2018/03/02/reasonml-http-server-in-node-js/) by Maciej Smolinski. For simplicity's sake I'll just use the community bindings for [`bs-express`](https://github.com/reasonml-community/bs-express). We'll also pull in `bs-socket`:
 
 ```
 $ yarn add -D bs-express https://github.com/reasonml-community/bs-socket.io.git
@@ -122,7 +129,7 @@ Bucklescript will take care of the rest as long as the package in question has a
 
 ## Messages
 
-Before we actually implement our server, though, we need to define some message types.  This will help us plan the scope of the application.  Create a new file at `src/Messages.re` with the following contents:
+Before we actually implement our server, though, we need to define some message types. This will help us plan the scope of the application. Create a new file at `src/Messages.re` with the following contents:
 
 ```ocaml
 /* Messages */
@@ -145,7 +152,7 @@ type serverToClient =
   | Success((numClients, buttonList));
 ```
 
-These are the various messages we'll be sending back and forth.  This is the biggest difference from using `socket.io` in JavaScript, where custom events are named with strings.  Here we always just emit a generic message but use ReasonML pattern matching to destructure the payload itself.  The library currently doesn't cover stringly typed events, though the one issue open is [asking about it](https://github.com/reasonml-community/bs-socket.io/issues/9).  The readme on that GitHub repo puts it succinctly:  "The API differs a bit from socket.io's API to be more idiomatic in Reason. Generally, e.g. JavaScript's `socket.emit("bla", 10)` becomes `Server.emit(socket, Bla(10))` in Reason".
+These are the various messages we'll be sending back and forth. This is the biggest difference from using `socket.io` in JavaScript, where custom events are named with strings. Here we always just emit a generic message but use ReasonML pattern matching to destructure the payload itself. The library currently doesn't cover stringly typed events, though the one issue open is [asking about it](https://github.com/reasonml-community/bs-socket.io/issues/9). The readme on that GitHub repo puts it succinctly: "The API differs a bit from socket.io's API to be more idiomatic in Reason. Generally, e.g. JavaScript's `socket.emit("bla", 10)` becomes `Server.emit(socket, Bla(10))` in Reason".
 
 Take a look at `Messages.bs.js`:
 
@@ -154,13 +161,13 @@ Take a look at `Messages.bs.js`:
 /* This output is empty. Its source's type definitions, externals and/or unused code got optimized away. */
 ```
 
-They don't end up represented at all in our bundle - it's just a compile-time benefit.  Neat!
+They don't end up represented at all in our bundle - it's just a compile-time benefit. Neat!
 
 ## The Server
 
 ### Express
 
-Alright - one last step before we can write our server.  Back in `src/Extern.re`, add the following typings for `Http` at the bottom of the file:
+Alright - one last step before we can write our server. Back in `src/Extern.re`, add the following typings for `Http` at the bottom of the file:
 
 ```ocaml
 module Http = {
@@ -170,7 +177,7 @@ module Http = {
 };
 ```
 
-Now we're ready!  Get back into `src/ButtonServer.re` and make it look like this:
+Now we're ready! Get back into `src/ButtonServer.re` and make it look like this:
 
 ```ocaml
 open Belt.Option;
@@ -188,16 +195,16 @@ Http.listen(http, port |> int_of_string, () =>
 );
 ```
 
-`|>` is the pipe operator.  In brief, `a |> b` is the same as `b(a)`.  It can be much more readable when chaining multiple functions.
+`|>` is the pipe operator. In brief, `a |> b` is the same as `b(a)`. It can be much more readable when chaining multiple functions.
 
-Just to verify it works, add a placeholder `/` endpoint, above the `Http.listen()` line.  We'll come back to the client.
+Just to verify it works, add a placeholder `/` endpoint, above the `Http.listen()` line. We'll come back to the client.
 
 ```ocaml
 App.get(app, ~path="/") @@
 Middleware.from((_, _) => Response.sendString("<h1>HELLO, REASON</h1>"));
 ```
 
-Alright, I lied - there's one more bit o' syntax there.  Per [the docs](https://reasonml.github.io/api/Pervasives.html) `(@@)` is the application operator - "g @@ f @@ x is exactly equivalent to g (f (x))."  If you're familiar with Haskell, it's `($)`, or if you're familiar with...math, I guess, it's `g o f(x)`.
+Alright, I lied - there's one more bit o' syntax there. Per [the docs](https://reasonml.github.io/api/Pervasives.html) `(@@)` is the application operator - "g @@ f @@ x is exactly equivalent to g (f (x))." If you're familiar with Haskell, it's `($)`, or if you're familiar with...math, I guess, it's `g o f(x)`.
 
 Let's make sure we're good to go:
 
@@ -211,7 +218,7 @@ If you point your browser, you should see **HELLO REASON**.
 
 ### Socketry
 
-Now for the real-time bits!  Add the following two lines below your `/` endpoint, but above your call to `Http.listen()`:
+Now for the real-time bits! Add the following two lines below your `/` endpoint, but above your call to `Http.listen()`:
 
 ```ocaml
 module Server = BsSocket.Server.Make(Messages);
@@ -219,7 +226,7 @@ module Server = BsSocket.Server.Make(Messages);
 let io = Server.createWithHttp(http);
 ```
 
-Now `socket.io` is configured to use the newly defined Message types.  To keep track of the current set of buttons and connected clients, we'll need some state:
+Now `socket.io` is configured to use the newly defined Message types. To keep track of the current set of buttons and connected clients, we'll need some state:
 
 ```ocaml
 type appState = {
@@ -230,7 +237,7 @@ type appState = {
 let state = ref({buttons: ["Click me"], clients: []});
 ```
 
-The state is held inside a mutable `ref`.  We can access the current contents via `state^`, and assign to it with the assignment operator `:=`.  When the server starts up it has no clients and one default button.
+The state is held inside a mutable `ref`. We can access the current contents via `state^`, and assign to it with the assignment operator `:=`. When the server starts up it has no clients and one default button.
 
 Also handy is this helper function to emit a message to every client stored except the client passed:
 
@@ -241,7 +248,7 @@ let sendToRest = (socket, msg) =>
   |> List.iter(c => Server.Socket.emit(c, msg));
 ```
 
-Now everything is set up to define the real meat of the application.  Start with the following outline:
+Now everything is set up to define the real meat of the application. Start with the following outline:
 
 ```ocaml
 Server.onConnect(
@@ -252,7 +259,7 @@ Server.onConnect(
 );
 ```
 
-The first part is how to handle a client connecting.  Replace the placeholder comment with the following:
+The first part is how to handle a client connecting. Replace the placeholder comment with the following:
 
 ```ocaml
 open Server;
@@ -265,9 +272,9 @@ open Server;
     );
 ```
 
-For convenience we'll open our `Server` module into the local scope, and then adjust our state to include the new client.  We use the `sendToRest` function to emit the `ClientDelta` message to everyone else who may already be stored in `state.clients`, and finally send back the `Success` message, telling the newly connected client about the current state.
+For convenience we'll open our `Server` module into the local scope, and then adjust our state to include the new client. We use the `sendToRest` function to emit the `ClientDelta` message to everyone else who may already be stored in `state.clients`, and finally send back the `Success` message, telling the newly connected client about the current state.
 
-The next order of business is handling the disconnect.  Right below the last `Socket.emit()` call add:
+The next order of business is handling the disconnect. Right below the last `Socket.emit()` call add:
 
 ```ocaml
     Socket.onDisconnect(
@@ -281,7 +288,7 @@ The next order of business is handling the disconnect.  Right below the last `So
     );
 ```
 
-The client gets dropped from the app state and everyone else still connected is updated on the change.  The only part left is to handle the `clientToServer` messages we defined in `Messages.re`:
+The client gets dropped from the app state and everyone else still connected is updated on the change. The only part left is to handle the `clientToServer` messages we defined in `Messages.re`:
 
 ```ocaml
 Socket.on(
@@ -310,13 +317,13 @@ Socket.on(
     );
 ```
 
-Whenever a button is added or removed, we adjust our state accordingly and let everyone else know about the change.  That's it for the server!
+Whenever a button is added or removed, we adjust our state accordingly and let everyone else know about the change. That's it for the server!
 
 ## The Client
 
 ### Nuts 'n' Bolts
 
-I'd feel remiss if I didn't use the ReasonReact library for this demo.  It's excellent.  First, add the dependencies:
+I'd feel remiss if I didn't use the ReasonReact library for this demo. It's excellent. First, add the dependencies:
 
 ```
 $ yarn add react react-dom
@@ -333,7 +340,7 @@ Also add `reason-react` to `bsconfig.json`:
   ],
 ```
 
-While we're in here, let's activate JSX.  Add the following entry to the top level:
+While we're in here, let's activate JSX. Add the following entry to the top level:
 
 ```json
   "reason": {
@@ -341,7 +348,7 @@ While we're in here, let's activate JSX.  Add the following entry to the top lev
   },
 ```
 
-To handle bundling, I'm going to use [Parcel](https://parceljs.org/).  This is not necessary - you're welcome to use anything you're comfortable with.  To follow along, add the dependency:
+To handle bundling, I'm going to use [Parcel](https://parceljs.org/). This is not necessary - you're welcome to use anything you're comfortable with. To follow along, add the dependency:
 
 ```
 $ yarn add -D parcel-bundler
@@ -357,37 +364,34 @@ Also add a script to `package.json` to run it:
 },
 ```
 
-We also need to create that `index.html`.  Put it at your project root:
+We also need to create that `index.html`. Put it at your project root:
 
 ```html
 <!-- https://github.com/sveltejs/template/issues/12 -->
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Reason Buttons</title>
 
     <script id="s"></script>
     <script>
-        document.getElementById('s').src = "socket.io/socket.io.js"
+      document.getElementById("s").src = "socket.io/socket.io.js";
     </script>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <div id="app"></div>
     <script defer src="./src/Index.re"></script>
-</body>
-
+  </body>
 </html>
 ```
 
-This stub includes a [workaround](https://github.com/sveltejs/template/issues/12) in the head for using Parcel with socket.io on the client side.  Also note that Parcel understands ReasonML - we can pass in `Index.re` for the entry point directly.  Once this file is here, open a new terminal and enter `yarn start:bundle` - this can be left running and will recompile your bundle when needed.
+This stub includes a [workaround](https://github.com/sveltejs/template/issues/12) in the head for using Parcel with socket.io on the client side. Also note that Parcel understands ReasonML - we can pass in `Index.re` for the entry point directly. Once this file is here, open a new terminal and enter `yarn start:bundle` - this can be left running and will recompile your bundle when needed.
 
-We now need to tell our server to serve this file instead of our placeholder string.  We'll use a little more interop from this - add the following to `Extern.re`, helpfully lifted from the [bs-socket example](https://github.com/reasonml-community/bs-socket.io/blob/master/example/ExampleServer.re):
+We now need to tell our server to serve this file instead of our placeholder string. We'll use a little more interop from this - add the following to `Extern.re`, helpfully lifted from the [bs-socket example](https://github.com/reasonml-community/bs-socket.io/blob/master/example/ExampleServer.re):
 
 ```ocaml
 module Path = {
@@ -421,17 +425,17 @@ This sets up our static file serving and serves `dist/index.html`, which is gene
 
 ### Code
 
-We've pointed Parcel towards `src/Index.re` - might be a good idea to put a file there!  Create it with the following contents:
+We've pointed Parcel towards `src/Index.re` - might be a good idea to put a file there! Create it with the following contents:
 
 ```ocaml
 ReactDOMRe.renderToElementWithId(<ButtonClient />, "app");
 ```
 
-This is how ReasonReact mounts to the DOM.  We're finally ready to build the component.
+This is how ReasonReact mounts to the DOM. We're finally ready to build the component.
 
-In a real app, this would ideally be split into several components - one for the buttons, one for the input, maybe a separate one for the counter.  For demonstration purposes I'm just throwing it all in one component, but if this app were to get much larger splitting it apart would likely be step number one.
+In a real app, this would ideally be split into several components - one for the buttons, one for the input, maybe a separate one for the counter. For demonstration purposes I'm just throwing it all in one component, but if this app were to get much larger splitting it apart would likely be step number one.
 
-Create a file at `src/ButtonClient.re`.  First, we'll set up our socket client at the top of the file:
+Create a file at `src/ButtonClient.re`. First, we'll set up our socket client at the top of the file:
 
 ```ocaml
 module Client = BsSocket.Client.Make(Messages);
@@ -489,9 +493,9 @@ let make = _children => {
 };
 ```
 
-We'll look at each section separately.  The `initialState` given here will just be used to render the component right off the bat - as soon as our client connects, it's going to receive a `Success` message which will overwrite this value.
+We'll look at each section separately. The `initialState` given here will just be used to render the component right off the bat - as soon as our client connects, it's going to receive a `Success` message which will overwrite this value.
 
-We need to translate incoming `socket.io` messages.  I've put this in the `didMount` method to make sure our client has successfully loaded.  Replace the placeholder with:
+We need to translate incoming `socket.io` messages. I've put this in the `didMount` method to make sure our client has successfully loaded. Replace the placeholder with:
 
 ```ocaml
 Client.on(socket, m =>
@@ -509,9 +513,9 @@ Client.on(socket, m =>
     Client.emit(socket, Howdy);
 ```
 
-The `Client.on()` portion is pattern matching on the incoming `serverToClient` messages and mapping it to the proper ReasonReact `action`.  We also send back a `Howdy` message to the server once successfully loaded.
+The `Client.on()` portion is pattern matching on the incoming `serverToClient` messages and mapping it to the proper ReasonReact `action`. We also send back a `Howdy` message to the server once successfully loaded.
 
-The next order of business is our reducer.  We need to define how exactly each `action` should manipulate our `state`:
+The next order of business is our reducer. We need to define how exactly each `action` should manipulate our `state`:
 
 ```ocaml
 switch (action) {
@@ -534,9 +538,9 @@ switch (action) {
 },
 ```
 
-The `...` spread operator is a huge help!  This code also takes advantage of a feature called "punning" - for instance, in `UpdateTitle(newButtonTitle)`, `newButtonTitle` is both being used as a temporary name for the message payload and the name of the field in the app `state`.  If they're named the same thing, we can use the shorthand `{...state, newButtonTitle}` instead of `{...state, newButtonTitle: newButtonTitle}`.
+The `...` spread operator is a huge help! This code also takes advantage of a feature called "punning" - for instance, in `UpdateTitle(newButtonTitle)`, `newButtonTitle` is both being used as a temporary name for the message payload and the name of the field in the app `state`. If they're named the same thing, we can use the shorthand `{...state, newButtonTitle}` instead of `{...state, newButtonTitle: newButtonTitle}`.
 
-All that's left to define is the UI!  The list of buttons will render each button name in our `state` as a button which when clicked will signal the removal of that button:
+All that's left to define is the UI! The list of buttons will render each button name in our `state` as a button which when clicked will signal the removal of that button:
 
 ```ocaml
 {ReasonReact.array(
@@ -588,7 +592,7 @@ The last bit is the count of total connected clients:
  )}
 ```
 
-And that's a wrap!  Let's fire it up.  Assuming you've had `yarn start:re` and `yarn start:bundle` running, open a new terminal and finally invoke `yarn serve`.  Now open up a couple of browser windows, point them all to `localhost:3000` and you should see them remain in sync with each other as you add and remove buttons.  Hooray!
+And that's a wrap! Let's fire it up. Assuming you've had `yarn start:re` and `yarn start:bundle` running, open a new terminal and finally invoke `yarn serve`. Now open up a couple of browser windows, point them all to `localhost:3000` and you should see them remain in sync with each other as you add and remove buttons. Hooray!
 
 Completed code can be found [here](https://github.com/deciduously/reason-buttons).
 

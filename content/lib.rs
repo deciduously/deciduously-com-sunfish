@@ -8,11 +8,12 @@ pub struct BlogPost;
 
 #[derive(serde::Deserialize, PartialEq, Eq)]
 pub struct BlogPostFrontMatter {
-	pub title: String,
+	pub cover_image: Option<Url>,
 	#[serde(with = "time::serde::rfc3339")]
 	pub date: time::OffsetDateTime,
+	pub description: Option<String>,
 	pub tags: Option<Vec<String>>,
-	pub cover_image: Option<Url>,
+	pub title: String,
 }
 
 impl Content for BlogPost {
