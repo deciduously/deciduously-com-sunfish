@@ -3,7 +3,10 @@ cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--AJ9eCaT8--/c
 date: 2019-09-17T12:00:00.000Z
 title: Pass-By-Value in C++ and Rust
 description: A comparison of Rust and C++ pass-by-value semantics
-tags: beginners, cpp, rust
+tags:
+  - beginners
+  - cpp
+  - rust
 ---
 
 C++ and Rust are often compared to each other. They occupy a similar space in terms of power and flexibility - neither has a garbage collector and thus can fit in resource-constrained domains, yet both provide richer high-level tools than a language like C which increase safety and correctness.
