@@ -10,14 +10,21 @@ impl Component for Footer {
 			.child(
 				p().class("footer-copyright")
 					.child(format!(
-						"Copyright © {} deciduously | ",
+						"Copyright © {} ",
 						time::OffsetDateTime::now_utc().year()
 					))
 					.child(
 						ui::Link::new()
+							.href("https://github.com/deciduously".to_owned())
+							.target("blank".to_owned())
+							.child("deciduously".to_owned()),
+					)
+					.child(" | Built with ${Visitor.preferred_emoji()} ")
+					.child(
+						ui::Link::new()
 							.href("https://github.com/deciduously/deciduously-com".to_owned())
 							.target("blank".to_owned())
-							.child("source".to_owned()),
+							.child("in Rust".to_owned()),
 					),
 			)
 			.into_node()

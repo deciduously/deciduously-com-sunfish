@@ -1,13 +1,15 @@
 # deciduously_com
 
-A `deciduously-com` to stand the test of time, power by [Sunfish](https://github.com/tangramdotdev/sunfish/) and [Pinwheel](https://github.com/tangramdotdev/pinwheel/).
+Yet another `deciduously-com`. Powered by [Sunfish](https://github.com/tangramdotdev/sunfish/) and [Pinwheel](https://github.com/tangramdotdev/pinwheel/).
 
 ## Usage
 
 ```
-$ HOST=0.0.0.0 PORT=8080 cargo run --release
+$ cargo run
 ```
 
-**TODO**:
+_or_
 
-- can default `HOST` just be `0`, which expands to `0.0.0.0`?
+```
+# HOST=0.0.0.0 PORT=8080 cargo run --release
+```
