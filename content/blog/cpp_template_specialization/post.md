@@ -1,11 +1,15 @@
 ---
 title: C++ Template Specialization - Syntax Note
 cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--UE24ZL6H--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/r405j8k2c1z9pm0lmrl7.jpg
-tags: beginners, cpp, devjournal, todayilearned
-published: true
-edited: 2020-01-24T12:00:00.000Z
+tags:
+  - beginners
+  - cpp
+  - devjournal
+  - todayilearned
+date: 2020-01-24T12:00:00.000Z
 ---
-I sat down yesterday with [@codemouse92](https://dev.to/codemouse92/) via [Visual Studio Live Share](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare) for [VS Code](https://code.visualstudio.com/) -- which is an *awesome* tool - to do a mostly straightforward re-arrangement of some C++.  Unexpectedly, we ran into something, well...unexpected.  To DEV!
+
+I sat down yesterday with [@codemouse92](https://dev.to/codemouse92/) via [Visual Studio Live Share](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare) for [VS Code](https://code.visualstudio.com/) -- which is an _awesome_ tool - to do a mostly straightforward re-arrangement of some C++. Unexpectedly, we ran into something, well...unexpected. To DEV!
 
 ## The Concept
 
@@ -19,7 +23,7 @@ T myIdentityFunction(T val)
 }
 ```
 
-This nearly useless function just returns whatever is passed in, no matter the type.  You use it with a concrete type, like this:
+This nearly useless function just returns whatever is passed in, no matter the type. You use it with a concrete type, like this:
 
 ```cpp
 #include <iostream>
@@ -55,13 +59,13 @@ As I just learned today, you can [specialize](https://en.cppreference.com/w/cpp/
 template int myIdentityFunction(int val);
 ```
 
-This is a silly example, but this ability lets you do things like partially specialize a `template<typename T, typename U>` to `template<int, typename U>`, and also makes implicit behaviour explicit, giving you back the keys from the compiler.  You just define one for each type you need.
+This is a silly example, but this ability lets you do things like partially specialize a `template<typename T, typename U>` to `template<int, typename U>`, and also makes implicit behaviour explicit, giving you back the keys from the compiler. You just define one for each type you need.
 
 ## The Context
 
-I don't actually know if the fact we're doing this in headers is relevant or not, but I'm including it for completeness in case somebody *does* know and wants to elaborate on this.  I think the issue is just "in a class" vs. "not in a class".
+I don't actually know if the fact we're doing this in headers is relevant or not, but I'm including it for completeness in case somebody _does_ know and wants to elaborate on this. I think the issue is just "in a class" vs. "not in a class".
 
-We were refactoring a library to be [header-only](https://en.wikipedia.org/wiki/Header-only).  In a standard library, you have your declarations in `someModule.hpp`:
+We were refactoring a library to be [header-only](https://en.wikipedia.org/wiki/Header-only). In a standard library, you have your declarations in `someModule.hpp`:
 
 ```cpp
 class idksomefunctions
@@ -129,7 +133,7 @@ Good to go!
 
 ## The Switcheroo
 
-Now, `idksomefunctions` doesn't really need to be a class - it's just, I don't know, some functions.  This could just be a [namespace](https://en.cppreference.com/w/cpp/language/namespace).  No more constructor thing, no more [`static`](https://en.cppreference.com/w/cpp/language/static) or `public` (or `storage class` errors), just some good ol' functions:
+Now, `idksomefunctions` doesn't really need to be a class - it's just, I don't know, some functions. This could just be a [namespace](https://en.cppreference.com/w/cpp/language/namespace). No more constructor thing, no more [`static`](https://en.cppreference.com/w/cpp/language/static) or `public` (or `storage class` errors), just some good ol' functions:
 
 ```diff
 - class idksomefunctions
@@ -151,7 +155,7 @@ Now, `idksomefunctions` doesn't really need to be a class - it's just, I don't k
   }
 ```
 
-Great!  But wait:
+Great! But wait:
 
 ```
 $ clang++ test.cpp -o test
@@ -160,7 +164,7 @@ test.cpp:(.text+0x13): undefined reference to `int idksomefunctions::myIdentityF
 clang-9: error: linker command failed with exit code 1 (use -v to see invocation)
 ```
 
-That's no good.  There's one more change to make:
+That's no good. There's one more change to make:
 
 ```diff
       template <typename T>
@@ -174,7 +178,7 @@ That's no good.  There's one more change to make:
       int myIdentityFunction(int val);
 ```
 
-Gotta take out the `<>` thingy, back to where we started!  Now it'll compile:
+Gotta take out the `<>` thingy, back to where we started! Now it'll compile:
 
 ```cpp
 
@@ -217,4 +221,4 @@ template int myIdentityFunction(int val);
 
 What am I saying when I say `template <>` versus `template` here?
 
-*Photo by Ricardo Gomez Angel on Unsplash*
+_Photo by Ricardo Gomez Angel on Unsplash_
