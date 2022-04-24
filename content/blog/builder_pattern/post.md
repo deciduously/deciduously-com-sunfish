@@ -1,18 +1,22 @@
 ---
 cover_image: https://res.cloudinahttps://thepracticaldev.s3.amazonaws.com/i/lk886f5xd4t64pa2cw9i.jpg
-edited: 2019-09-06T12:00:00.000Z
+date: 2019-09-06T12:00:00.000Z
 title: The Builder Pattern
-published: true
 description: A walkthrough of the builder pattern in Rust
-tags: rust, beginners, tutorial, patterns
+tags:
+  - rust
+  - beginners
+  - tutorial
+  - patterns
 ---
-# Matchmaking Like Its 2001
 
-We're going to help John McCrea of Cake find the woman of his slightly sarcastic, oddly specific dreams.  He's a particular man:
+_Matchmaking Like Its 2001_
+
+We're going to help John McCrea of Cake find the woman of his slightly sarcastic, oddly specific dreams. He's a particular man:
 
 {# {% youtube X5KmB8Laemg %} #}
 
-Yep, you and I both think it: this sounds like a job for the Rust compiler.  This band was truly ahead of its time.  Let's model the problem:
+Yep, you and I both think it: this sounds like a job for the Rust compiler. This band was truly ahead of its time. Let's model the problem:
 
 ```rust
 /// Girl type
@@ -39,7 +43,7 @@ fn main() {
 
 Running this with `cargo run` yields the expected output: `Match: false`.
 
-So, what is it we're looking for specifically?  Luckily, our man starts right in with the preferences, on the first line he tells us he wants "a girl with a mind like a diamond".  Let's add a member field to test for:
+So, what is it we're looking for specifically? Luckily, our man starts right in with the preferences, on the first line he tells us he wants "a girl with a mind like a diamond". Let's add a member field to test for:
 
 ```rust
 #[derive(Clone, Copy, PartialEq)]
@@ -76,7 +80,7 @@ fn main() {
 }
 ```
 
-Great!  Now we get `Match: true` when passing in this `Girl`.  Hold on, though - we've got some more criteria.  Next, we need "a girl who knows what's best".  That's pretty easy - either she does or she doesn't:
+Great! Now we get `Match: true` when passing in this `Girl`. Hold on, though - we've got some more criteria. Next, we need "a girl who knows what's best". That's pretty easy - either she does or she doesn't:
 
 ```rust
 struct Girl {
@@ -104,7 +108,7 @@ fn main() {
 }
 ```
 
-Groovy.  Now we need "shoes that cut and eyes that burn like cigarettes".  It sounds like we'll need to associate some pairs of strings:
+Groovy. Now we need "shoes that cut and eyes that burn like cigarettes". It sounds like we'll need to associate some pairs of strings:
 
 ```rust
 type Attribute = (String, String);
@@ -117,7 +121,7 @@ struct Girl {
 }
 ```
 
-An attribute will be a tuple like `("shoes", "cut")`.  We can ask for the shoes and eye attributes in the constructor:
+An attribute will be a tuple like `("shoes", "cut")`. We can ask for the shoes and eye attributes in the constructor:
 
 ```rust
 impl Girl {
@@ -155,7 +159,7 @@ fn is_dream_girl(girl: &Girl) -> bool {
 }
 ```
 
-Awesome!  We just need to construct the `Girl` with the new attributes:
+Awesome! We just need to construct the `Girl` with the new attributes:
 
 ```rust
 fn main() {
@@ -164,7 +168,7 @@ fn main() {
 }
 ```
 
-Okay.  Hold on.  Do you see the problem here?  Let's skim ahead...
+Okay. Hold on. Do you see the problem here? Let's skim ahead...
 
 ```
 I want a girl with the right allocations
@@ -177,11 +181,11 @@ And picking up slack
 ...
 ```
 
-It just continues from there!  This `Girl` constructor is already getting out of hand and we just barely made it out of the first stanza.  What if John changes his mind?  He might decide something's not as important, or add a new criterion.  This code is not amenable to changes like that, every call site is dependent on this exact parameter list given in this exact order, but people don't work like that.  There could be all sorts of variations.
+It just continues from there! This `Girl` constructor is already getting out of hand and we just barely made it out of the first stanza. What if John changes his mind? He might decide something's not as important, or add a new criterion. This code is not amenable to changes like that, every call site is dependent on this exact parameter list given in this exact order, but people don't work like that. There could be all sorts of variations.
 
 ## The Pattern
 
-Let's re-implement this program leveraging the Builder Pattern.  When a `Girl` is first constructed, we just want to start with some sensible defaults:
+Let's re-implement this program leveraging the Builder Pattern. When a `Girl` is first constructed, we just want to start with some sensible defaults:
 
 ```rust
 struct Girl {
@@ -203,7 +207,7 @@ impl Default for Girl {
 }
 ```
 
-Everything else is a blank slate.  This way we can just use `Girl::new()` with no parameters and get a starting point.  To add more, we can define methods:
+Everything else is a blank slate. This way we can just use `Girl::new()` with no parameters and get a starting point. To add more, we can define methods:
 
 ```rust
 impl Girl {
@@ -256,7 +260,7 @@ fn main() {
 
 This is so much easier to work with as the specification grows and evolves.
 
-More complex scenarios may require you to use a separate type, like GirlBuilder, and take ownership at each step.  This will allow you to do this all in a one-liner: `let girl = GirlBuilder::new().set_mind(Mind::Diamond).toggle_knows_best();`  This does limit your configuration options, for instance if you want to conditionally call some builder method in an `if` expression.  If possible, the non-owning pattern here is more flexible.
+More complex scenarios may require you to use a separate type, like GirlBuilder, and take ownership at each step. This will allow you to do this all in a one-liner: `let girl = GirlBuilder::new().set_mind(Mind::Diamond).toggle_knows_best();` This does limit your configuration options, for instance if you want to conditionally call some builder method in an `if` expression. If possible, the non-owning pattern here is more flexible.
 
 Here's hoping we can help Mr. McCrea finally settle down after all this time.
 
