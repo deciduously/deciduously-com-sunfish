@@ -1,18 +1,22 @@
 ---
 cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--H5b_3Qbt--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/vz50vjb1ufs2snvbb0pd.jpg
-edited: 2020-02-07T12:00:00.000Z
+date: 2020-02-07T12:00:00.000Z
 title: Automatically Generate Rust Modules With Cargo Build Scripts
-published: true
 description: Learn how to use build.rs to autogenerate Rust code.
-tags: beginners, rust, devjournal, todayilearned
+tags:
+  - beginners
+  - rust
+  - devjournal
+  - todayilearned
 ---
-I just learned how to use [Cargo build scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html).  They're pretty cool.
+
+I just learned how to use [Cargo build scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html). They're pretty cool.
 
 ## The Context
 
 If you don't care about the context, here's the [build script part](#the-build-script-part).
 
-I'm rebuilding my personal website from scratch and plan to re-host my DEV blog posts there.  I've selected the [`askama`](https://github.com/djc/askama) library to generate HTML for my webpages.  This tool is kind of like [Jinja](https://jinja.palletsprojects.com/en/2.11.x/) (or [`tera`](https://github.com/Keats/tera) in the Rust world) but with one significant difference - it typechecks your templates, and actually compiles them directly in to your application's exectuable.
+I'm rebuilding my personal website from scratch and plan to re-host my DEV blog posts there. I've selected the [`askama`](https://github.com/djc/askama) library to generate HTML for my webpages. This tool is kind of like [Jinja](https://jinja.palletsprojects.com/en/2.11.x/) (or [`tera`](https://github.com/Keats/tera) in the Rust world) but with one significant difference - it typechecks your templates, and actually compiles them directly in to your application's exectuable.
 
 As an example, here's my toplevel `skel.html` template:
 
@@ -54,9 +58,9 @@ As an example, here's my toplevel `skel.html` template:
 You can create subpages using `extends`, and then add your own content to fill in the `block`s defined in the base:
 
 ```html
-{% extends "skel.html" %}
-{% block title %}404{% endblock %}
-{% block content %}<h1>NOT FOUND!</h1>{% endblock %}
+{% extends "skel.html" %} {% block title %}404{% endblock %} {% block content %}
+<h1>NOT FOUND!</h1>
+{% endblock %}
 ```
 
 On the Rust side, to render this markup you create a struct and pass it the file directly in a tag:
@@ -75,7 +79,7 @@ impl Default for SkelTemplate {
 }
 ```
 
-When the template says `{% for link in links %}` it means specifically what Rust has stored in this struct field.  To finally pull out your rendered markup, you instantiate the struct and call `render()`, which `askama` auto-generates for us:
+When the template says `{% for link in links %}` it means specifically what Rust has stored in this struct field. To finally pull out your rendered markup, you instantiate the struct and call `render()`, which `askama` auto-generates for us:
 
 ```rust
 pub async fn four_oh_four() -> HandlerResult {
@@ -85,9 +89,9 @@ pub async fn four_oh_four() -> HandlerResult {
 }
 ```
 
-If you needed to inject any data, you'd have to store it in the struct and define a constructor (or other method) to add the data.  It works just like you expect any other Rust to work.  All the data flowing into this template is defined in this struct, and verified by the compiler well before it ever hits your markup.
+If you needed to inject any data, you'd have to store it in the struct and define a constructor (or other method) to add the data. It works just like you expect any other Rust to work. All the data flowing into this template is defined in this struct, and verified by the compiler well before it ever hits your markup.
 
-This is great for all the reasons Rust typechecking is usually great.  It's also highly performant, because your template gets slurped up right into your binary and precompiled - no file IO happens at runtime, and all templating operations like loops and conditions are already turned into actual Rust loops and conditions by the time they're called.  It's *totally sweet*.
+This is great for all the reasons Rust typechecking is usually great. It's also highly performant, because your template gets slurped up right into your binary and precompiled - no file IO happens at runtime, and all templating operations like loops and conditions are already turned into actual Rust loops and conditions by the time they're called. It's _totally sweet_.
 
 The magic happens in the tag:
 
@@ -96,11 +100,11 @@ The magic happens in the tag:
 #[template(path = "skel.html")]
 ```
 
-This is a [procedural macro](https://blog.rust-lang.org/2018/12/21/Procedural-Macros-in-Rust-2018.html).  When your code is compiled, these expand before anything else happens.  In this case, it parses your template and inserts the resulting Rust code in your module before compilation begins as an `impl MyTemplate {}` block that includes a `render(&self)` method you can then call.  It's during this macro expansion stage, not compilation, that your actual template files like `skel.html` are opened up from the filesystem - it assumes they're all in `<crate root>/templates` - and after that your code does not read those files again.
+This is a [procedural macro](https://blog.rust-lang.org/2018/12/21/Procedural-Macros-in-Rust-2018.html). When your code is compiled, these expand before anything else happens. In this case, it parses your template and inserts the resulting Rust code in your module before compilation begins as an `impl MyTemplate {}` block that includes a `render(&self)` method you can then call. It's during this macro expansion stage, not compilation, that your actual template files like `skel.html` are opened up from the filesystem - it assumes they're all in `<crate root>/templates` - and after that your code does not read those files again.
 
 ## The Problem
 
-I want to author my posts in Markdown, not HTML.  This means I'm going to need to transform my Markdown to HTML before serving them up.  Okay, that's fine - I'm driving a programming language.  This is a three-line problem with [`pulldown-cmark`](https://github.com/raphlinus/pulldown-cmark):
+I want to author my posts in Markdown, not HTML. This means I'm going to need to transform my Markdown to HTML before serving them up. Okay, that's fine - I'm driving a programming language. This is a three-line problem with [`pulldown-cmark`](https://github.com/raphlinus/pulldown-cmark):
 
 ```rust
 let parser = pulldown_cmark::Parser::new("# THE BEST HEADING");
@@ -109,7 +113,7 @@ html::push_html(&mut html, parser);
 println!("{}", html); // <h1>THE BEST HEADING</h1>
 ```
 
-This generated markup, though, also needs to inherit the `skel.html` boilerplate to make it look like it's part of the same website.  Easy enough, I just need to make a new template for each file.
+This generated markup, though, also needs to inherit the `skel.html` boilerplate to make it look like it's part of the same website. Easy enough, I just need to make a new template for each file.
 
 Scaling up juuust slightly, if this is my markdown:
 
@@ -117,6 +121,7 @@ Scaling up juuust slightly, if this is my markdown:
 ---
 title: COOL POST
 ---
+
 # THE BEST HEADING
 
 But _nothing_ compared to this intro!
@@ -124,12 +129,12 @@ But _nothing_ compared to this intro!
 
 This is my markup:
 
-
 ```html
-{% extends "skel.html" %}
-{% block title %}COOL POST{% endblock %}
-{% block content %}<h1>THE BEST HEADING</h1>
-<p>But <em>nothing</em> compared to this intro!</p>{% endblock %}
+{% extends "skel.html" %} {% block title %}COOL POST{% endblock %} {% block
+content %}
+<h1>THE BEST HEADING</h1>
+<p>But <em>nothing</em> compared to this intro!</p>
+{% endblock %}
 ```
 
 That's a string manipulation problem - again, we're driving a programming language, so I'm okay with that:
@@ -143,21 +148,21 @@ fn write_template(title: &str, html: &str, file: &mut std::fs::File) -> Result<(
 }
 ```
 
-You might have already guessed the snag, here.  To get these Askama templates out of our Markdown and write them to disk, we need to execute some code.  However, all of our template macros have *already* expanded by the time we have the chance to run this process.
+You might have already guessed the snag, here. To get these Askama templates out of our Markdown and write them to disk, we need to execute some code. However, all of our template macros have _already_ expanded by the time we have the chance to run this process.
 
-In order for this to work, we need to somehow auto-generate these template files and corresponding structs *before* the macro expansion phase - which, as we've gone over, happens before anything else.  Ruh-roh.
+In order for this to work, we need to somehow auto-generate these template files and corresponding structs _before_ the macro expansion phase - which, as we've gone over, happens before anything else. Ruh-roh.
 
 ## The Fix
 
-When I first tackled this problem, I...well, I didn't tackle it at all.  I instead created a separate built-in CLI command for my executable to handle this, so I had a `publish` mode and a `serve` mode.  You needed to invoke `publish` before building your production binary.  It worked, but I hated it.
+When I first tackled this problem, I...well, I didn't tackle it at all. I instead created a separate built-in CLI command for my executable to handle this, so I had a `publish` mode and a `serve` mode. You needed to invoke `publish` before building your production binary. It worked, but I hated it.
 
-Another option would be to ditch Askama and just use the aforementioned [`tera`](https://github.com/Keats/tera) instead, which does do its work at runtime.  It's quick and easy and gets the job done more than adequately, and you probably should just do that.  You lose out on the typechecking and the self-contained binary, though.  I'm also stubborn.
+Another option would be to ditch Askama and just use the aforementioned [`tera`](https://github.com/Keats/tera) instead, which does do its work at runtime. It's quick and easy and gets the job done more than adequately, and you probably should just do that. You lose out on the typechecking and the self-contained binary, though. I'm also stubborn.
 
 Luckily, there's build scripts!
 
 ### The Build Script Part
 
-A [build.rs](https://doc.rust-lang.org/cargo/reference/build-scripts.html) file can be placed in the root of your crate, outside of `src`.  It's not a part of your crate.  If present, `cargo` will compile and run it *before* getting to your crate.
+A [build.rs](https://doc.rust-lang.org/cargo/reference/build-scripts.html) file can be placed in the root of your crate, outside of `src`. It's not a part of your crate. If present, `cargo` will compile and run it _before_ getting to your crate.
 
 The example given in the documentation link is for FFI:
 
@@ -175,7 +180,7 @@ fn main() {
 
 This script checks to see if `hello.c` has changed, and will rebuild it if necessary before compiling your crate.
 
-One annoying thing is that you communicate with `cargo` from within the script by writing to `stdout`: `println!("cargo:rerun-if-changed=src/hello.c");`.  This path does not recurse through directories, so if you want to watch for changes for, say, every template in `templates/`, you're gonna need to write a separate line to `stdout` for each file therein.
+One annoying thing is that you communicate with `cargo` from within the script by writing to `stdout`: `println!("cargo:rerun-if-changed=src/hello.c");`. This path does not recurse through directories, so if you want to watch for changes for, say, every template in `templates/`, you're gonna need to write a separate line to `stdout` for each file therein.
 
 Being a regular old Rust program, that's not really an issue - we can read the directory and generate a `println!()` statement for each line found:
 
@@ -211,7 +216,7 @@ fn main() {
 }
 ```
 
-That'll do.  So, if we can use Rust, we can use `std::fs::File` and `writeln!()` like we did for generating Askama templates above.  Why not write some Rust instead:
+That'll do. So, if we can use Rust, we can use `std::fs::File` and `writeln!()` like we did for generating Askama templates above. Why not write some Rust instead:
 
 ```rust
 fn write_link_info_type(file: &mut std::fs::File) -> Result<(), std::io::Error> {
@@ -248,13 +253,13 @@ pub struct LinkInfo {
 }
 ```
 
-That looks like runnable Rust!  All you need to do is ensure you add it to `main.rs` or `lib.rs`:
+That looks like runnable Rust! All you need to do is ensure you add it to `main.rs` or `lib.rs`:
 
 ```rust
 mod blog;
 ```
 
-Boom, brand new module.  It gets better, though.  Not only can you use the Rust standard library, you can actually use anything `cargo` can find.  You can add dependencies to `Cargo.toml` for the build phase specifically:
+Boom, brand new module. It gets better, though. Not only can you use the Rust standard library, you can actually use anything `cargo` can find. You can add dependencies to `Cargo.toml` for the build phase specifically:
 
 ```toml
 [build-dependencies]
@@ -266,7 +271,7 @@ default-features = false
 version = "0.6"
 ```
 
-Anything defined here are NOT available to your crate, only to `build.rs`.  If you want to use something in both, you need to add it to both sections of this file.  The only thing you can't use here is your crate specifically, because it by definition has not yet been built.  Beyond that you're good to go.
+Anything defined here are NOT available to your crate, only to `build.rs`. If you want to use something in both, you need to add it to both sections of this file. The only thing you can't use here is your crate specifically, because it by definition has not yet been built. Beyond that you're good to go.
 
 I decided I wanted a little more fine-grained control over the Markdown-header-to-Rust-handler-and-template pipeline, so I used [`pest`](https://pest.rs) to throw together my own blog post parser to crawl through the header:
 
@@ -282,7 +287,7 @@ body = { ANY* }
 draft = { SOI ~ header ~ body? ~ EOI }
 ```
 
-This means that *right in the build script* I can parse and generate a structure for my blog posts:
+This means that _right in the build script_ I can parse and generate a structure for my blog posts:
 
 ```rust
 // Compiles drafts to templates and generates struct
@@ -377,7 +382,7 @@ Now that the build script has each blogpost with properly organized metadata in 
     }
 ```
 
-The driver code just has to loop through all the scraped posts and call this method.  We also need a struct for Askama to render, too, though - as long as we can generate a Rust module, we can generate those too:
+The driver code just has to loop through all the scraped posts and call this method. We also need a struct for Askama to render, too, though - as long as we can generate a Rust module, we can generate those too:
 
 ```rust
     fn struct_name(&self) -> String {
@@ -574,8 +579,8 @@ pub async fn blog_handler(path_str: &str) -> HandlerResult {
 
 The build script will re-make this file to match every time you change the files in this directory, so you only ever have to worry about the markdown files to manage your blog.
 
-...You know, like a static site thingamajigger or something.  Crazy.
+...You know, like a static site thingamajigger or something. Crazy.
 
-Build scripts are pretty powerful - what have *you* used them for?
+Build scripts are pretty powerful - what have _you_ used them for?
 
-*Photo by Scott Blake on Unsplash*
+_Photo by Scott Blake on Unsplash_
