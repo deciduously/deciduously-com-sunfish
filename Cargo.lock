@@ -324,6 +324,7 @@ name = "deciduously_com_index_server"
 version = "0.0.0"
 dependencies = [
  "deciduously_com_layouts",
+ "deciduously_com_ui",
  "futures",
  "pinwheel",
  "sunfish",

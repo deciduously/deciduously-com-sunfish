@@ -12,3 +12,4 @@ pinwheel = "0.2"
 futures = "0.3"
 sunfish = "0.7"
 deciduously_com_layouts = { path = "../../../layouts" }
+deciduously_com_ui = { path = "../../../ui" }
