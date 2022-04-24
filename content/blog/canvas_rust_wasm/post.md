@@ -1,22 +1,26 @@
 ---
 cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--417W9fRI--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/ozzemh45p626qkat5kau.jpg
-edited: 2019-06-14T12:00:00.000Z
+date: 2019-06-14T12:00:00.000Z
 title: Reactive Canvas with Rust/WebAssembly and web-sys
-published: true
 description: A Rust/Wasm canvas tutorial
-tags: rust, webassembly, beginners, tutorial
+tags:
+  - rust
+  - webassembly
+  - beginners
+  - tutorial
 ---
-# Or How I Learned To Stop Worrying And Love Macros
 
-It's been a little while since I built a resizable dot with a slider in some esoteric stack.  Time for Chapter 3!  I guess it's a series now.
+_Or How I Learned To Stop Worrying And Love Macros_
 
-The last two demos used languages that transpile the whole app to regular ol' JavaScript to be interpreted.  This time around, we're going to be compiling our app to WebAssembly first, and then having JavaScript load that.
+It's been a little while since I built a resizable dot with a slider in some esoteric stack. Time for Chapter 3! I guess it's a series now.
 
-As per usual with these dot demos, this is overkill for this app.  This one perhaps especially so.  Roll up your sleeves, we're gonna scrob us some DOM.
+The last two demos used languages that transpile the whole app to regular ol' JavaScript to be interpreted. This time around, we're going to be compiling our app to WebAssembly first, and then having JavaScript load that.
+
+As per usual with these dot demos, this is overkill for this app. This one perhaps especially so. Roll up your sleeves, we're gonna scrob us some DOM.
 
 ## The Pipeline
 
-This section is largely copped straight outta the [RustWasm Book](https://rustwasm.github.io/docs/book/game-of-life/hello-world.html).  If you plan to do further work with Rust and WebAssembly, head straight there next (or now).  You'll need a Rust toolchain and Node/NPM to follow along.
+This section is largely copped straight outta the [RustWasm Book](https://rustwasm.github.io/docs/book/game-of-life/hello-world.html). If you plan to do further work with Rust and WebAssembly, head straight there next (or now). You'll need a Rust toolchain and Node/NPM to follow along.
 
 First, create a new library-type crate:
 
@@ -25,7 +29,7 @@ $ cargo new wasm-dot --lib
 $ cd wasm-dot
 ```
 
-We need to add `wasm-bindgen`.  This crate auto-generates all the JS <-> Rust FFI glue for us, and is much of the reason Rust is such a phenomenal choice for writing WebAssembly.  Open up `Cargo.toml` in the crate root and make it look like this:
+We need to add `wasm-bindgen`. This crate auto-generates all the JS <-> Rust FFI glue for us, and is much of the reason Rust is such a phenomenal choice for writing WebAssembly. Open up `Cargo.toml` in the crate root and make it look like this:
 
 ```toml
 [package]
@@ -43,7 +47,7 @@ crate-type = ["cdylib"]
 wasm-bindgen = "0.2"
 ```
 
-The `cdylib` crate type will produce a dynamic system library for loading into another language.  Now open up `src/lib.rs` and make it look like this:
+The `cdylib` crate type will produce a dynamic system library for loading into another language. Now open up `src/lib.rs` and make it look like this:
 
 ```rust
 use wasm_bindgen::prelude::*;
@@ -61,9 +65,9 @@ pub fn say_hi() {
 }
 ```
 
-We're importing the JavaScript `alert()` function and exporting our own `say_hi()` Rust function that calls it.  That's all we need to do, `wasm_bindgen` is taking care of the details.  This will just ensure both directions work as intended.
+We're importing the JavaScript `alert()` function and exporting our own `say_hi()` Rust function that calls it. That's all we need to do, `wasm_bindgen` is taking care of the details. This will just ensure both directions work as intended.
 
-The rustwasm team also provides a tool called [`wasm-pack`](https://github.com/rustwasm/wasm-pack) to automate WebAssembly packaging and integration with npm.  You'll need to install it once with `cargo install wasm-pack` and then you can use it to build your package:
+The rustwasm team also provides a tool called [`wasm-pack`](https://github.com/rustwasm/wasm-pack) to automate WebAssembly packaging and integration with npm. You'll need to install it once with `cargo install wasm-pack` and then you can use it to build your package:
 
 ```
 $ wasm-pack build
@@ -74,7 +78,7 @@ $ wasm-pack build
 [INFO]: :-) Your wasm pkg is ready to publish at ./pkg.
 ```
 
-Inside `pkg/` you'll find everything you need to deploy, ready to be imported into any npm project.  All we need now is a project in which to use it!  Because the rustwasm group thought of everything, there's a template ready to go - use it to create a new project:
+Inside `pkg/` you'll find everything you need to deploy, ready to be imported into any npm project. All we need now is a project in which to use it! Because the rustwasm group thought of everything, there's a template ready to go - use it to create a new project:
 
 ```
 $ npm init wasm-app www
@@ -88,7 +92,7 @@ import * as wasm from "hello-wasm-pack";
 wasm.greet();
 ```
 
-There's a stub included so that it will run as is, but we don't want to import from `hello-wasm-pack`, we want to use the app we're developing.  To point it in the right direction, open up `www/package.json` and add a `dependencies` key, pointing directly at the `pkg` output dir from `wasm-pack`:
+There's a stub included so that it will run as is, but we don't want to import from `hello-wasm-pack`, we want to use the app we're developing. To point it in the right direction, open up `www/package.json` and add a `dependencies` key, pointing directly at the `pkg` output dir from `wasm-pack`:
 
 ```json
   // ..
@@ -116,11 +120,11 @@ You should see the requested alert at`localhost:8080`:
 
 ![hello wasm alert box screenshot](https://i.imgur.com/INNppw6.png)
 
-Huzzah!  Now we can iterate.  I recommend opening a second terminal at this point.  In one, run `npm run start` and keep it open, and in the other invoke `wasm-pack build` whenever you make a change to the Rust.
+Huzzah! Now we can iterate. I recommend opening a second terminal at this point. In one, run `npm run start` and keep it open, and in the other invoke `wasm-pack build` whenever you make a change to the Rust.
 
 ## The Layout
 
-To deal with the JavaScript universe, the `wasm-bindgen` project provides two important crates: `web-sys` provides bindings for all the Web APIS (!!) and `js-sys` provides all the ECMAScript stuff like `Array` and `Date` (!!).  Yeah, they already did the hard work.  It's pretty cool, you don't need to manually define a `Document.createElement` extern or anything.  Instead, just pull in what we need from `web-sys` in `Cargo.toml`:
+To deal with the JavaScript universe, the `wasm-bindgen` project provides two important crates: `web-sys` provides bindings for all the Web APIS (!!) and `js-sys` provides all the ECMAScript stuff like `Array` and `Date` (!!). Yeah, they already did the hard work. It's pretty cool, you don't need to manually define a `Document.createElement` extern or anything. Instead, just pull in what we need from `web-sys` in `Cargo.toml`:
 
 ```toml
 [dependencies]
@@ -144,11 +148,11 @@ features = [
 ]
 ```
 
-It's a huge crate, so each interface is feature-gated.  You only use what you need.  If you're trying to call a function and it's telling you it doesn't exist, double check the API docs.  It always tells you which features a given method needs:
+It's a huge crate, so each interface is feature-gated. You only use what you need. If you're trying to call a function and it's telling you it doesn't exist, double check the API docs. It always tells you which features a given method needs:
 
 ![feature gate screenshot](https://i.imgur.com/thITZh3.png)
 
-To make sure it's all groovy, we're going to build a DOM node ourselves, JS-style but, like, also Rust-style.  Remove the `alert()` test in `src/lib.rs` and add:
+To make sure it's all groovy, we're going to build a DOM node ourselves, JS-style but, like, also Rust-style. Remove the `alert()` test in `src/lib.rs` and add:
 
 ```rust
 #[wasm_bindgen]
@@ -196,15 +200,15 @@ See if it works by running `wasm-pack build` and reloading `localhost:8080`:
 
 ![dom node screenshot](https://i.imgur.com/7yiqu7f.png)
 
-Whoa.  Did you see how blazing-fast and WASM-infused that title was?!
+Whoa. Did you see how blazing-fast and WASM-infused that title was?!
 
-No, you didn't, but still.  Neat.  Before moving on, let's address the error handling situation.  All of these `web-sys` calls will return a `Result<T, JsValue>`.  We're not going to deal with other types of errors in this tiny demo, so just alias that:
+No, you didn't, but still. Neat. Before moving on, let's address the error handling situation. All of these `web-sys` calls will return a `Result<T, JsValue>`. We're not going to deal with other types of errors in this tiny demo, so just alias that:
 
 ```rust
 type Result<T> = std::result::Result<T, JsValue>;
 ```
 
-Now we can have our functions return a `Result<()>` and get to use the `?` operator instead of sprinkling `expect()` everywhere.  Refactor `run()` to leverage this:
+Now we can have our functions return a `Result<()>` and get to use the `?` operator instead of sprinkling `expect()` everywhere. Refactor `run()` to leverage this:
 
 ```rust
 fn get_document() -> Result<Document> {
@@ -222,26 +226,26 @@ pub fn run() -> Result<()> {
 }
 ```
 
-Pulling `get_document()` out will help us define the event listener later.  First, though, we need to define the DOM tree we want.  Here's what we're aiming for in HTML:
+Pulling `get_document()` out will help us define the event listener later. First, though, we need to define the DOM tree we want. Here's what we're aiming for in HTML:
 
 ```html
-  <div id="rxcanvas">
-    <span id="size-output"></span>
-    <input id="size" type="range" min="1" max="100" step="5">
-    <label for="size">- Size</label>
-    <p>
-      <canvas id="dot-canvas"></canvas>
-    </p>
-  </div>
+<div id="rxcanvas">
+  <span id="size-output"></span>
+  <input id="size" type="range" min="1" max="100" step="5" />
+  <label for="size">- Size</label>
+  <p>
+    <canvas id="dot-canvas"></canvas>
+  </p>
+</div>
 ```
 
-If you've ever manipulated the DOM via JavaScript, you're pretty much good to go.  In Rust, though, this is *so verbose*.  Look how big the function to create a simple `<h1>DOT</h1>` element was!  I promised up above there would be macros - here we go.
+If you've ever manipulated the DOM via JavaScript, you're pretty much good to go. In Rust, though, this is _so verbose_. Look how big the function to create a simple `<h1>DOT</h1>` element was! I promised up above there would be macros - here we go.
 
-For the uninitiated, a macro is a bit of code that expands into other Rust code *before* everything is evaluated.  In Rust, they look like function calls but with an exclamation point at the end.  They aren't function calls at all though - when the compiler comes through your module, it expands all of these anywhere they find them into the full Rust code you (or a library) defined.  It's a mechanism for automatic code generation!
+For the uninitiated, a macro is a bit of code that expands into other Rust code _before_ everything is evaluated. In Rust, they look like function calls but with an exclamation point at the end. They aren't function calls at all though - when the compiler comes through your module, it expands all of these anywhere they find them into the full Rust code you (or a library) defined. It's a mechanism for automatic code generation!
 
-This syntax is the only place in Rust you'll see that `thing { () => {} }` bracket pattern.  It's its own special syntax.  The parameters are prefixed with a `$` and placed in the parens, and are copied in to the Rust code in the curly braces during expansion, right in place in your code.
+This syntax is the only place in Rust you'll see that `thing { () => {} }` bracket pattern. It's its own special syntax. The parameters are prefixed with a `$` and placed in the parens, and are copied in to the Rust code in the curly braces during expansion, right in place in your code.
 
-Rust actually has another type of macro called a [procedural macro](https://blog.rust-lang.org/2018/12/21/Procedural-Macros-in-Rust-2018.html) that's *even more powerful and arcane* but for now `macro_rules!` will do us just fine.
+Rust actually has another type of macro called a [procedural macro](https://blog.rust-lang.org/2018/12/21/Procedural-Macros-in-Rust-2018.html) that's _even more powerful and arcane_ but for now `macro_rules!` will do us just fine.
 
 Here's a macro to append an arbitrary number of attributes to a DOM element, passed as 2-tuples:
 
@@ -257,9 +261,9 @@ macro_rules! append_attrs {
 }
 ```
 
-Each parameter to expand is tagged with a token type - an `ident` will allow us to pass a Rust name though and an `expr` takes any Rust expression (in this case, a 2-tuple).  When called, each one will just paste this block of Rust into our function in place, using what we pass in.
+Each parameter to expand is tagged with a token type - an `ident` will allow us to pass a Rust name though and an `expr` takes any Rust expression (in this case, a 2-tuple). When called, each one will just paste this block of Rust into our function in place, using what we pass in.
 
-This macro is variadic, meaning it can accept a variable number of arguments.  The `$( $name:expr ),*` syntax means that it will carry out this block for zero or more arguments given, pasting a copy of the code in the curly braces for each arg passed here.  Each time through, the arg we're processing gets the name `$attr`.
+This macro is variadic, meaning it can accept a variable number of arguments. The `$( $name:expr ),*` syntax means that it will carry out this block for zero or more arguments given, pasting a copy of the code in the curly braces for each arg passed here. Each time through, the arg we're processing gets the name `$attr`.
 
 You can call it like this, with as many trailing tuple arguments as needed for each attribute:
 
@@ -267,7 +271,7 @@ You can call it like this, with as many trailing tuple arguments as needed for e
 append_attrs!(document, label, ("for", "size"));
 ```
 
-We can do better, though - macros can call other macros!  We can boil everything down to the bare minimum by defining a few more helpers:
+We can do better, though - macros can call other macros! We can boil everything down to the bare minimum by defining a few more helpers:
 
 ```rust
 macro_rules! append_text_child {
@@ -301,7 +305,7 @@ macro_rules! append_text_element_attrs {
 }
 ```
 
-There are two "top-level" macros, `append_element_attrs` and `append_text_element_attrs`.  The former will append a childless element with the given attributes to the parent provided and the latter will include a text node child.  Note that to pass the variadic trailing arguments down you just use the same syntax inside the curly brace expansion but omit the `expr` type:
+There are two "top-level" macros, `append_element_attrs` and `append_text_element_attrs`. The former will append a childless element with the given attributes to the parent provided and the latter will include a text node child. Note that to pass the variadic trailing arguments down you just use the same syntax inside the curly brace expansion but omit the `expr` type:
 
 ```rust
 let el = create_element_attrs!($document, $type, $( $attr ),* );
@@ -316,9 +320,9 @@ fn mount_app(document: &Document, body: &HtmlElement) -> Result<()> {
 }
 ```
 
-I've also added our new return type, and as a result we now return a simple `Ok(())` at the end to signify success.  This macro expansion contains `?` operators, which will now work as expected!
+I've also added our new return type, and as a result we now return a simple `Ok(())` at the end to signify success. This macro expansion contains `?` operators, which will now work as expected!
 
-Note the trailing comma after `"DOT"` is mandatory - that's the "zero or more" attributes this macro accepts.  That's so much boilerplate we've avoided though.  The initial function is what the compiler sees when building the binary, we just saved ourselves the hassle of typing it all.  Thanks, macros!  Thacros.
+Note the trailing comma after `"DOT"` is mandatory - that's the "zero or more" attributes this macro accepts. That's so much boilerplate we've avoided though. The initial function is what the compiler sees when building the binary, we just saved ourselves the hassle of typing it all. Thanks, macros! Thacros.
 
 Here's the rest of the f#@%!^g owl:
 
@@ -373,7 +377,7 @@ The astute will notice a reference to `STARTING_SIZE` - add that constant to the
 const STARTING_SIZE: u32 = 5;
 ```
 
-All the `web_sys` calls look very familiar if you're coming from JavaScript.  If you want a Web API function, just try looking for it in the [`web-sys` API docs](https://rustwasm.github.io/wasm-bindgen/api/web_sys/).  Each listing will conveniently link to the corresponding MDN page, too!  Leveraging crates or writing your own abstractions to make this smoother is both quite possible and left as an exercise for the reader.
+All the `web_sys` calls look very familiar if you're coming from JavaScript. If you want a Web API function, just try looking for it in the [`web-sys` API docs](https://rustwasm.github.io/wasm-bindgen/api/web_sys/). Each listing will conveniently link to the corresponding MDN page, too! Leveraging crates or writing your own abstractions to make this smoother is both quite possible and left as an exercise for the reader.
 
 Rebuild with `wasm-pack build`, and if you have `webpack-dev-server` running (via `npm run start`) you can reload `localhost:8080`:
 
@@ -383,7 +387,7 @@ Good stuff.
 
 ## The Action
 
-This doesn't do anything, though.  There's nary a dot in sight, let alone a resizable one.  The next order of business is to draw the dot to the canvas:
+This doesn't do anything, though. There's nary a dot in sight, let alone a resizable one. The next order of business is to draw the dot to the canvas:
 
 ```rust
 // draw dot
@@ -421,15 +425,15 @@ fn update_canvas(document: &Document, size: u32) -> Result<()> {
 }
 ```
 
-This is also not too foreign if you've done this in JavaScript.  One unfamiliar element is those `dyn_into` calls.  To get this working, you need another import at the top of the file:
+This is also not too foreign if you've done this in JavaScript. One unfamiliar element is those `dyn_into` calls. To get this working, you need another import at the top of the file:
 
 ```rust
 use wasm_bindgen::JsCast;
 ```
 
-When you grab an element with `Document::get_element_by_id(&str)` it returns an `Element` type.  A plain `Element` doesn't have a `width` or a `height`, though - this is specifically a `canvas` element.  The `HtmlCanvasElement` object does have these fields, so we can attempt to cast with `dyn_into()`.  If we did indeed grab the correct element this cast will succeed.  Now we can use things like `set_height()` and `get_context()`.  Note that all methods use snake_case instead of camelCase, and you can't directly modify a field with `canvas.height = 10;`, you must use a method: `canvas.set_height(10);`.  Otherwise this is a translation of equivalent JavaScript to resize the canvas to the bounding box of the circle with the given radius and then draw that circle.
+When you grab an element with `Document::get_element_by_id(&str)` it returns an `Element` type. A plain `Element` doesn't have a `width` or a `height`, though - this is specifically a `canvas` element. The `HtmlCanvasElement` object does have these fields, so we can attempt to cast with `dyn_into()`. If we did indeed grab the correct element this cast will succeed. Now we can use things like `set_height()` and `get_context()`. Note that all methods use snake_case instead of camelCase, and you can't directly modify a field with `canvas.height = 10;`, you must use a method: `canvas.set_height(10);`. Otherwise this is a translation of equivalent JavaScript to resize the canvas to the bounding box of the circle with the given radius and then draw that circle.
 
-Cool.  We'll also need to update the `<span>` we have dedicated to showing the current size:
+Cool. We'll also need to update the `<span>` we have dedicated to showing the current size:
 
 ```rust
 // update the size-output span
@@ -440,7 +444,7 @@ fn update_span(document: &Document, new_size: u32) -> Result<()> {
 }
 ```
 
-This isn't too surprising, `set_text_content` is a setter for [`Node.textContent`](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent).  Let's bundle up these two updates:
+This isn't too surprising, `set_text_content` is a setter for [`Node.textContent`](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent). Let's bundle up these two updates:
 
 ```rust
 // given a new size, sets all relevant DOM elements
@@ -484,7 +488,7 @@ fn attach_listener(document: &Document) -> Result<()> {
 }
 ```
 
-This uses a `web_sys::Closure`.  This allows you to pass Rust-defined closures through to JS to be used as event listener callbacks.  This has some definite weirdness, I'm going to direct you to [the book](https://rustwasm.github.io/wasm-bindgen/examples/closures.html) for a better run though of why this looks like it does.  That `as_ref().unchecked_ref()` chain lets you extract the `&Function` that `set_onchange` expects from the `web_sys::Closure`.
+This uses a `web_sys::Closure`. This allows you to pass Rust-defined closures through to JS to be used as event listener callbacks. This has some definite weirdness, I'm going to direct you to [the book](https://rustwasm.github.io/wasm-bindgen/examples/closures.html) for a better run though of why this looks like it does. That `as_ref().unchecked_ref()` chain lets you extract the `&Function` that `set_onchange` expects from the `web_sys::Closure`.
 
 Now we just need to call this after we mount the app:
 
@@ -500,7 +504,7 @@ pub fn run() -> Result<()> {
 }
 ```
 
-And that's it!  Recompile, reload, and rejoice as you resize.  Aww *yisss*.
+And that's it! Recompile, reload, and rejoice as you resize. Aww _yisss_.
 
 ![finished screenshot](https://i.imgur.com/TxCIBFH.png)
 
