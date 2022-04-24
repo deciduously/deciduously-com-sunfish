@@ -1,24 +1,26 @@
 ---
 cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--Av_bUH0n--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/jhwnn4ryog0mjms4is8o.jpg
-edited: 2019-10-03T12:00:00.000Z
-title: Overly Functional C++: The BenFolds Five
-published: true
+date: 2019-10-03T12:00:00.000Z
+title: "Overly Functional C++: The BenFolds Five"
 description: Some common operations implemented in terms of a fold.
-tags: beginners, cpp, functional, devjournal
+tags:
+  - beginners
+  - cpp
+  - functional
+  - devjournal
 ---
-# Two-Part Series, Chapter 3
 
-What a plot twist!  I made almost no effort to avoid [the pun](https://en.wikipedia.org/wiki/Ben_Folds_Five) and I'm only a little sorry.
+What a plot twist! I made almost no effort to avoid [the pun](https://en.wikipedia.org/wiki/Ben_Folds_Five) and I'm only a little sorry.
 
-Despite being a trilogy now, this post stands alone if you're familiar with the concept of the `fold` or `reduce` [higher-order function](https://en.wikipedia.org/wiki/Fold_(higher-order_function)).
+Despite being a trilogy now, this post stands alone if you're familiar with the concept of the `fold` or `reduce` [higher-order function](<https://en.wikipedia.org/wiki/Fold_(higher-order_function)>).
 
-In [part 2](https://dev.to/deciduously/overly-functional-c-the-fold-4kid) of yesterday's minddump, I documented my first stab at a specific fold in C++.  I had gotten stuck, though, in trying to make it generic.
+In [part 2](https://dev.to/deciduously/overly-functional-c-the-fold-4kid) of yesterday's minddump, I documented my first stab at a specific fold in C++. I had gotten stuck, though, in trying to make it generic.
 
- I've [said it before](https://dev.to/deciduously/you-lot-are-great-cea) and I'll say it again: ask DEV stuff, they know things.  Thanks to [@curtisfenner](https://dev.to/curtisfenner) and [@markboer](https://dev.to/markboer) I was able to write the intended generic `fold` function I had set out to write initially with almost no modification.  This newly-generic `fold` function is a building block, and if you give a nerd a `fold`...
+I've [said it before](https://dev.to/deciduously/you-lot-are-great-cea) and I'll say it again: ask DEV stuff, they know things. Thanks to [@curtisfenner](https://dev.to/curtisfenner) and [@markboer](https://dev.to/markboer) I was able to write the intended generic `fold` function I had set out to write initially with almost no modification. This newly-generic `fold` function is a building block, and if you give a nerd a `fold`...
 
 ## Five Library Functions
 
-`BenFolds` is a class with five static member functions.  It defines `BenFolds::fold()` as a generic version of the code from part 2, and then defines `or`, `any`, `elem`, and `map` in terms of this fold.  I'll walk through each, or you can grab the [gist](https://gist.github.com/deciduously/fdb8ee23b4f3d73e4340ef85359edce6).  This gist compiled and executed successfully for me using `g++ -std=c++11 -o benfolds benfolds.cpp` on g++ 9.2.0.
+`BenFolds` is a class with five static member functions. It defines `BenFolds::fold()` as a generic version of the code from part 2, and then defines `or`, `any`, `elem`, and `map` in terms of this fold. I'll walk through each, or you can grab the [gist](https://gist.github.com/deciduously/fdb8ee23b4f3d73e4340ef85359edce6). This gist compiled and executed successfully for me using `g++ -std=c++11 -o benfolds benfolds.cpp` on g++ 9.2.0.
 
 ### Fold
 
@@ -48,13 +50,13 @@ static R fold(std::vector<T> elems, R acc, BinOp func)
 }
 ```
 
-This implementation is identical to the solution from [part 2](https://dev.to/deciduously/overly-functional-c-the-fold-4kid) apart from the parameterized types.  The other four "backup" functions are just specific cases of this `fold`.
+This implementation is identical to the solution from [part 2](https://dev.to/deciduously/overly-functional-c-the-fold-4kid) apart from the parameterized types. The other four "backup" functions are just specific cases of this `fold`.
 
-As [@curtisfenner](https://dev.to/curtisfenner) pointed out, this naive implementation is needlessly expensive.  The recursion is in tail position, which the compiler does optimize for, but each call is allocating a brand new vector to swap into the stack frame.  If you needed to optimize this further, you could consider instead passing ever-smaller subslice references to the same vector, or even mutating the original vector in place instead.
+As [@curtisfenner](https://dev.to/curtisfenner) pointed out, this naive implementation is needlessly expensive. The recursion is in tail position, which the compiler does optimize for, but each call is allocating a brand new vector to swap into the stack frame. If you needed to optimize this further, you could consider instead passing ever-smaller subslice references to the same vector, or even mutating the original vector in place instead.
 
 ### foldOr
 
-The simplest application just takes a list of booleans and tells you if any of them are `true`.  The `T` in `BenFolds::fold()` is `bool`:
+The simplest application just takes a list of booleans and tells you if any of them are `true`. The `T` in `BenFolds::fold()` is `bool`:
 
 ```cpp
 static bool foldOr(std::vector<bool> bools)
@@ -63,7 +65,7 @@ static bool foldOr(std::vector<bool> bools)
 }
 ```
 
-The initial accumulator is `false`.  We call `||` on this accumulator against each element of the passed collection.  At the end, if any element was `true`, the accumulator flipped to `true` and stuck.  Otherwise, nothing was found it's still `false`.
+The initial accumulator is `false`. We call `||` on this accumulator against each element of the passed collection. At the end, if any element was `true`, the accumulator flipped to `true` and stuck. Otherwise, nothing was found it's still `false`.
 
 To test, I added a quick throwaway to `main()`:
 
@@ -84,7 +86,7 @@ static bool foldAny(std::vector<T> elems, Predicate p)
 }
 ```
 
-It's really almost the same thing.  We're still calling `||` on the accumulator and this element, but we're passing the element through some other predicate `p` before checking for truth.
+It's really almost the same thing. We're still calling `||` on the accumulator and this element, but we're passing the element through some other predicate `p` before checking for truth.
 
 For example, see if the inputs has any even numbers (it should) or anything greater than 10 (it shouldn't):
 
@@ -105,7 +107,7 @@ static bool foldElem(std::vector<T> elems, T elem)
 }
 ```
 
-It calls `foldAny` defining the predicate as equality against a specific element.  We can test by checking for a specific number, no need to pass a lambda:
+It calls `foldAny` defining the predicate as equality against a specific element. We can test by checking for a specific number, no need to pass a lambda:
 
 ```cpp
 cout << "Testing foldElem...\nIs the number 2 present in the set: " << bf.foldElem(nums, 2) << "\n";
@@ -153,4 +155,4 @@ Here's each element doubled: [0, 2, 4, 6, 8]
 
 ![Good enough](https://media1.tenor.com/images/39f958c6a71049618e89d6bbfc8e96a2/tenor.gif)
 
-*Photo by Oscar Keys on Unsplash*
+_Photo by Oscar Keys on Unsplash_
