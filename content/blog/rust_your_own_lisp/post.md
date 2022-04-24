@@ -1,22 +1,25 @@
 ---
 cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--AL977crl--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/hpy6695aug72kxxj300s.jpg
-edited: 2019-06-04T12:00:00.000Z
+date: 2019-06-04T12:00:00.000Z
 title: Rust Your Own Lisp
-published: true
 description: An overview of my Rust translation of orangeducks Build Your Own Lisp
-tags: rust, beginners, lisp
+tags:
+  - rust
+  - beginners
+  - lisp
 ---
+
 This is a fuller walk-through of the code I talked about in a previous post, [Solving Problems by Avoiding Them](https://dev.to/deciduously/solving-problems-by-avoiding-them-58dm).
 
-The project is a translation of [Build Your Own Lisp](http://www.buildyourownlisp.com/) by [orangeduck](http://theorangeduck.com/page/about) into [Rust](https://www.rust-lang.org/).  His book is fantastic, both as an introduction to C and an introduction to writing an interpreter.
+The project is a translation of [Build Your Own Lisp](http://www.buildyourownlisp.com/) by [orangeduck](http://theorangeduck.com/page/about) into [Rust](https://www.rust-lang.org/). His book is fantastic, both as an introduction to C and an introduction to writing an interpreter.
 
-This post is nowhere close to a replacement for that text, by a long shot - go read the book.  It's excellent.  In translating to Rust, though, there are a few necessary differences worth noting.  This post does not include the code in its entirety but rather examples of each concept, and may be useful for anyone attempting a similar project or translation of their own in Rust.  I've also removed most debug logging for clarity.  The full implementation can be found in [this repo](https://github.com/deciduously/blispr).
+This post is nowhere close to a replacement for that text, by a long shot - go read the book. It's excellent. In translating to Rust, though, there are a few necessary differences worth noting. This post does not include the code in its entirety but rather examples of each concept, and may be useful for anyone attempting a similar project or translation of their own in Rust. I've also removed most debug logging for clarity. The full implementation can be found in [this repo](https://github.com/deciduously/blispr).
 
-I learned a lot about C, interpreters, and Rust from this project, and highly recommend the exercise.  For better or worse (probably worse), I've called this implementation `blispr`.
+I learned a lot about C, interpreters, and Rust from this project, and highly recommend the exercise. For better or worse (probably worse), I've called this implementation `blispr`.
 
 ## Rustyline
 
-First thing's first, we've got to collect us some strings.  I highly recommend [`rustyline`](https://github.com/kkawakam/rustyline), a pure-Rust `readline` implementation.  You get line editing, keyboard commands, and command history out of the box.  This is all you have to do:
+First thing's first, we've got to collect us some strings. I highly recommend [`rustyline`](https://github.com/kkawakam/rustyline), a pure-Rust `readline` implementation. You get line editing, keyboard commands, and command history out of the box. This is all you have to do:
 
 ```rust
 fn repl(e: &mut Lenv) -> Result<()> {
@@ -63,7 +66,7 @@ fn print_eval_result(v: BlisprResult) {
 
 ```
 
-One thing to note is that I'm not propagating the error that `eval_str` might throw up to the caller here with `?` - I don't want blispr evaluation errors to crash the repl.  Anything that can happen inside `eval_str()` I just want to inform the user about with `eprintln!()` and loop again.  The `&mut Lenv` getting passed through is the global environment - more on that below.
+One thing to note is that I'm not propagating the error that `eval_str` might throw up to the caller here with `?` - I don't want blispr evaluation errors to crash the repl. Anything that can happen inside `eval_str()` I just want to inform the user about with `eprintln!()` and loop again. The `&mut Lenv` getting passed through is the global environment - more on that below.
 
 The bulk of evaluation is hinted at in the `Ok()` arm of the `match` - the meat of the work is happening in `eval_str()`:
 
@@ -75,7 +78,7 @@ pub fn eval_str(e: &mut Lenv, s: &str) -> BlisprResult {
 }
 ```
 
-This is it, this is the entire interpreter.  This function does all of the steps required to evaluate a programming language given in text string form.  The first line stores the parse tree to `parsed`.  This tags our input string with semantic grammatical tags that we'll define below.  The next line reads that tree into an AST at `lval_ptr`, which represents the whole program as a lisp value that can be evaluated recursively.  Finally we return the result of fully evaluating that AST with `lval_eval`, which ensures this there are no further evaluations that can happen.  Any errors that happened along the way were caught with the `?` operator - below we'll see what that `Result<T>` alias represents.
+This is it, this is the entire interpreter. This function does all of the steps required to evaluate a programming language given in text string form. The first line stores the parse tree to `parsed`. This tags our input string with semantic grammatical tags that we'll define below. The next line reads that tree into an AST at `lval_ptr`, which represents the whole program as a lisp value that can be evaluated recursively. Finally we return the result of fully evaluating that AST with `lval_eval`, which ensures this there are no further evaluations that can happen. Any errors that happened along the way were caught with the `?` operator - below we'll see what that `Result<T>` alias represents.
 
 ## Lval
 
@@ -105,7 +108,7 @@ pub enum Lval {
 }
 ```
 
-Each variant carries its contents with it.  As we read the text each element is going to be converted into the proper type of `Lval`.    For example, a string like `"4"` is going to be parsed into `Lval::Num(4)`.  Now this value can be used in the context of a larger evaluation.  I've also implemented [`fmt::Display`](https://doc.rust-lang.org/std/fmt/trait.Display.html) for this type, which is responsible for defining the output string to be finally displayed to the user.  With the auto-derived `Debug` trait we get something like `Lval::Num(4)`, and with `Display` we just get `4`:
+Each variant carries its contents with it. As we read the text each element is going to be converted into the proper type of `Lval`. For example, a string like `"4"` is going to be parsed into `Lval::Num(4)`. Now this value can be used in the context of a larger evaluation. I've also implemented [`fmt::Display`](https://doc.rust-lang.org/std/fmt/trait.Display.html) for this type, which is responsible for defining the output string to be finally displayed to the user. With the auto-derived `Debug` trait we get something like `Lval::Num(4)`, and with `Display` we just get `4`:
 
 ```rust
 impl fmt::Display for Lval {
@@ -136,11 +139,11 @@ fn lval_expr_print(cell: &[Box<Lval>]) -> String {
 }
 ```
 
-We have numbers, symbols, functions (two different types of function - more on those later on), and two types of expression list - s-expressions and q-expressions.  S-expressions will be evaluated as code, looking for a function in the first position, and q-expressions are evaluated as just lists of data.  The whole program that's read in is going to be one big containing `Lval::Sexpr`, and we just need to evaluate it until we only have a result needing no further evaluation, either a `Num`, `Sym`, or `Qexpr`.
+We have numbers, symbols, functions (two different types of function - more on those later on), and two types of expression list - s-expressions and q-expressions. S-expressions will be evaluated as code, looking for a function in the first position, and q-expressions are evaluated as just lists of data. The whole program that's read in is going to be one big containing `Lval::Sexpr`, and we just need to evaluate it until we only have a result needing no further evaluation, either a `Num`, `Sym`, or `Qexpr`.
 
-As a simple example, `"+ 1 2"` is going to get stored as `Sexpr(Sym("+"), Num(1), Num(2))`.  When this `Sexpr` is evaluated, it will first look up `+` in the environment and find a function pointer to the built-in addition function: `Sexpr(Fun(Builtin("+"), Num(1), Num("2")))`.  Then this `Sexpr` will be evaluated as a function call, yielding `Num(3)`, which cannot be evaluated further.
+As a simple example, `"+ 1 2"` is going to get stored as `Sexpr(Sym("+"), Num(1), Num(2))`. When this `Sexpr` is evaluated, it will first look up `+` in the environment and find a function pointer to the built-in addition function: `Sexpr(Fun(Builtin("+"), Num(1), Num("2")))`. Then this `Sexpr` will be evaluated as a function call, yielding `Num(3)`, which cannot be evaluated further.
 
-This code makes use of the `Box` pointer type, which is a smart pointer to a heap-allocated value.  Because an `Lval` can hold many different types of data, the size of a given `Lval` is not known at compile-time.  By only storing pointers to values on the heap, we can build lists of them.  Because these `Box`es adhere to Rust's ownership and borrowing semantics, Rust is going to manage cleaning them up for us when they are no longer needed.  This is how we'll manage our memory over the lifetime of the program - with quite a bit less ceremony than the corresponding C!  To build a new one, we use a constructor.  For example:
+This code makes use of the `Box` pointer type, which is a smart pointer to a heap-allocated value. Because an `Lval` can hold many different types of data, the size of a given `Lval` is not known at compile-time. By only storing pointers to values on the heap, we can build lists of them. Because these `Box`es adhere to Rust's ownership and borrowing semantics, Rust is going to manage cleaning them up for us when they are no longer needed. This is how we'll manage our memory over the lifetime of the program - with quite a bit less ceremony than the corresponding C! To build a new one, we use a constructor. For example:
 
 ```rust
 pub fn lval_num(n: i64) -> Box<Lval> {
@@ -148,7 +151,7 @@ pub fn lval_num(n: i64) -> Box<Lval> {
 }
 ```
 
-There's one of these for each variant.  Calling this will allocate the appropriate space with `Box::new()` on the heap and return the pointer.  No need to futz with a destructor - the `Box` will drop itself as soon as it can.
+There's one of these for each variant. Calling this will allocate the appropriate space with `Box::new()` on the heap and return the pointer. No need to futz with a destructor - the `Box` will drop itself as soon as it can.
 
 The containing types start out with an empty `Vec` of children, and can be manipulated with `lval_add` and `lval_pop`:
 
@@ -185,7 +188,7 @@ Both of these functions mutate their first argument in place, either removing or
 
 ## Errors
 
-One difference from the book's implementation is that I don't have a separate specific `Lval::Err` AST variant for handling errors in our program.  Instead, I built a separate error type and leverage `Result<T, E>`-style error handling throughout:
+One difference from the book's implementation is that I don't have a separate specific `Lval::Err` AST variant for handling errors in our program. Instead, I built a separate error type and leverage `Result<T, E>`-style error handling throughout:
 
 ```rust
 #[derive(Debug)]
@@ -210,7 +213,7 @@ pub type Result<T> = std::result::Result<T, BlisprError>;
 pub type BlisprResult = Result<Box<Lval>>;
 ```
 
-The majority of evaluation functions are going to return a `Result<Box<Lval>, BlisprError>`, now I can just type `BlisprResult`.  The few functions here and there that don't have a success type of `Box<Lval>` can still use this new `Result<T>` alias instead of the more verbose built-in `Result<T, E>`, and the error type will automatically always be this `BlisprError`.
+The majority of evaluation functions are going to return a `Result<Box<Lval>, BlisprError>`, now I can just type `BlisprResult`. The few functions here and there that don't have a success type of `Box<Lval>` can still use this new `Result<T>` alias instead of the more verbose built-in `Result<T, E>`, and the error type will automatically always be this `BlisprError`.
 
 In order to be able to use this throughout our entire program, I've provided `impl From<E> for BlisprError` for a few other types of errors that are thrown, like `std::io::Error` and `pest::error::Error` for example:
 
@@ -231,7 +234,7 @@ impl From<std::io::Error> for BlisprError {
 }
 ```
 
-This way I can still use the `?` operator on function calls that return these other error types inside functions that return a `BlisprResult`, and any errors returned will be automatically converted to the proper `BlisprError` for me.  Instead of storing specific error-type `Lval`s during our evaluation that are carried through the whole computation and finally printed out, all errors are bubbled up through the type system, but you still get the full `pest`-generated error carried along:
+This way I can still use the `?` operator on function calls that return these other error types inside functions that return a `BlisprResult`, and any errors returned will be automatically converted to the proper `BlisprError` for me. Instead of storing specific error-type `Lval`s during our evaluation that are carried through the whole computation and finally printed out, all errors are bubbled up through the type system, but you still get the full `pest`-generated error carried along:
 
 ```lisp
 blispr> eval {* 2 3)
@@ -243,11 +246,11 @@ Parse error:  --> 1:12
   = expected expr
 ```
 
-Full disclosure: to write the `pest::error::Error<T>` block, I just wrote what I wanted, i.e. `BlisprError::ParseError(format!("{}", error))` and appeased the compiler.  There is likely a better way to go about this but it works!
+Full disclosure: to write the `pest::error::Error<T>` block, I just wrote what I wanted, i.e. `BlisprError::ParseError(format!("{}", error))` and appeased the compiler. There is likely a better way to go about this but it works!
 
 ## Parsing
 
-The book uses the author's own parser combinator library called [mpc](https://github.com/orangeduck/mpc).  If I were to tackle another similar problem in C, I'd likely reach for it again.  Rust, however, has its own strong ecosystem for parsing.  Some of the heavyweights in this space are [nom](https://github.com/Geal/nom), [combine](https://github.com/Marwes/combine),  and [pest](https://github.com/pest-parser/pest).  For this project I opted for pest, to stay as close to the source material as possible.  Whereas `nom` and `combine` will have you defining your own [parser combinators](https://dev.to/deciduously/parser-combinators-are-easy-4bjm), with `pest` you provide a PEG (or [Parsing Expression Grammar](https://en.wikipedia.org/wiki/Parsing_expression_grammar)), separately from your code.  Pest then uses Rust's powerful custom derive tooling to create a parse for your grammar automatically.
+The book uses the author's own parser combinator library called [mpc](https://github.com/orangeduck/mpc). If I were to tackle another similar problem in C, I'd likely reach for it again. Rust, however, has its own strong ecosystem for parsing. Some of the heavyweights in this space are [nom](https://github.com/Geal/nom), [combine](https://github.com/Marwes/combine), and [pest](https://github.com/pest-parser/pest). For this project I opted for pest, to stay as close to the source material as possible. Whereas `nom` and `combine` will have you defining your own [parser combinators](https://dev.to/deciduously/parser-combinators-are-easy-4bjm), with `pest` you provide a PEG (or [Parsing Expression Grammar](https://en.wikipedia.org/wiki/Parsing_expression_grammar)), separately from your code. Pest then uses Rust's powerful custom derive tooling to create a parse for your grammar automatically.
 
 Here's the grammar I used for this language:
 
@@ -273,7 +276,7 @@ expr = { num | symbol | sexpr | qexpr }
 blispr = { SOI ~ expr* ~ EOI }
 ```
 
-This is stored in its own file called `blispr.pest` alongside the source code.  Each line refines a parse rule.  I find this exceedingly readable, and easy to tweak.  Starting from the bottom, we see a unit of valid `blispr` consists of one or more `expr`s between the Start of Input (SOI) and End of Input (EOI).  An `expr` is any of the options given.  It can handle comments and whitespace for you.  I also enjoy how the grammar maintained completely separately from any Rust code.  It's easy to get this working with Rust:
+This is stored in its own file called `blispr.pest` alongside the source code. Each line refines a parse rule. I find this exceedingly readable, and easy to tweak. Starting from the bottom, we see a unit of valid `blispr` consists of one or more `expr`s between the Start of Input (SOI) and End of Input (EOI). An `expr` is any of the options given. It can handle comments and whitespace for you. I also enjoy how the grammar maintained completely separately from any Rust code. It's easy to get this working with Rust:
 
 ```rust
 use pest::{iterators::Pair, Parser};
@@ -286,7 +289,7 @@ const _GRAMMAR: &str = include_str!("blispr.pest");
 pub struct BlisprParser;
 ```
 
-Now we can use the `BlisprParser` struct to parse string input into a parse tree with `parse()`.  In order to evaluate it, though, we need to build a a big `Lval` AST:
+Now we can use the `BlisprParser` struct to parse string input into a parse tree with `parse()`. In order to evaluate it, though, we need to build a a big `Lval` AST:
 
 ```rust
 fn lval_read(parsed: Pair<Rule>) -> BlisprResult {
@@ -314,7 +317,7 @@ fn lval_read(parsed: Pair<Rule>) -> BlisprResult {
 }
 ```
 
-We pass the parse tree from `pest` into `lval_read`, which will recursively build the AST for us.  This function looks at the top-level rule and takes an appropriate action, either allocating a new `Lval` variant or adjusting the children of . Then every child in the parse tree is added as a child to this containing `Lval`, passing through `lval_read()` itself to turn it into the correct `Lval`.  The rule for `qexpr` is similar, and the other rules just create the corresponding `Lval` from the type given.  The one weird one is `Rule::expr` - this is a sort of meta-rule that matches any of the valid expression types, so it's not its own lval, just wrapping one of a more specific type.  We just use `next()` to pass the actual rule found back into `lval_read()`.
+We pass the parse tree from `pest` into `lval_read`, which will recursively build the AST for us. This function looks at the top-level rule and takes an appropriate action, either allocating a new `Lval` variant or adjusting the children of . Then every child in the parse tree is added as a child to this containing `Lval`, passing through `lval_read()` itself to turn it into the correct `Lval`. The rule for `qexpr` is similar, and the other rules just create the corresponding `Lval` from the type given. The one weird one is `Rule::expr` - this is a sort of meta-rule that matches any of the valid expression types, so it's not its own lval, just wrapping one of a more specific type. We just use `next()` to pass the actual rule found back into `lval_read()`.
 
 The variants contianng children use a helper which skips surrounding brackets, and just adds the actual children to the new `Lval`:
 
@@ -330,13 +333,13 @@ fn read_to_lval(mut v: &mut Lval, parsed: Pair<Rule>) -> Result<()> {
 }
 ```
 
-The final result of `lval_read()` will be a single `Lval` containing the entire parsed program, saved in `lval_ptr`.  Then we call `lval_eval()`, which will also return a `BlisprResult` after reducing this tree to its most evaluated form.  If the evaluation is successful we just print out the result, and if any error was raised we print that error instead.
+The final result of `lval_read()` will be a single `Lval` containing the entire parsed program, saved in `lval_ptr`. Then we call `lval_eval()`, which will also return a `BlisprResult` after reducing this tree to its most evaluated form. If the evaluation is successful we just print out the result, and if any error was raised we print that error instead.
 
 ## Environment
 
-Before we dig into how `lval_eval()` does its mojo lets pause and talk about the environment.  This is how symbols are able to correspond to functions and values - otherwise `"+"` would just be that character, but we need to to specifically correspond to the addition function.
+Before we dig into how `lval_eval()` does its mojo lets pause and talk about the environment. This is how symbols are able to correspond to functions and values - otherwise `"+"` would just be that character, but we need to to specifically correspond to the addition function.
 
-Jury's out on whether or not I have the right idea, here, but I also handled this differently from the book.  The original text has you create a `struct` that holds two arrays and a counter, one for keys and the other for values.  To perform a lookup, you find the index of that key and then return the value at that same index in the values.  This struct is built before the program enters the loop, and is passed in manually to every single function that gets called.
+Jury's out on whether or not I have the right idea, here, but I also handled this differently from the book. The original text has you create a `struct` that holds two arrays and a counter, one for keys and the other for values. To perform a lookup, you find the index of that key and then return the value at that same index in the values. This struct is built before the program enters the loop, and is passed in manually to every single function that gets called.
 
 Instead, I've opted for a [`HashMap`](https://doc.rust-lang.org/std/collections/struct.HashMap.html) data structure instead of two separated arrays with matching indices:
 
@@ -393,33 +396,33 @@ impl Lenv {
 }
 ```
 
-Getting a value from the environment will return a brand new `Lval` with a copy of what's stored, and printing out the contents will also return a ready-made `Lval::Qexpr` containing `Symbol`s corresponding to each entry.  We'll come back to initialization after talking a bit about evaluation.
+Getting a value from the environment will return a brand new `Lval` with a copy of what's stored, and printing out the contents will also return a ready-made `Lval::Qexpr` containing `Symbol`s corresponding to each entry. We'll come back to initialization after talking a bit about evaluation.
 
 Environments optionally hold a parent environment, and if the lookup fails in this one it will attempt the parent environment.
 
 ## Eval
 
-The `lval_eval()` function called in `eval_str()` is where the real crunching happens.  This will take an `Lval` (that is, an AST) and recursively evaluate it to a final `Lval`.  Most types of `Lval` are already evaluated fully - but any `S-Expression` found will need to be evaluated, and any `Symbol` gets looked up in the environment.
+The `lval_eval()` function called in `eval_str()` is where the real crunching happens. This will take an `Lval` (that is, an AST) and recursively evaluate it to a final `Lval`. Most types of `Lval` are already evaluated fully - but any `S-Expression` found will need to be evaluated, and any `Symbol` gets looked up in the environment.
 
 Before looking at the Rust, let's break it down in English:
 
 1. Check the type of Lval:
 
-    a. Fun | Num | Qexpr - we're done - return lval as is.
+   a. Fun | Num | Qexpr - we're done - return lval as is.
 
-    b. Symbol - Do an environment lookup with `Lenv::get()` - e.g., for `Sym("+")`, see if we have a function pointer stored at name `"+"`.  Return result of lookup, which will already be an `Lval`.
+   b. Symbol - Do an environment lookup with `Lenv::get()` - e.g., for `Sym("+")`, see if we have a function pointer stored at name `"+"`. Return result of lookup, which will already be an `Lval`.
 
-    c. Sexpr - Evaluate the S-Expression.
+   c. Sexpr - Evaluate the S-Expression.
 
-2. If we made it to this step, we're working with an S-Expression.  Everything else has already returned. Before going further, fully evaluate all children with `lval_eval()`.
+2. If we made it to this step, we're working with an S-Expression. Everything else has already returned. Before going further, fully evaluate all children with `lval_eval()`.
 
 3. Check the length of the S-Expression:
 
-    a. 0 - empty S-Expression - return as-is
+   a. 0 - empty S-Expression - return as-is
 
-    b. 1 - single expression - pop that expression and return the result of calling `lval_eval()` on it
+   b. 1 - single expression - pop that expression and return the result of calling `lval_eval()` on it
 
-    c. Multiple expressions (function call) - pop the first expression and attempt to use it as a function on the rest of the children
+   c. Multiple expressions (function call) - pop the first expression and attempt to use it as a function on the rest of the children
 
 Here's what that looks like in Rust:
 
@@ -492,7 +495,7 @@ This is written as a `fold` using an empty `Lval::Sexpr` as the accumulator, usi
 
 This gets us almost all the way there - there's one last missing step, which is `lval_call()`.
 
-This language has two kinds of functions: builtins and user-defined lambdas.  Builtins are implemented in Rust and part of the executable itself.  These are stored in the environment when it's created:
+This language has two kinds of functions: builtins and user-defined lambdas. Builtins are implemented in Rust and part of the executable itself. These are stored in the environment when it's created:
 
 ```rust
 fn add_builtin(&mut self, name: &str, func: LBuiltin) {
@@ -521,7 +524,7 @@ pub fn new(lookup: Option<LEnvLookup>, parent: Option<&'a Lenv<'a>>) -> Self {
 }
 ```
 
-Each name stores a function pointer to a Rust function.  These functions manipulate lvals directly.  For example, this is `builtin_head`, which returns the first element of an `Lval::Qexpr`:
+Each name stores a function pointer to a Rust function. These functions manipulate lvals directly. For example, this is `builtin_head`, which returns the first element of an `Lval::Qexpr`:
 
 ```rust
 pub fn builtin_head(v: &mut Lval) -> BlisprResult {
@@ -542,7 +545,7 @@ pub fn builtin_head(v: &mut Lval) -> BlisprResult {
 }
 ```
 
-Mathematical operations all use the same function.  They all accept a list of any length of `Lval::Num`s and will successively apply a binary operation to a running result and the next number until the list is consumed:
+Mathematical operations all use the same function. They all accept a list of any length of `Lval::Num`s and will successively apply a binary operation to a running result and the next number until the list is consumed:
 
 ```rust
 fn builtin_op(mut v: &mut Lval, func: &str) -> BlisprResult {
@@ -637,9 +640,9 @@ macro_rules! apply_binop {
 }
 ```
 
-This makes some of the Lval type checking quicker to type!  It handles making sure both arguments are `Lval::Num` before trying to do something numeric with them, as in `apply_binop!(add, x, y)`.  This was my first brush with defining Rust macros, and it was a serious help.
+This makes some of the Lval type checking quicker to type! It handles making sure both arguments are `Lval::Num` before trying to do something numeric with them, as in `apply_binop!(add, x, y)`. This was my first brush with defining Rust macros, and it was a serious help.
 
-These are fairly easy to call.  Because the environment stores these ans function pointers you can simply call the function.  My solution is a little hacky, because a few builtins require access to an environment, which builtin functions don't have - these special cases are dispatched separately, and everything else is just called with `fp()`:
+These are fairly easy to call. Because the environment stores these ans function pointers you can simply call the function. My solution is a little hacky, because a few builtins require access to an environment, which builtin functions don't have - these special cases are dispatched separately, and everything else is just called with `fp()`:
 
 ```rust
 LvalFun::Builtin(name, fp) => match name.as_str() {
@@ -651,6 +654,6 @@ LvalFun::Builtin(name, fp) => match name.as_str() {
 },
 ```
 
-Calling a `Lambda` is a little trickier.  We need to build a new environment, add any local bindings to it, and then either call the new function or return a new, partially applied lambda if not all locals were given.  The machinery here is verbose - see [this line](https://github.com/deciduously/blispr/blob/2d8aa15cf7ba8cfc624cf9663fd024dda1df9f72/src/eval.rs#L436) for the code in context.
+Calling a `Lambda` is a little trickier. We need to build a new environment, add any local bindings to it, and then either call the new function or return a new, partially applied lambda if not all locals were given. The machinery here is verbose - see [this line](https://github.com/deciduously/blispr/blob/2d8aa15cf7ba8cfc624cf9663fd024dda1df9f72/src/eval.rs#L436) for the code in context.
 
-That's all of our pieces.  With all this in place `lval_eval()` can handle a whole bunch of stuff, and this language actually approaches usable.  This language implementation is not complete, but it's a great playground for learning about how languages work!
+That's all of our pieces. With all this in place `lval_eval()` can handle a whole bunch of stuff, and this language actually approaches usable. This language implementation is not complete, but it's a great playground for learning about how languages work!
