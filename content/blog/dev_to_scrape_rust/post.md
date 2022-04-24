@@ -1,15 +1,16 @@
 ---
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/qy9lgsrochopihygaxt0.png
-edited: 2018-11-15T12:00:00.000Z
+date: 2018-11-15T12:00:00.000Z
 title: Scrape your Dev.to pageviews with Rust
-published: true
 description: A quick webscraper to generate CSVs from your pageviews
-tags: rust, beginners
+tags:
+  - rust
+  - beginners
 ---
-Here's a quick 'n' dirty way to dump your new-fangled post analytics to a CSV using Rust.  You have to save the page source to `src/page.html`.  Y'know, for graphs and stuff.  Who doesn't like graphs?
 
-This ain't polished - It was my "one-hour-before-my-day-job-starts" project today.  Snag the regex for your own real version, or improve this one and show me!
+Here's a quick 'n' dirty way to dump your new-fangled post analytics to a CSV using Rust. You have to save the page source to `src/page.html`. Y'know, for graphs and stuff. Who doesn't like graphs?
 
+This ain't polished - It was my "one-hour-before-my-day-job-starts" project today. Snag the regex for your own real version, or improve this one and show me!
 
 ```rust
 extern crate chrono;
@@ -122,4 +123,4 @@ fn main() {
 
 ```
 
-*edit* finished off the error handling
+_edit_ finished off the error handling
