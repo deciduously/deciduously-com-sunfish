@@ -1,5 +1,4 @@
 /target
-**/*.rs.bk
-/node_modules
-/src/assets/main.css
-/templates/post_*
+/old-site
+.envrc
+/.direnv
