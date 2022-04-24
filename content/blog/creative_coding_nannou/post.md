@@ -1,12 +1,13 @@
 ---
 cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s---H0zdB7I--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/pfdfanwj7jsgsnhcq2xe.jpg
-edited: 2019-11-19T12:00:00.000Z
+date: 2019-11-19T12:00:00.000Z
 title: Creative Coding in Rust with Nannou
-published: true
-tags: rust, beginners, tutorial, creative
+tags:
+  - rust
+  - beginners
+  - tutorial
+  - creative
 ---
-
-# Oxidize Your Life With One Weird Trick
 
 We're going to build a small demo with the [nannou](https://nannou.cc/) creative coding framework for [Rust](https://www.rust-lang.org/). This example itself is very simple, but specifically over-engineered to prepare to scale even further for your own project.
 
@@ -618,7 +619,7 @@ I still leverage the default constructor, but instead give myself a method to se
 
 ##### Logging
 
-Another way to set ourselves up for success is by hooking up the standard Rust logging tooling. Now, I'm going to toss three crates at you but don't panic, it's all just one thing. I'm using [`pretty_env_logger`](https://github.com/seanmonstar/pretty-env-logger), which dresses up the output from [`env_logger`](https://github.com/sebasmagri/env_logger) with nice colors and formatting. This itself is a wrapper around [`log`](https://docs.rs/log/0.4.8/log/), which provides a bunch of `println!()`-esque macros like `warn!()`, `debug!()`, and `info!()`. The `env_logger` crate (and thus `pretty_env_logger`) read the `RUST_LOG` environment variable at runtime to determine which statements to show without needing to recompile.  No more commenting out print statements, just pick their debug level and leave 'em all in.
+Another way to set ourselves up for success is by hooking up the standard Rust logging tooling. Now, I'm going to toss three crates at you but don't panic, it's all just one thing. I'm using [`pretty_env_logger`](https://github.com/seanmonstar/pretty-env-logger), which dresses up the output from [`env_logger`](https://github.com/sebasmagri/env_logger) with nice colors and formatting. This itself is a wrapper around [`log`](https://docs.rs/log/0.4.8/log/), which provides a bunch of `println!()`-esque macros like `warn!()`, `debug!()`, and `info!()`. The `env_logger` crate (and thus `pretty_env_logger`) read the `RUST_LOG` environment variable at runtime to determine which statements to show without needing to recompile. No more commenting out print statements, just pick their debug level and leave 'em all in.
 
 First, add some new dependencies to `Cargo.toml`:
 
