@@ -15,19 +15,23 @@ impl Component for Page {
 						.child(div().class("s1").child("Ben Lovy | Rust Developer"))
 						.child(
 							ul().child(
-								li().child("DEV.to: ").child(
-									ui::Link::new()
-										.href("https://dev.to/deciduously".to_owned())
-										.target("blank".to_owned())
-										.child("deciduously".to_owned()),
+								li().child(
+									ui::Card::new().child("DEV.to: ").child(
+										ui::Link::new()
+											.href("https://dev.to/deciduously".to_owned())
+											.target("blank".to_owned())
+											.child("deciduously".to_owned()),
+									),
 								),
 							)
 							.child(
-								li().child("Github: ").child(
-									ui::Link::new()
-										.href("https://github.com/deciduously".to_owned())
-										.target("blank".to_owned())
-										.child("deciduously".to_owned()),
+								li().child(
+									ui::Card::new().child("Github: ").child(
+										ui::Link::new()
+											.href("https://github.com/deciduously".to_owned())
+											.target("blank".to_owned())
+											.child("deciduously".to_owned()),
+									),
 								),
 							),
 						),
