@@ -13,13 +13,15 @@
 # RUN mkdir -p /usr/local/bin
 # WORKDIR /usr/local/bin
 # COPY --from=builder /usr/src/deciduously-com/target/x86_64-unknown-linux-musl/debug/deciduously_com .
-FROM ubuntu:20.04
-RUN apt-get update && apt-get -y upgrade && apt-get install -y cargo && apt-get -y autoremove
+FROM rust:1.60.0
+#RUN apt-get update && apt-get -y upgrade && apt-get install -y curl && apt-get -y autoremove && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && . $HOME/.cargo/env
 RUN mkdir -p /usr/src/deciduously-com
 WORKDIR /usr/src/deciduously-com
-COPY ./content/ ./layouts/ ./routes/ ./ui/ Cargo.toml build.rs main.rs serve.rs ./
+COPY content/ ./content
+COPY layouts/ ./layouts
+COPY routes/ ./routes
+COPY static/ ./static
+COPY ui/ ./ui
+COPY Cargo.toml main.rs build.rs serve.rs .
 RUN cargo build --release
-RUN mkdir -p /usr/bin
-WORKDIR /usr/bin
-COPY /usr/src/deciduously-com/target/release/deciduously_com .
-CMD ["deciduously_com", "--host", "0.0.0.0", "-port", "8080"]
+CMD ["target/release/deciduously_com", "--host", "0.0.0.0", "-port", "8080"]
