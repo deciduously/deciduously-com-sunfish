@@ -4,3 +4,4 @@
 .envrc
 /.direnv
 **/*.tar.*
+**/.DS_Store
