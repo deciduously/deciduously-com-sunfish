@@ -1,5 +1,6 @@
 ---
 author: Ben Lovy
+date: 2022-06-09T12:00:00.000Z
 description: A tour of the OCI Image spec
 title: Cracking Open an OCI Image
 ---
