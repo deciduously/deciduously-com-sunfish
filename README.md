@@ -4,12 +4,12 @@ Yet another `deciduously-com`. Powered by [Sunfish](https://github.com/tangramdo
 
 ## Usage
 
-```
-$ cargo run
+```txt
+cargo run
 ```
 
 _or_
 
-```
+```txt
 # HOST=0.0.0.0 PORT=8080 cargo run --release
 ```
