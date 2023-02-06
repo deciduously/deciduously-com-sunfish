@@ -93,7 +93,7 @@ where
 					backtrace = ?backtrace,
 					"500"
 				);
-				format!("{}\n{:?}", message, backtrace)
+				format!("{message}\n{backtrace:?}")
 			});
 			http::Response::builder()
 				.status(http::StatusCode::INTERNAL_SERVER_ERROR)
