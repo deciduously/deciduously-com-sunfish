@@ -1,5 +1,4 @@
 //! Helper functions to serve teh Sunfish app.
-
 use crate::Context;
 use backtrace::Backtrace;
 use futures::{future::FutureExt, Future};
