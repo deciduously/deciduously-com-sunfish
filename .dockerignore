@@ -1,0 +1,9 @@
+# flyctl launch added from .gitignore
+build
+target
+old-site
+**/.envrc
+.direnv
+**/**/*.tar.*
+**/**/.DS_Store
+fly.toml
