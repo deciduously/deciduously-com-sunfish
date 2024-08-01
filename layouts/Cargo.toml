@@ -1,6 +1,6 @@
 [package]
 edition = "2021"
-name = "deciduously_com_layouts"
+name = "deciduously_com_sunfish_layouts"
 publish = false
 version = "0.0.0"
 
@@ -8,7 +8,7 @@ version = "0.0.0"
 path = "lib.rs"
 
 [dependencies]
-deciduously_com_ui = { path = "../ui" }
+deciduously_com_sunfish_ui = { path = "../ui" }
 pinwheel = "0.2"
 sunfish = "0.7"
 time = "0.3"

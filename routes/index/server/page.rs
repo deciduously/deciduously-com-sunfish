@@ -1,5 +1,5 @@
-use deciduously_com_layouts::{document::Document, page_layout::PageLayout};
-use deciduously_com_ui as ui;
+use deciduously_com_sunfish_layouts::{document::Document, page_layout::PageLayout};
+use deciduously_com_sunfish_ui as ui;
 use pinwheel::prelude::*;
 
 pub struct Page;

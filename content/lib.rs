@@ -1,7 +1,7 @@
 #![warn(clippy::pedantic)]
 
 use anyhow::{anyhow, Result};
-use deciduously_com_ui as ui;
+use deciduously_com_sunfish_ui as ui;
 use std::path::{Path, PathBuf};
 use sunfish::{include_dir, include_dir::IncludeDir};
 use url::Url;

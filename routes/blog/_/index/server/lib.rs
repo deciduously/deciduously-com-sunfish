@@ -1,6 +1,6 @@
 #![warn(clippy::pedantic)]
 
-use deciduously_com_content::{BlogPost, Content};
+use deciduously_com_sunfish_content::{BlogPost, Content};
 use pinwheel::prelude::*;
 
 mod page;

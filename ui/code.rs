@@ -111,14 +111,30 @@ pub fn highlight_code_for_language(code_for_language: CodeForLanguage) -> CodeFo
 }
 
 #[cfg(not(target_arch = "wasm32"))]
-macro_rules! highlight_configuration {
-	($i:ident, $c:ident) => {
+macro_rules! highlight_configuration_js {
+	($i:ident) => {
 		static $i: once_cell::sync::Lazy<tree_sitter_highlight::HighlightConfiguration> =
 			once_cell::sync::Lazy::new(|| {
-				let language = $c::language();
-				let query = $c::HIGHLIGHT_QUERY;
+				let language = tree_sitter_javascript::language();
+				let query = tree_sitter_javascript::HIGHLIGHT_QUERY;
 				let mut config =
-					tree_sitter_highlight::HighlightConfiguration::new(language, query, "", "")
+					tree_sitter_highlight::HighlightConfiguration::new(language, query, "", "", "")
+						.unwrap();
+				config.configure(&NAMES);
+				config
+			});
+	};
+}
+
+#[cfg(not(target_arch = "wasm32"))]
+macro_rules! highlight_configuration_rust {
+	($i:ident) => {
+		static $i: once_cell::sync::Lazy<tree_sitter_highlight::HighlightConfiguration> =
+			once_cell::sync::Lazy::new(|| {
+				let language = tree_sitter_rust::language();
+				let query = tree_sitter_rust::HIGHLIGHTS_QUERY;
+				let mut config =
+					tree_sitter_highlight::HighlightConfiguration::new(language, query, "", "", "")
 						.unwrap();
 				config.configure(&NAMES);
 				config
@@ -149,13 +165,13 @@ pub fn highlight(code: &str, language: Language) -> String {
 		.map(String::from)
 		.collect()
 	});
-	highlight_configuration!(ELIXIR, tree_sitter_javascript);
-	highlight_configuration!(GO, tree_sitter_javascript);
-	highlight_configuration!(JAVASCRIPT, tree_sitter_javascript);
-	highlight_configuration!(PHP, tree_sitter_javascript);
-	highlight_configuration!(PYTHON, tree_sitter_javascript);
-	highlight_configuration!(RUBY, tree_sitter_javascript);
-	highlight_configuration!(RUST, tree_sitter_rust);
+	highlight_configuration_js!(ELIXIR);
+	highlight_configuration_js!(GO);
+	highlight_configuration_js!(JAVASCRIPT);
+	highlight_configuration_js!(PHP);
+	highlight_configuration_js!(PYTHON);
+	highlight_configuration_js!(RUBY);
+	highlight_configuration_rust!(RUST);
 	let highlight_configuration = match language {
 		Language::Elixir => &ELIXIR,
 		Language::Go => &GO,

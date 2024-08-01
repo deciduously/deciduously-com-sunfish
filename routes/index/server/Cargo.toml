@@ -1,6 +1,6 @@
 [package]
 edition = "2021"
-name = "deciduously_com_index_server"
+name = "deciduously_com_sunfish_index_server"
 publish = false
 version = "0.0.0"
 
@@ -11,5 +11,5 @@ path = "lib.rs"
 pinwheel = "0.2"
 futures = "0.3"
 sunfish = "0.7"
-deciduously_com_layouts = { path = "../../../layouts" }
-deciduously_com_ui = { path = "../../../ui" }
+deciduously_com_sunfish_layouts = { path = "../../../layouts" }
+deciduously_com_sunfish_ui = { path = "../../../ui" }

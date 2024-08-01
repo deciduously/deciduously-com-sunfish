@@ -1,4 +1,4 @@
-use deciduously_com_ui as ui;
+use deciduously_com_sunfish_ui as ui;
 use pinwheel::prelude::*;
 
 pub struct Footer;
