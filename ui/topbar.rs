@@ -6,12 +6,12 @@ pub struct Topbar {
 	#[builder]
 	pub background_color: Option<String>,
 	#[builder]
-	pub items: Option<Vec<TopbarItem>>,
+	pub items: Option<Vec<Item>>,
 	#[builder]
 	pub title: Option<String>,
 }
 
-pub struct TopbarItem {
+pub struct Item {
 	pub element: Option<Node>,
 	pub href: String,
 	pub title: String,

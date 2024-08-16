@@ -62,17 +62,17 @@ impl Component for LineNumbers {
 	}
 }
 
-pub struct InlineCode {
+pub struct InlineCodeBlock {
 	pub code: Cow<'static, str>,
 }
 
-impl InlineCode {
-	pub fn new(code: impl Into<Cow<'static, str>>) -> InlineCode {
-		InlineCode { code: code.into() }
+impl InlineCodeBlock {
+	pub fn new(code: impl Into<Cow<'static, str>>) -> InlineCodeBlock {
+		InlineCodeBlock { code: code.into() }
 	}
 }
 
-impl Component for InlineCode {
+impl Component for InlineCodeBlock {
 	fn into_node(self) -> Node {
 		span().class("inline-code").child(self.code).into_node()
 	}
@@ -87,7 +87,7 @@ fn count_lines(text: &str) -> usize {
 	}
 }
 
-pub struct CodeForLanguage {
+pub struct HighlightCodeForLanguage {
 	pub elixir: Cow<'static, str>,
 	pub go: Cow<'static, str>,
 	pub javascript: Cow<'static, str>,
@@ -98,8 +98,11 @@ pub struct CodeForLanguage {
 }
 
 #[cfg(not(target_arch = "wasm32"))]
-pub fn highlight_code_for_language(code_for_language: CodeForLanguage) -> CodeForLanguage {
-	CodeForLanguage {
+#[must_use]
+pub fn highlight_code_for_language(
+	code_for_language: &HighlightCodeForLanguage,
+) -> HighlightCodeForLanguage {
+	HighlightCodeForLanguage {
 		elixir: highlight(&code_for_language.elixir, Language::Elixir).into(),
 		go: highlight(&code_for_language.go, Language::Go).into(),
 		javascript: highlight(&code_for_language.javascript, Language::Javascript).into(),
@@ -161,7 +164,7 @@ pub fn highlight(code: &str, language: Language) -> String {
 			"variable",
 		]
 		.iter()
-		.cloned()
+		.copied()
 		.map(String::from)
 		.collect()
 	});

@@ -24,12 +24,12 @@ struct Topbar;
 impl Component for Topbar {
 	fn into_node(self) -> Node {
 		let topbar_items = vec![
-			ui::TopbarItem {
+			ui::Item {
 				element: None,
 				href: "/".to_owned(),
 				title: "Home".to_owned(),
 			},
-			ui::TopbarItem {
+			ui::Item {
 				element: None,
 				href: "/blog/".to_owned(),
 				title: "Blog".to_owned(),

@@ -1,5 +1,3 @@
-#![warn(clippy::pedantic)]
-
 use anyhow::{anyhow, Result};
 use deciduously_com_sunfish_ui as ui;
 use std::path::{Path, PathBuf};
@@ -27,7 +25,7 @@ impl Content for BlogPost {
 
 impl PartialOrd for BlogPostFrontMatter {
 	fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
-		Some(self.cmp(&other))
+		Some(self.cmp(other))
 	}
 }
 

@@ -1,19 +1,28 @@
 [package]
-edition = "2021"
 name = "deciduously_com_sunfish_content"
+
+description = { workspace = true }
+edition = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
 publish = false
-version = "0.0.0"
+repository = { workspace = true }
+rust-version = { workspace = true }
+version = { workspace = true }
+
+[lints]
+workspace = true
 
 [lib]
 path = "lib.rs"
 
 [dependencies]
-anyhow = { version = "1", features = ["backtrace"] }
-deciduously_com_sunfish_ui = { path = "../ui" }
-pinwheel = "0.2"
-serde = { version = "1", features = ["derive"] }
-serde_json = "1"
-serde_yaml = "0.9"
-sunfish = "0.7"
-time = { version = "0.3", features = ["serde-well-known"] }
-url = { version = "2.2", features = ["serde"] }
+anyhow = { workspace = true }
+deciduously_com_sunfish_ui = { workspace = true }
+pinwheel = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+serde_yaml = { workspace = true }
+sunfish = { workspace = true }
+time = { workspace = true }
+url = { workspace = true }

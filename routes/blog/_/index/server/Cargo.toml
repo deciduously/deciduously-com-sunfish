@@ -1,16 +1,25 @@
 [package]
-edition = "2021"
 name = "deciduously_com_sunfish_blog_server"
+
+description = { workspace = true }
+edition = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
 publish = false
-version = "0.0.0"
+repository = { workspace = true }
+rust-version = { workspace = true }
+version = { workspace = true }
+
+[lints]
+workspace = true
 
 [lib]
 path = "lib.rs"
 
 [dependencies]
-pinwheel = "0.2"
-sunfish = "0.7"
-time = { version = "0.3", features = ["formatting", "macros"] }
-deciduously_com_sunfish_ui = { path = "../../../../../ui" }
-deciduously_com_sunfish_content = { path = "../../../../../content" }
-deciduously_com_sunfish_layouts = { path = "../../../../../layouts" }
+pinwheel = { workspace = true }
+sunfish = { workspace = true }
+time = { workspace = true }
+deciduously_com_sunfish_ui = { workspace = true }
+deciduously_com_sunfish_content = { workspace = true }
+deciduously_com_sunfish_layouts = { workspace = true }

@@ -31,6 +31,7 @@ enum TablePart {
 }
 
 impl Component for Markdown {
+	#[allow(clippy::too_many_lines)]
 	fn into_node(self) -> Node {
 		let markdown = div().class("markdown");
 		let mut state = State::Ground;
@@ -69,7 +70,7 @@ impl Component for Markdown {
 					}
 					Tag::List(start) => {
 						if let Some(start) = start {
-							write!(&mut html, "<ol start=\"{}\">", start).unwrap();
+							write!(&mut html, "<ol start=\"{start}\">").unwrap();
 						} else {
 							html.push_str("<ul>");
 						}
@@ -115,7 +116,7 @@ impl Component for Markdown {
 								alignments,
 								column_index,
 								..
-							} => match alignments[*column_index] {
+							} => match alignments.get(*column_index).expect("no alignment") {
 								Alignment::None => {}
 								Alignment::Left => {
 									html.push_str(" style=\"text-align: left;\"");
@@ -141,14 +142,14 @@ impl Component for Markdown {
 						html.push_str("<del>");
 					}
 					Tag::Link(_, href, _) => {
-						write!(&mut html, "<a href=\"{}\">", href).unwrap();
+						write!(&mut html, "<a href=\"{href}\">").unwrap();
 					}
 					Tag::Image(_, src, alt) => {
 						let node = ui::Img::new()
 							.alt(alt.into_string())
 							.src(src.into_string())
 							.into_node();
-						write!(&mut html, "{}", node).unwrap();
+						write!(&mut html, "{node}").unwrap();
 					}
 				},
 				Event::End(tag) => match tag {
@@ -157,20 +158,20 @@ impl Component for Markdown {
 					}
 					Tag::Heading(level, id, _) => match &state {
 						State::Heading { heading, .. } => {
-							write!(&mut html, "<h{}", level).unwrap();
-							let id = id.map(|id| id.to_owned()).or_else(|| {
+							write!(&mut html, "<h{level}").unwrap();
+							let id = id.map(std::borrow::ToOwned::to_owned).or_else(|| {
 								heading.as_ref().map(|heading| {
 									heading.to_lowercase().to_case(convert_case::Case::Snake)
 								})
 							});
 							if let Some(id) = id {
-								write!(&mut html, " id=\"{}\"", id).unwrap();
+								write!(&mut html, " id=\"{id}\"").unwrap();
 							}
 							write!(&mut html, ">").unwrap();
 							if let Some(heading) = heading {
-								write!(&mut html, "{}", heading).unwrap();
+								write!(&mut html, "{heading}").unwrap();
 							}
-							write!(&mut html, "</h{}>", level).unwrap();
+							write!(&mut html, "</h{level}>").unwrap();
 							state = State::Ground;
 						}
 						_ => unreachable!(),
@@ -183,7 +184,7 @@ impl Component for Markdown {
 							let code = code.as_ref().unwrap().to_owned();
 							let code = ui::Code::new().code(Cow::Owned(code)).language(*language);
 							let node = ui::Card::new().child(code).into_node();
-							write!(&mut html, "{}", node).unwrap();
+							write!(&mut html, "{node}").unwrap();
 							state = State::Ground;
 						}
 						_ => unreachable!(),
@@ -256,7 +257,7 @@ impl Component for Markdown {
 				Event::Code(code) => {
 					html.push_str(r#"<span class="inline-code">"#);
 					escape_html(&mut html, &code).unwrap();
-					html.push_str(r#"</span>"#);
+					html.push_str(r"</span>");
 				}
 				Event::Html(raw) => {
 					html.push_str(&raw);

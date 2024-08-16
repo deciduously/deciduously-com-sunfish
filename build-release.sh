@@ -1,5 +1,5 @@
 #!/bin/sh
-VERSION=2.0.3
+VERSION=2.0.4
 
 cargo build --release --target=x86_64-unknown-linux-musl
 rm -rf build
